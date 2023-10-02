@@ -38,6 +38,10 @@ public class Ciudad {
         return idCiudad;
     }
 
+    public void setIdCiudad(int idCiudad) {
+        this.idCiudad = idCiudad;
+    }
+
     
 
     public String getNombre() {
