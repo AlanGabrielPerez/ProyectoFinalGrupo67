@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-10-2023 a las 16:11:19
+-- Tiempo de generación: 02-10-2023 a las 16:41:46
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `alojamiento` (
   `idAlojamiento` int(11) NOT NULL,
   `fechaIn` date NOT NULL,
-  `fechaOn` date NOT NULL,
+  `fechaOut` date NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `servicio` varchar(11) NOT NULL,
   `importeDiario` double(11,2) NOT NULL,
