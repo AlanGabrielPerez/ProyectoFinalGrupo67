@@ -32,6 +32,12 @@ public class Paquete {
         return idPasaje;
     }
 
+    public void setIdPasaje(int idPasaje) {
+        this.idPasaje = idPasaje;
+    }
+
+    
+    
     public Ciudad getOrigen() {
         return origen;
     }

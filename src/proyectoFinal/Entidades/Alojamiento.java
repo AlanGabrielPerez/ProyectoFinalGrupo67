@@ -44,6 +44,10 @@ public class Alojamiento {
         return idAlojamiento;
     }
 
+    public void setIdAlojamiento(int idAlojamiento) {
+        this.idAlojamiento = idAlojamiento;
+    }
+
 
     public LocalDate getFechaIn() {
         return fechaIn;
