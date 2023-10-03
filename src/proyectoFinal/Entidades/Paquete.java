@@ -4,7 +4,7 @@ package proyectoFinal.Entidades;
 
 public class Paquete {
     
-    private int idPasaje;
+    private int idPaquete;
     private Ciudad origen;
     private Pasaje pasaje;
     private Alojamiento alojamiento;
@@ -21,7 +21,7 @@ public class Paquete {
     }
 
     public Paquete(int idPasaje, Ciudad origen, Pasaje pasaje, Alojamiento alojamiento, Ciudad Destino) {
-        this.idPasaje = idPasaje;
+        this.idPaquete = idPaquete;
         this.origen = origen;
         this.pasaje = pasaje;
         this.alojamiento = alojamiento;
@@ -29,11 +29,11 @@ public class Paquete {
     }
 
     public int getIdPasaje() {
-        return idPasaje;
+        return idPaquete;
     }
 
     public void setIdPasaje(int idPasaje) {
-        this.idPasaje = idPasaje;
+        this.idPaquete = idPasaje;
     }
 
     
