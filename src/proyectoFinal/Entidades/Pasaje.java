@@ -15,27 +15,38 @@ public class Pasaje {
     private double importe;
     private Ciudad ciudadOrigen;
     private boolean estado; 
+    private Ciudad ciudadDestino;
 
     public Pasaje() {
     }
 
-    public Pasaje(int idPasaje, String tipoDeTransporte, double importe, Ciudad ciudadOrigen, boolean estado) {
+    public Pasaje(int idPasaje, String tipoDeTransporte, double importe, Ciudad ciudadOrigen, boolean estado, Ciudad ciudadDestino) {
         this.idPasaje = idPasaje;
         this.tipoDeTransporte = tipoDeTransporte;
         this.importe = importe;
         this.ciudadOrigen = ciudadOrigen;
         this.estado = estado;
+        this.ciudadDestino = ciudadDestino;
     }
 
-    public Pasaje(String tipoDeTransporte, double importe, Ciudad ciudadOrigen, boolean estado) {
+    public Pasaje(String tipoDeTransporte, double importe, Ciudad ciudadOrigen, boolean estado, Ciudad ciudadDestino) {
         this.tipoDeTransporte = tipoDeTransporte;
         this.importe = importe;
         this.ciudadOrigen = ciudadOrigen;
         this.estado = estado;
+        this.ciudadDestino = ciudadDestino;
     }
 
     public int getIdPasaje() {
         return idPasaje;
+    }
+
+    public Ciudad getCiudadDestino() {
+        return ciudadDestino;
+    }
+
+    public void setCiudadDestino(Ciudad ciudadDestino) {
+        this.ciudadDestino = ciudadDestino;
     }
 
     public void setIdPasaje(int idPasaje) {

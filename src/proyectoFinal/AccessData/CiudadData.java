@@ -83,12 +83,12 @@ public class CiudadData {
     
     }
     
-    public void eliminarCiudad(Ciudad ciudad){
+    public void eliminarCiudad(int id){
     String sql = "UPDATE `ciudad` SET `estado`= 0 WHERE idCiudad = ? and estado = 1";
     
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, ciudad.getIdCiudad());
+            ps.setInt(1, id);
             int exito = ps.executeUpdate();
             
             if (exito == 1){
