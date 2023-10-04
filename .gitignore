@@ -25,3 +25,5 @@ replay_pid*
 *.properties
 *.properties
 /build/
+nbproject/private/private.xml
+*.bkp
