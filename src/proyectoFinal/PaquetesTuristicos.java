@@ -30,9 +30,9 @@ public class PaquetesTuristicos {
         //ciu.guardarCiudad(Mendoza);
         //ciu.guardarCiudad(ElCalafate);
         
-        for(Ciudad c:ciu.listarCiudad()){
+        //for(Ciudad c:ciu.listarCiudad()){
             
-            System.out.println(c);
+            //System.out.println(c);
             
             
         }
