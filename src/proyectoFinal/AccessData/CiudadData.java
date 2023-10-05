@@ -34,7 +34,7 @@ public class CiudadData {
             ps.setString(1, ciudad.getNombre());
             ps.setString(2, ciudad.getPais());
             ps.setBoolean(3, ciudad.isEstado());
-            ps.setString(4, ciudad.getPais());
+            ps.setString(4, ciudad.getProvincia());
             ps.setDate(5, Date.valueOf(ciudad.getTemAlta()));
             ps.setDate(6, Date.valueOf(ciudad.getTemMedia()));
             ps.setDate(7, Date.valueOf(ciudad.getTemBaja()));

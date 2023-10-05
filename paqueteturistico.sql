@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 02-10-2023 a las 16:41:46
+-- Servidor: localhost
+-- Tiempo de generación: 05-10-2023 a las 17:22:33
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -29,6 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `alojamiento` (
   `idAlojamiento` int(11) NOT NULL,
+  `tipoAlojamiento` varchar(25) DEFAULT NULL,
+  `nombre` varchar(25) DEFAULT NULL,
   `fechaIn` date NOT NULL,
   `fechaOut` date NOT NULL,
   `estado` tinyint(1) NOT NULL,
@@ -48,8 +50,20 @@ CREATE TABLE `ciudad` (
   `nombre` varchar(15) NOT NULL,
   `pais` varchar(15) NOT NULL,
   `estado` tinyint(1) NOT NULL,
-  `provincia` varchar(15) NOT NULL
+  `provincia` varchar(15) NOT NULL,
+  `temAlta` date NOT NULL,
+  `temMedia` date NOT NULL,
+  `temBaja` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ciudad`
+--
+
+INSERT INTO `ciudad` (`idCiudad`, `nombre`, `pais`, `estado`, `provincia`, `temAlta`, `temMedia`, `temBaja`) VALUES
+(1, 'Cordoba', 'Argentina', 1, 'Cordoba', '2000-05-01', '2000-09-01', '2000-12-01'),
+(4, 'Mendoza', 'Argentina', 1, 'Mendoza', '2000-01-01', '2000-09-01', '2000-05-01'),
+(5, 'ElCalafate', 'Argentina', 1, 'Santa Cruz', '2000-12-01', '2000-08-01', '2000-04-01');
 
 -- --------------------------------------------------------
 
@@ -76,6 +90,7 @@ CREATE TABLE `pasaje` (
   `tipoTransporte` varchar(11) NOT NULL,
   `importe` double(11,2) NOT NULL,
   `origen` varchar(11) NOT NULL,
+  `destino` varchar(20) NOT NULL,
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -125,7 +140,7 @@ ALTER TABLE `alojamiento`
 -- AUTO_INCREMENT de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
-  MODIFY `idCiudad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCiudad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `paquete`

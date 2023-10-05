@@ -11,6 +11,8 @@ import java.time.LocalDate;
 public class Alojamiento {
     
     private int idAlojamiento;
+    private String tipoAlojamiento;
+    private String nombre;
     private LocalDate fechaIn;
     private LocalDate fechaOut;
     private boolean estado;
@@ -21,7 +23,9 @@ public class Alojamiento {
     public Alojamiento() {
     }
 
-    public Alojamiento(LocalDate fechaIn, LocalDate fechaOut, boolean estado, String servicio, double importeDiario, Ciudad ciudadDestino) {
+    public Alojamiento(String tipoAlojamiento, String nombre, LocalDate fechaIn, LocalDate fechaOut, boolean estado, String servicio, double importeDiario, Ciudad ciudadDestino) {
+        this.tipoAlojamiento = tipoAlojamiento;
+        this.nombre = nombre;
         this.fechaIn = fechaIn;
         this.fechaOut = fechaOut;
         this.estado = estado;
@@ -30,8 +34,10 @@ public class Alojamiento {
         this.ciudadDestino = ciudadDestino;
     }
 
-    public Alojamiento(int idAlojamiento, LocalDate fechaIn, LocalDate fechaOut, boolean estado, String servicio, double importeDiario, Ciudad ciudadDestino) {
+    public Alojamiento(int idAlojamiento, String tipoAlojamiento, LocalDate fechaIn, LocalDate fechaOut, boolean estado, String servicio, double importeDiario, Ciudad ciudadDestino) {
         this.idAlojamiento = idAlojamiento;
+        this.tipoAlojamiento = tipoAlojamiento;
+        this.nombre = nombre;
         this.fechaIn = fechaIn;
         this.fechaOut = fechaOut;
         this.estado = estado;
@@ -96,6 +102,29 @@ public class Alojamiento {
     public void setCiudadDestino(Ciudad ciudadDestino) {
         this.ciudadDestino = ciudadDestino;
     }
+
+    public String getTipoAlojamiento() {
+        return tipoAlojamiento;
+    }
+
+    public void setTipoAlojamiento(String tipoAlojamiento) {
+        this.tipoAlojamiento = tipoAlojamiento;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Alojamiento{" + "tipoAlojamiento=" + tipoAlojamiento + ", nombre=" + nombre + ", fechaIn=" + fechaIn + ", fechaOut=" + fechaOut + ", estado=" + estado + ", servicio=" + servicio + ", importeDiario=" + importeDiario + ", ciudadDestino=" + ciudadDestino + '}';
+    }
+
+    
     
    
     
