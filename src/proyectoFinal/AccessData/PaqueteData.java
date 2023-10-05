@@ -84,7 +84,7 @@ public class PaqueteData {
                paquete.setIdPaquete(id);
                paquete.setOrigen(ciudad.ciudadId(rs.getInt("idOrigen")));
                paquete.setDestino(ciudad.ciudadId(rs.getInt("idDestino")));
-               //paquete.setAlojamiento(alojamiento.alojamientoId(rs.getInt("idAlojamiento"));
+               paquete.setAlojamiento(alojamiento.alojamientoId(rs.getInt("idAlojamiento")));
                paquete.setPasaje(pasaje.pasajeId(rs.getInt("idPasaje")));
             }else {
                 JOptionPane.showMessageDialog(null,"No se encontro el paquete");

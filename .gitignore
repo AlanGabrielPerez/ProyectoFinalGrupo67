@@ -32,3 +32,5 @@ nbproject/private/private.xml
 src/proyectoFinal/PaquetesTuristicos.java
 src/proyectoFinal/PaquetesTuristicos.java
 *.dtmp
+nbproject/private/private.properties
+*.properties
