@@ -94,5 +94,30 @@ public class AlojamientoData {
         return alojamientos;
 
     }
+    
+    public Alojamiento alojamientoId(int id){
+    String sql = "SELECT * FROM `alojamiento` WHERE `idAlojamiento` = ?";
+    Alojamiento a = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+            a = new Alojamiento();
+            a.getCiudadDestino().setNombre(rs.getString("ciudadDest"));
+            a.setIdAlojamiento(id);
+            a.setEstado(rs.getBoolean("estado"));
+            a.setFechaIn(rs.getDate("fechaIn").toLocalDate());
+            a.setFechaOut(rs.getDate("fechaOut").toLocalDate());
+            a.setImporteDiario(rs.getDouble("importeDiario"));
+            a.setServicio(rs.getString("servicio"));
+            a.setNombre(rs.getString("nombre"));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en la conexión SQL");
+        }
+    return a;
+    }
 
 }
