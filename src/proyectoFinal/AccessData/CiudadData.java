@@ -161,5 +161,30 @@ public class CiudadData {
         return listado;
     }
     
+    public Ciudad ciudadId(int id){
+    String sql = "SELECT * FROM `ciudad` WHERE `idCiudad` = ?";
+    Ciudad c = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+             c = new Ciudad ();
+             c.setIdCiudad(id);
+             c.setEstado(rs.getBoolean("estado"));
+             c.setNombre(rs.getString("nombre"));
+             c.setPais(rs.getString("pais"));
+             c.setProvincia(rs.getString("provincia"));
+             c.setTemAlta(rs.getDate("temAlta").toLocalDate());
+             c.setTemMedia(rs.getDate("temMedia").toLocalDate());
+             c.setTemBaja(rs.getDate("temBaja").toLocalDate());
+            }
+              ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en el mensaje sql");
+        }
+        return c;
+    }
+    
     
 }

@@ -9,10 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
+import proyectoFinal.Entidades.Ciudad;
 import proyectoFinal.Entidades.Pasaje;
 
 /**
@@ -27,7 +30,7 @@ public class PasajeData {
     }
     
     public void crearPasaje(Pasaje pasaje){
-        String sql = "INSERT INTO `pasaje`(`tipoTransporte`, `importe`, `origen`, `estado`) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO `pasaje`(`tipoTransporte`, `importe`, `origen`, `estado`, `destino`) VALUES (?,?,?,?,?)";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -35,6 +38,7 @@ public class PasajeData {
             ps.setDouble(2, pasaje.getImporte());
             ps.setString(3, pasaje.getCiudadOrigen().getNombre());
             ps.setBoolean(4, pasaje.isEstado());
+            ps.setString(5,pasaje.getCiudadDestino().getNombre());
             ps.execute();
             
             ResultSet rs = ps.getGeneratedKeys();
@@ -71,7 +75,7 @@ public class PasajeData {
     }
     
     public void modificarPasaje (Pasaje pasaje){
-    String sql = "UPDATE `pasaje` SET `tipoTransporte`= ?,`importe`=?,`origen`=?,`estado`= ? WHERE idPasaje = ?";
+    String sql = "UPDATE `pasaje` SET `tipoTransporte`= ?,`importe`=?,`origen`=?,`estado`= ?, `destino`= ? WHERE idPasaje = ?";
     
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -79,7 +83,8 @@ public class PasajeData {
             ps.setDouble(2, pasaje.getImporte());
             ps.setString(3, pasaje.getCiudadOrigen().getNombre());
             ps.setBoolean(4, pasaje.isEstado());
-            ps.setInt(5, pasaje.getIdPasaje());
+            ps.setString(5, pasaje.getCiudadDestino().getNombre());
+            ps.setInt(6, pasaje.getIdPasaje());
             int exito = ps.executeUpdate();
             
             if (exito == 1){
@@ -89,6 +94,59 @@ public class PasajeData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error en el sql");
         }
+    }
+    
+    public List listaTransporte (String pasaje) {
+    String sql = "SELECT * FROM `pasaje` WHERE `tipoTransporte` = ?";
+    ArrayList <Pasaje> listado = new ArrayList <>();
+    
+        try { 
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, pasaje);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+            Pasaje p = new Pasaje();
+            p.setIdPasaje(rs.getInt("idPasaje"));
+            p.getCiudadOrigen().setNombre("origen");
+            p.getCiudadDestino().setNombre(rs.getString(rs.getString("destino")));
+            p.setEstado(rs.getBoolean("estado"));
+            p.setTipoDeTransporte(rs.getString("tipoTransporte"));
+            p.setImporte(rs.getDouble("importe"));
+            listado.add(p);
+            
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en el sql");
+        }
+        
+        return listado;
+    }
+    
+    public Pasaje pasajeId(int id){
+    String sql = "SELECT * FROM `pasaje` WHERE idPasaje = ?";
+    Pasaje p = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()){
+            p = new Pasaje ();
+            p.setIdPasaje(id);
+            p.getCiudadOrigen().setNombre(rs.getString("origen"));
+            p.getCiudadDestino().setNombre(rs.getString("destino"));
+            p.setEstado(rs.getBoolean("estado"));
+            p.setImporte(rs.getDouble("importe"));
+            p.setTipoDeTransporte(rs.getString("tipoTransporte"));
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en el sql");
+        }
+        return p;
     }
     
 }
