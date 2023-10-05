@@ -27,7 +27,7 @@ public class PasajeData {
     }
     
     public void crearPasaje(Pasaje pasaje){
-        String sql = "INSERT INTO `pasaje`(`tipoTransporte`, `importe`, `origen`, `estado`) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO `pasaje`(`tipoTransporte`, `importe`, `origen`, `estado`, `destino`) VALUES (?,?,?,?,?)";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -35,6 +35,7 @@ public class PasajeData {
             ps.setDouble(2, pasaje.getImporte());
             ps.setString(3, pasaje.getCiudadOrigen().getNombre());
             ps.setBoolean(4, pasaje.isEstado());
+            ps.setString(5,pasaje.getCiudadDestino().getNombre());
             ps.execute();
             
             ResultSet rs = ps.getGeneratedKeys();
@@ -71,7 +72,7 @@ public class PasajeData {
     }
     
     public void modificarPasaje (Pasaje pasaje){
-    String sql = "UPDATE `pasaje` SET `tipoTransporte`= ?,`importe`=?,`origen`=?,`estado`= ? WHERE idPasaje = ?";
+    String sql = "UPDATE `pasaje` SET `tipoTransporte`= ?,`importe`=?,`origen`=?,`estado`= ?, `destino`= ? WHERE idPasaje = ?";
     
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -79,7 +80,8 @@ public class PasajeData {
             ps.setDouble(2, pasaje.getImporte());
             ps.setString(3, pasaje.getCiudadOrigen().getNombre());
             ps.setBoolean(4, pasaje.isEstado());
-            ps.setInt(5, pasaje.getIdPasaje());
+            ps.setString(5, pasaje.getCiudadDestino().getNombre());
+            ps.setInt(6, pasaje.getIdPasaje());
             int exito = ps.executeUpdate();
             
             if (exito == 1){
