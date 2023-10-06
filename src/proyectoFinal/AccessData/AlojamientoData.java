@@ -30,22 +30,21 @@ public class AlojamientoData {
     public AlojamientoData() {
 
         con = Conexion.getConnection();
-    }
+    }            
 
     public void guardarAlojamiento(Alojamiento alojamiento) {
 
-        String sql = "INSERT INTO `alojamiento`(`fechaIn`, `tipoAlojamiento`, `fechaOut`, `estado`, `servicio`, `importeDiario`, `ciudadDest`) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO `alojamiento`(`tipoAlojamiento`,`estado`, `servicio`, `importeDiario`, `ciudadDest`) VALUES (?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setDate(1, Date.valueOf(alojamiento.getFechaIn()));
-            ps.setString(2, alojamiento.getTipoAlojamiento());
-            ps.setDate(3, Date.valueOf(alojamiento.getFechaOut()));
-            ps.setBoolean(4, alojamiento.isEstado());
-            ps.setString(5, alojamiento.getServicio());
-            ps.setDouble(6, alojamiento.getImporteDiario());
-            ps.setString(7, alojamiento.getCiudadDestino().getNombre());
+            
+            ps.setString(1, alojamiento.getTipoAlojamiento());
+            ps.setBoolean(2, alojamiento.isEstado());
+            ps.setString(3, alojamiento.getServicio());
+            ps.setDouble(4, alojamiento.getImporteDiario());
+            ps.setString(5, alojamiento.getCiudadDestino().getNombre());
             ps.executeUpdate(sql);
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -106,9 +105,7 @@ public class AlojamientoData {
             a = new Alojamiento();
             a.getCiudadDestino().setNombre(rs.getString("ciudadDest"));
             a.setIdAlojamiento(id);
-            a.setEstado(rs.getBoolean("estado"));
-            a.setFechaIn(rs.getDate("fechaIn").toLocalDate());
-            a.setFechaOut(rs.getDate("fechaOut").toLocalDate());
+            a.setEstado(rs.getBoolean("estado")); 
             a.setImporteDiario(rs.getDouble("importeDiario"));
             a.setServicio(rs.getString("servicio"));
             a.setNombre(rs.getString("nombre"));
