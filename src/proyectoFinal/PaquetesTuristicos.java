@@ -21,16 +21,22 @@ public class PaquetesTuristicos {
      */
     public static void main(String[] args) {
 
-        //Ciudad Mendoza=new Ciudad("Mendoza","Mendoza","Argentina",true, LocalDate.of(2000,1, 1),LocalDate.of(2000,9, 1),LocalDate.of(2000,5, 1));
-        //Ciudad Cordoba=new Ciudad("Cordoba","Cordoba","Argentina",true, LocalDate.of(2000,5, 1),LocalDate.of(2000,9, 1),LocalDate.of(2000,12, 1));
-        //Ciudad ElCalafate=new Ciudad("ElCalafate","Santa Cruz","Argentina",true, LocalDate.of(2000,12, 1),LocalDate.of(2000,8, 1),LocalDate.of(2000,4, 1));
+        Ciudad Mendoza=new Ciudad("Mendoza","Mendoza","Argentina",true, LocalDate.of(2000,1, 1),LocalDate.of(2000,9, 1),LocalDate.of(2000,5, 1));
+        Ciudad Cordoba=new Ciudad("Cordoba","Cordoba","Argentina",true, LocalDate.of(2000,5, 1),LocalDate.of(2000,9, 1),LocalDate.of(2000,12, 1));
+        Ciudad ElCalafate=new Ciudad("ElCalafate","Santa Cruz","Argentina",true, LocalDate.of(2000,12, 1),LocalDate.of(2000,8, 1),LocalDate.of(2000,4, 1));
+        Ciudad caba = new Ciudad("CABA","Buenos Aires","Argentina",true,LocalDate.of(2000,11, 30),LocalDate.of(2000,4, 1),LocalDate.of(2000,12, 1));
+        
         CiudadData ciu=new CiudadData();
-        //ciu.guardarCiudad(Cordoba);
-        //ciu.guardarCiudad(Mendoza);
-        //ciu.guardarCiudad(ElCalafate);
-        //for(Ciudad c:ciu.listarCiudad()){
-        //System.out.println(c);
-        //System.out.println(ciu.listarCiudad());
+        ciu.guardarCiudad(Cordoba);
+        ciu.guardarCiudad(Mendoza);
+        ciu.guardarCiudad(ElCalafate);
+        //ElCalafate.setNombre("El Calafate");
+        //ciu.modificarCiudad(ElCalafate);
+        
+        
+        for(Ciudad c:ciu.listarCiudad()){
+        System.out.println(c);
+        System.out.println(ciu.listarCiudad());
         
         
         
