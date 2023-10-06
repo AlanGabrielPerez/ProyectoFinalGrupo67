@@ -2,6 +2,7 @@
 package proyectoFinal.AccessData;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class PaqueteData {
     }
     
     public void armarPaquete(Paquete paquete) {
-        String sql = "INSERT INTO paquete(idOrigen, idPasaje, idAlojamiento, idDestino) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO paquete(idOrigen, idPasaje, idAlojamiento, idDestino, fechaIn, fechaOut) VALUES (?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -33,6 +34,8 @@ public class PaqueteData {
             ps.setInt(2, paquete.getPasaje().getIdPasaje());
             ps.setInt(3, paquete.getAlojamiento().getIdAlojamiento());
             ps.setInt(4, paquete.getDestino().getIdCiudad());
+            ps.setDate(5, Date.valueOf(paquete.getFechaIn()));
+            ps.setDate(6, Date.valueOf(paquete.getFechaOut()));
 
             ps.executeUpdate();
 
@@ -86,6 +89,8 @@ public class PaqueteData {
                paquete.setDestino(ciudad.ciudadId(rs.getInt("idDestino")));
                paquete.setAlojamiento(alojamiento.alojamientoId(rs.getInt("idAlojamiento")));
                paquete.setPasaje(pasaje.pasajeId(rs.getInt("idPasaje")));
+               paquete.setFechaIn(rs.getDate("fechaIn").toLocalDate());
+               paquete.setFechaOut(rs.getDate("fechaOut").toLocalDate());
             }else {
                 JOptionPane.showMessageDialog(null,"No se encontro el paquete");
            
