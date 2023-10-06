@@ -28,15 +28,14 @@ public class Paquete {
         this.Destino = Destino;
     }
 
-    public int getIdPasaje() {
+    public int getIdPaquete() {
         return idPaquete;
     }
 
-    public void setIdPasaje(int idPasaje) {
-        this.idPaquete = idPasaje;
+    public void setIdPaquete(int idPaquete) {
+        this.idPaquete = idPaquete;
     }
-
-    
+ 
     
     public Ciudad getOrigen() {
         return origen;
