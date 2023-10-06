@@ -5,16 +5,12 @@
  */
 package proyectoFinal.Entidades;
 
-import java.time.LocalDate;
-
 
 public class Alojamiento {
     
     private int idAlojamiento;
     private String tipoAlojamiento;
     private String nombre;
-    private LocalDate fechaIn;
-    private LocalDate fechaOut;
     private boolean estado;
     private String servicio;
     private double importeDiario;
@@ -23,23 +19,19 @@ public class Alojamiento {
     public Alojamiento() {
     }
 
-    public Alojamiento(String tipoAlojamiento, String nombre, LocalDate fechaIn, LocalDate fechaOut, boolean estado, String servicio, double importeDiario, Ciudad ciudadDestino) {
+    public Alojamiento(String tipoAlojamiento, String nombre, boolean estado, String servicio, double importeDiario, Ciudad ciudadDestino) {
         this.tipoAlojamiento = tipoAlojamiento;
         this.nombre = nombre;
-        this.fechaIn = fechaIn;
-        this.fechaOut = fechaOut;
         this.estado = estado;
         this.servicio = servicio;
         this.importeDiario = importeDiario;
         this.ciudadDestino = ciudadDestino;
     }
 
-    public Alojamiento(int idAlojamiento, String tipoAlojamiento, LocalDate fechaIn, LocalDate fechaOut, boolean estado, String servicio, double importeDiario, Ciudad ciudadDestino) {
+    public Alojamiento(int idAlojamiento, String tipoAlojamiento, boolean estado, String servicio, double importeDiario, Ciudad ciudadDestino) {
         this.idAlojamiento = idAlojamiento;
         this.tipoAlojamiento = tipoAlojamiento;
         this.nombre = nombre;
-        this.fechaIn = fechaIn;
-        this.fechaOut = fechaOut;
         this.estado = estado;
         this.servicio = servicio;
         this.importeDiario = importeDiario;
@@ -54,22 +46,6 @@ public class Alojamiento {
         this.idAlojamiento = idAlojamiento;
     }
 
-
-    public LocalDate getFechaIn() {
-        return fechaIn;
-    }
-
-    public void setFechaIn(LocalDate fechaIn) {
-        this.fechaIn = fechaIn;
-    }
-
-    public LocalDate getFechaOut() {
-        return fechaOut;
-    }
-
-    public void setFechaOut(LocalDate fechaOut) {
-        this.fechaOut = fechaOut;
-    }
 
     public boolean isEstado() {
         return estado;
@@ -121,7 +97,7 @@ public class Alojamiento {
 
     @Override
     public String toString() {
-        return "Alojamiento{" + "tipoAlojamiento=" + tipoAlojamiento + ", nombre=" + nombre + ", fechaIn=" + fechaIn + ", fechaOut=" + fechaOut + ", estado=" + estado + ", servicio=" + servicio + ", importeDiario=" + importeDiario + ", ciudadDestino=" + ciudadDestino + '}';
+        return "Alojamiento{" + "tipoAlojamiento=" + tipoAlojamiento + ", nombre=" + nombre + ", estado=" + estado + ", servicio=" + servicio + ", importeDiario=" + importeDiario + ", ciudadDestino=" + ciudadDestino + '}';
     }
 
     
