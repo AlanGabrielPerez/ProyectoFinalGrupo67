@@ -1,6 +1,9 @@
 
 package proyectoFinal.Entidades;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 
 public class Paquete {
     
@@ -9,23 +12,30 @@ public class Paquete {
     private Pasaje pasaje;
     private Alojamiento alojamiento;
     private Ciudad Destino;
+    private LocalDate fechaIn;
+    private LocalDate fechaOut;
 
     public Paquete() {
     }
 
-    public Paquete(Ciudad origen, Pasaje pasaje, Alojamiento alojamiento, Ciudad Destino) {
+    public Paquete(Ciudad origen, Pasaje pasaje, Alojamiento alojamiento, Ciudad Destino, LocalDate fechaIn, LocalDate fechaOut) {
         this.origen = origen;
         this.pasaje = pasaje;
         this.alojamiento = alojamiento;
         this.Destino = Destino;
+        this.fechaIn = fechaIn;
+        this.fechaOut = fechaOut;
     }
+    
 
-    public Paquete(int idPasaje, Ciudad origen, Pasaje pasaje, Alojamiento alojamiento, Ciudad Destino) {
+    public Paquete(int idPasaje, Ciudad origen, Pasaje pasaje, Alojamiento alojamiento, Ciudad Destino, LocalDate fechaIn, LocalDate FechaOut) {
         this.idPaquete = idPaquete;
         this.origen = origen;
         this.pasaje = pasaje;
         this.alojamiento = alojamiento;
         this.Destino = Destino;
+        this.fechaIn = fechaIn;
+        this.fechaOut = fechaOut;
     }
 
     public int getIdPaquete() {
@@ -35,7 +45,24 @@ public class Paquete {
     public void setIdPaquete(int idPaquete) {
         this.idPaquete = idPaquete;
     }
+
+    public LocalDate getFechaIn() {
+        return fechaIn;
+    }
+
+    public void setFechaIn(LocalDate fechaIn) {
+        this.fechaIn = fechaIn;
+    }
+
+    public LocalDate getFechaOut() {
+        return fechaOut;
+    }
+
+    public void setFechaOut(LocalDate fechaOut) {
+        this.fechaOut = fechaOut;
+    }
  
+    
     
     public Ciudad getOrigen() {
         return origen;

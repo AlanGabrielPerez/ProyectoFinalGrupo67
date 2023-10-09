@@ -27,19 +27,23 @@ public class PaquetesTuristicos {
         Ciudad caba = new Ciudad("CABA","Buenos Aires","Argentina",true,LocalDate.of(2000,11, 30),LocalDate.of(2000,4, 1),LocalDate.of(2000,12, 1));
         
         CiudadData ciu=new CiudadData();
-        ciu.guardarCiudad(Cordoba);
-        ciu.guardarCiudad(Mendoza);
-        ciu.guardarCiudad(ElCalafate);
-        //ElCalafate.setNombre("El Calafate");
-        //ciu.modificarCiudad(ElCalafate);
-        
-        
+        //ciu.guardarCiudad(Cordoba);
+        //ciu.guardarCiudad(Mendoza);
+        //ciu.guardarCiudad(ElCalafate);
+        Ciudad ciuCiu = ciu.ciudadId(1);
+        ciuCiu.setNombre("CIUU");
+        ciu.modificarCiudad(ciuCiu);
+        System.out.println(ciu.ciudadId(1).toString());
+        System.out.println("lista de ciudades:");
         for(Ciudad c:ciu.listarCiudad()){
         System.out.println(c);
-        System.out.println(ciu.listarCiudad());
         
-        
-        
-    }
+        }
+        ciu.eliminarCiudad(1);
+        System.out.println("Ciudades inactivas:");
+        for(Ciudad c2:ciu.ciudadesInactivas()){
+            System.out.println(c2);
+        }
 
+    }
 }
