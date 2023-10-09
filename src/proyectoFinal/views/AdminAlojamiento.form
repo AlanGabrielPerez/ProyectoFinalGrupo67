@@ -59,7 +59,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jcbTipoAlojamiento" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -91,9 +91,9 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jcbTipoAlojamiento" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="50" max="32767" attributes="0"/>
+              <EmptySpace pref="48" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbAlojamientoGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbAlojamientoModificar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -152,11 +152,6 @@
         <Property name="text" type="java.lang.String" value="Categoria(Tipo):"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Hostel,Hotel,Caba&#xf1;a,etc..."/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="jbAlojamientoModificar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
@@ -176,6 +171,20 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ingrese ID"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jcbTipoAlojamiento">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Hostel"/>
+            <StringItem index="1" value="Hotel"/>
+            <StringItem index="2" value="Caba&#xf1;a"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
