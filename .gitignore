@@ -35,3 +35,5 @@ src/proyectoFinal/PaquetesTuristicos.java
 nbproject/private/private.properties
 *.properties
 nbproject/private/private.xml
+*.properties
+nbproject/private/private.xml
