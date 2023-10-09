@@ -47,11 +47,11 @@ public class Principal extends javax.swing.JFrame {
         Desktop.setLayout(DesktopLayout);
         DesktopLayout.setHorizontalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 519, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
         DesktopLayout.setVerticalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 477, Short.MAX_VALUE)
+            .addGap(0, 627, Short.MAX_VALUE)
         );
 
         jmAdministrar.setText("Administracion");
@@ -80,10 +80,19 @@ public class Principal extends javax.swing.JFrame {
         }
 
         jmPasaje.setText("Adm. pasajes");
-        jmAdministrar.add(jmPasaje);
+        jmPasaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmPasajeActionPerformed(evt);
+            }
+        });
+        if(logeado){
+            jmAdministrar.add(jmPasaje);
+        }
 
         jmDesconectarse.setText("Desconectarse");
-        jmAdministrar.add(jmDesconectarse);
+        if(logeado){
+            jmAdministrar.add(jmDesconectarse);
+        }
 
         jMenuBar1.add(jmAdministrar);
 
@@ -117,7 +126,6 @@ public class Principal extends javax.swing.JFrame {
 
     private void jmAdministrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAdministrarMousePressed
         if (!logeado) {
-            activarMenu(logeado);
             Desktop.removeAll();
             Desktop.repaint();
             Login venlogin = new Login();
@@ -132,7 +140,9 @@ public class Principal extends javax.swing.JFrame {
         } else {
              jmAdministrar.add(jmCiudad);
              jmAdministrar.add(jmAlojamiento);
-             activarMenu(logeado);
+             jmAdministrar.add(jmPasaje);
+             jmAdministrar.add(jmDesconectarse);
+            
 
         }
     }//GEN-LAST:event_jmAdministrarMousePressed
@@ -140,6 +150,18 @@ public class Principal extends javax.swing.JFrame {
     private void jmCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCiudadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jmCiudadActionPerformed
+
+    private void jmPasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPasajeActionPerformed
+        
+        Desktop.removeAll();
+        Desktop.repaint();
+        jifPasaje admPasaje = new jifPasaje();
+        admPasaje.setVisible(true);
+        Desktop.add(admPasaje);
+        Desktop.moveToFront(admPasaje);
+        
+        
+    }//GEN-LAST:event_jmPasajeActionPerformed
 
   
     public static void main(String args[]) {
@@ -185,12 +207,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmPasaje;
     private javax.swing.JMenu jmPresupuestos;
     // End of variables declaration//GEN-END:variables
-
-    private void activarMenu(boolean l) {
-        jmAlojamiento.setVisible(l);
-        jmCiudad.setVisible(l);
-        jmAlojamiento.setEnabled(l);
-        jmCiudad.setEnabled(l);
-    }
 
 }
