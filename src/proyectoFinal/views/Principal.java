@@ -1,6 +1,9 @@
 package proyectoFinal.views;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 public class Principal extends javax.swing.JFrame {
     
@@ -21,11 +24,20 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Desktop = new javax.swing.JDesktopPane();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/G67TravelPackages.png"));
+        Image image = icon.getImage();
+        Desktop = new javax.swing.JDesktopPane(){
+
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jmAdministrar = new javax.swing.JMenu();
         jmCiudad = new javax.swing.JMenuItem();
         jmAlojamiento = new javax.swing.JMenuItem();
+        jmPasaje = new javax.swing.JMenuItem();
+        jmDesconectarse = new javax.swing.JMenuItem();
         jmPresupuestos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -52,15 +64,26 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jmCiudad.setText("jMenuItem1");
+        jmCiudad.setText("Adm. ciudades");
         if (logeado){
+            jmCiudad.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jmCiudadActionPerformed(evt);
+                }
+            });
             jmAdministrar.add(jmCiudad);
         }
 
-        jmAlojamiento.setText("jMenuItem2");
+        jmAlojamiento.setText("Adm. alojamientos");
         if(logeado){
             jmAdministrar.add(jmAlojamiento);
         }
+
+        jmPasaje.setText("Adm. pasajes");
+        jmAdministrar.add(jmPasaje);
+
+        jmDesconectarse.setText("Desconectarse");
+        jmAdministrar.add(jmDesconectarse);
 
         jMenuBar1.add(jmAdministrar);
 
@@ -114,6 +137,10 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmAdministrarMousePressed
 
+    private void jmCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCiudadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmCiudadActionPerformed
+
   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -154,6 +181,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jmAdministrar;
     private javax.swing.JMenuItem jmAlojamiento;
     private javax.swing.JMenuItem jmCiudad;
+    private javax.swing.JMenuItem jmDesconectarse;
+    private javax.swing.JMenuItem jmPasaje;
     private javax.swing.JMenu jmPresupuestos;
     // End of variables declaration//GEN-END:variables
 
