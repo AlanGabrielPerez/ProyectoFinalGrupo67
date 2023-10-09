@@ -65,22 +65,22 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jmCiudad.setText("Adm. ciudades");
+        jmCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmCiudadActionPerformed(evt);
+            }
+        });
         if (logeado){
-            jmCiudad.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jmCiudadActionPerformed(evt);
-                }
-            });
             jmAdministrar.add(jmCiudad);
         }
 
         jmAlojamiento.setText("Adm. alojamientos");
+        jmAlojamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmAlojamientoActionPerformed(evt);
+            }
+        });
         if(logeado){
-            jmAlojamiento.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jmAlojamientoActionPerformed(evt);
-                }
-            });
             jmAdministrar.add(jmAlojamiento);
         }
 
