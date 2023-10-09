@@ -29,8 +29,6 @@ nbproject/private/private.properties
 nbproject/private/private.xml
 *.bkp
 nbproject/private/private.xml
-src/proyectoFinal/PaquetesTuristicos.java
-src/proyectoFinal/PaquetesTuristicos.java
 *.dtmp
 nbproject/private/private.properties
 *.properties
@@ -38,3 +36,5 @@ nbproject/private/private.xml
 nbproject/private/private.xml
 *.properties
 *.xml
+*.properties
+nbproject/private/private.xml
