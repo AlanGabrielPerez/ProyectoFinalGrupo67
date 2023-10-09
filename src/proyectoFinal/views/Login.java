@@ -1,5 +1,7 @@
 package proyectoFinal.views;
 
+import javax.swing.JOptionPane;
+
 
 public class Login extends javax.swing.JInternalFrame {
 
@@ -113,7 +115,9 @@ public class Login extends javax.swing.JInternalFrame {
             Principal.logeado=true;
             dispose();
         }else {cont++;
-
+            JOptionPane.showMessageDialog(this,"Contraseña incorrecta.");
+            jtUser.setText("");
+            jPass.setText("");
             if (cont==3){
                 dispose();
             }
