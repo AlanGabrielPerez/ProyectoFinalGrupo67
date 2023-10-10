@@ -3,17 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/julian/Desktop/ArgProg_Desarrollo%20de%20Apps/ProyectoFinalGrupo67/src/proyectoFinal/Entidades/Alojamiento.java</file>
-            <file>file:/Users/julian/Desktop/ArgProg_Desarrollo%20de%20Apps/ProyectoFinalGrupo67/src/proyectoFinal/AccessData/PasajeData.java</file>
-            <file>file:/Users/julian/Desktop/ArgProg_Desarrollo%20de%20Apps/ProyectoFinalGrupo67/src/proyectoFinal/PaquetesTuristicos.java</file>
-            <file>file:/Users/julian/Desktop/ArgProg_Desarrollo%20de%20Apps/ProyectoFinalGrupo67/src/proyectoFinal/Entidades/Paquete.java</file>
-            <file>file:/Users/julian/Desktop/ArgProg_Desarrollo%20de%20Apps/ProyectoFinalGrupo67/src/proyectoFinal/AccessData/CiudadData.java</file>
-            <file>file:/Users/julian/Desktop/ArgProg_Desarrollo%20de%20Apps/ProyectoFinalGrupo67/src/proyectoFinal/AccessData/AlojamientoData.java</file>
-        </group>
-        <group>
             <file>file:/Users/julian/Desktop/ArgProg_Desarrollo%20de%20Apps/ProyectoFinalGrupo67/src/proyectoFinal/views/AdminAlojamiento.java</file>
             <file>file:/Users/julian/Desktop/ArgProg_Desarrollo%20de%20Apps/ProyectoFinalGrupo67/src/proyectoFinal/views/AdminCiudad.java</file>
             <file>file:/Users/julian/Desktop/ArgProg_Desarrollo%20de%20Apps/ProyectoFinalGrupo67/src/proyectoFinal/AccessData/AlojamientoData.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/Img/Diagramas/BDPaqueteTuristico.png</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/Img/Diagramas/UML.png</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/Img/Diagramas/UMLentidades.png</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/Entidades/Alojamiento.java</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/AccessData/PaqueteData.java</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/views/AdminCiudad.java</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/Entidades/Pasaje.java</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/views/AdminAlojamiento.java</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/AccessData/CiudadData.java</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/AccessData/Conexion.java</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/views/Principal.java</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/PaquetesTuristicos.java</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/Entidades/Paquete.java</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/views/AdminPasaje.java</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/AccessData/AlojamientoData.java</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/Entidades/Ciudad.java</file>
+            <file>file:/C:/Users/Pc/Documents/NetBeansProjects/ProyectoTransversalULP/ProyectoFinalGrupo67/src/proyectoFinal/AccessData/PasajeData.java</file>
         </group>
     </open-files>
 </project-private>

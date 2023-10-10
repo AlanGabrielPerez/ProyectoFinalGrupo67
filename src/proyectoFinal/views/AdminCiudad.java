@@ -5,11 +5,17 @@
  */
 package proyectoFinal.views;
 
+import java.time.ZoneId;
+import javax.swing.JOptionPane;
+import proyectoFinal.AccessData.CiudadData;
+import proyectoFinal.Entidades.Ciudad;
+
 /**
  *
  * @author julian
  */
 public class AdminCiudad extends javax.swing.JInternalFrame {
+    CiudadData cd = new CiudadData();
 
     /**
      * Creates new form AdminCiudad
@@ -27,6 +33,7 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jtfIngreseId = new javax.swing.JTextField();
@@ -41,6 +48,12 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
         jbCiudadModificar = new javax.swing.JButton();
         jbCiudadNuevo = new javax.swing.JButton();
         jbCiudadSalir = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
 
@@ -70,6 +83,11 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
         jTextField2.setText("Ingresar");
 
         jbCiudadGuardar.setText("Guardar");
+        jbCiudadGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCiudadGuardarActionPerformed(evt);
+            }
+        });
 
         jbCiudadModificar.setText("Modificar");
 
@@ -77,10 +95,26 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
 
         jbCiudadSalir.setText("Salir");
 
+        jLabel6.setText("Temporada Alta:");
+
+        jLabel7.setText("Temporada Media:");
+
+        jLabel8.setText("Temporada Baja:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 17, Short.MAX_VALUE)
+                .addComponent(jbCiudadGuardar)
+                .addGap(18, 18, 18)
+                .addComponent(jbCiudadModificar)
+                .addGap(18, 18, 18)
+                .addComponent(jbCiudadNuevo)
+                .addGap(18, 18, 18)
+                .addComponent(jbCiudadSalir)
+                .addGap(93, 93, 93))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -90,24 +124,11 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jtfIngreseId))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jbCiudadGuardar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jbCiudadModificar)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jbCiudadNuevo)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jbCiudadSalir))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(92, 92, 92)
-                                        .addComponent(jbBuscarCiudad))))
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfIngreseId, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(92, 92, 92)
+                                .addComponent(jbBuscarCiudad))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel5)
@@ -120,8 +141,21 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel3)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(194, Short.MAX_VALUE))
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,12 +180,24 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCiudadGuardar)
                     .addComponent(jbCiudadModificar)
                     .addComponent(jbCiudadNuevo)
                     .addComponent(jbCiudadSalir))
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
 
         pack();
@@ -161,13 +207,36 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfIngreseIdActionPerformed
 
+    private void jbCiudadGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCiudadGuardarActionPerformed
+        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jtfIngreseId.getText().isEmpty() || jtfIngreseProvincia.getText().isEmpty()){
+        JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
+        } else {
+            Ciudad ciudad = new Ciudad();
+            ciudad.setEstado(true);
+            ciudad.setNombre(jTextField1.getText());
+            ciudad.setPais(jTextField2.getText());
+            ciudad.setProvincia(jtfIngreseProvincia.getText());
+            ciudad.setTemAlta(jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            ciudad.setTemMedia(jDateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            ciudad.setTemBaja(jDateChooser3.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+         cd.guardarCiudad(ciudad);
+        }
+    }//GEN-LAST:event_jbCiudadGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JButton jbBuscarCiudad;
