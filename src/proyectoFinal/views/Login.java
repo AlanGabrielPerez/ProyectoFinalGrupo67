@@ -115,12 +115,15 @@ public class Login extends javax.swing.JInternalFrame {
             Principal.logeado=true;
             dispose();
         }else {cont++;
-            JOptionPane.showMessageDialog(this,"Contraseña incorrecta.");
             jtUser.setText("");
             jPass.setText("");
             if (cont==3){
+                 JOptionPane.showMessageDialog(this,"Demaciados intentos.");
                 dispose();
+            }else{
+            JOptionPane.showMessageDialog(this,"Contraseña incorrecta.");
             }
+            
         }
 
     }//GEN-LAST:event_jbIngresarActionPerformed

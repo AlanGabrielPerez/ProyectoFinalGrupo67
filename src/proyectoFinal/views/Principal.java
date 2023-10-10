@@ -65,16 +65,21 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jmCiudad.setText("Adm. ciudades");
+        jmCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmCiudadActionPerformed(evt);
+            }
+        });
         if (logeado){
-            jmCiudad.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jmCiudadActionPerformed(evt);
-                }
-            });
             jmAdministrar.add(jmCiudad);
         }
 
         jmAlojamiento.setText("Adm. alojamientos");
+        jmAlojamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmAlojamientoActionPerformed(evt);
+            }
+        });
         if(logeado){
             jmAdministrar.add(jmAlojamiento);
         }
@@ -91,6 +96,11 @@ public class Principal extends javax.swing.JFrame {
 
         jmDesconectarse.setText("Desconectarse");
         if(logeado){
+            jmDesconectarse.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jmDesconectarseActionPerformed(evt);
+                }
+            });
             jmAdministrar.add(jmDesconectarse);
         }
 
@@ -148,20 +158,40 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmAdministrarMousePressed
 
     private void jmCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCiudadActionPerformed
-        // TODO add your handling code here:
+           
+        Desktop.removeAll();
+        Desktop.repaint();
+        AdminCiudad admCiudad = new AdminCiudad();
+        admCiudad.setVisible(true);
+        Desktop.add(admCiudad);
+        Desktop.moveToFront(admCiudad);
     }//GEN-LAST:event_jmCiudadActionPerformed
 
     private void jmPasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPasajeActionPerformed
         
         Desktop.removeAll();
         Desktop.repaint();
-        jifPasaje admPasaje = new jifPasaje();
+        AdminPasaje admPasaje = new AdminPasaje();
         admPasaje.setVisible(true);
         Desktop.add(admPasaje);
         Desktop.moveToFront(admPasaje);
         
         
     }//GEN-LAST:event_jmPasajeActionPerformed
+
+    private void jmAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAlojamientoActionPerformed
+       Desktop.removeAll();
+        Desktop.repaint();
+        AdminAlojamiento admAlojamineto = new AdminAlojamiento();
+        admAlojamineto.setVisible(true);
+        Desktop.add(admAlojamineto);
+        Desktop.moveToFront(admAlojamineto);
+    }//GEN-LAST:event_jmAlojamientoActionPerformed
+
+    private void jmDesconectarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDesconectarseActionPerformed
+        
+        logeado = false;
+    }//GEN-LAST:event_jmDesconectarseActionPerformed
 
   
     public static void main(String args[]) {

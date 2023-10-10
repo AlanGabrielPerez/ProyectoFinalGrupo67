@@ -5,12 +5,12 @@ import proyectoFinal.AccessData.CiudadData;
 import proyectoFinal.Entidades.Ciudad;
 
 
-public class jifPasaje extends javax.swing.JInternalFrame {
+public class AdminPasaje extends javax.swing.JInternalFrame {
 
     private CiudadData ciu = new CiudadData();
     
     
-    public jifPasaje() {
+    public AdminPasaje() {
         initComponents();
         cargarTipoTrasporte();
         cargarCiudades();
