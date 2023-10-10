@@ -171,7 +171,7 @@ public class Principal extends javax.swing.JFrame {
         
         Desktop.removeAll();
         Desktop.repaint();
-        jifPasaje admPasaje = new jifPasaje();
+        AdminPasaje admPasaje = new AdminPasaje();
         admPasaje.setVisible(true);
         Desktop.add(admPasaje);
         Desktop.moveToFront(admPasaje);
