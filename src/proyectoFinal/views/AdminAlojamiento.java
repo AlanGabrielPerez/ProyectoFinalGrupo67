@@ -5,11 +5,17 @@
  */
 package proyectoFinal.views;
 
+import javax.swing.JOptionPane;
+import proyectoFinal.AccessData.AlojamientoData;
+import proyectoFinal.Entidades.Alojamiento;
+
 /**
  *
  * @author julian
  */
 public class AdminAlojamiento extends javax.swing.JInternalFrame {
+    
+    private AlojamientoData aloja=new AlojamientoData();
 
     /**
      * Creates new form AdminAlojamiento
@@ -41,12 +47,24 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jcbTipoAlojamiento = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jCheckBoxDesayuno = new javax.swing.JCheckBox();
+        jCheckBoxMenu = new javax.swing.JCheckBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
+        jLabel7 = new javax.swing.JLabel();
+        jtfImporteDiario = new javax.swing.JTextField();
 
         setClosable(true);
 
         jLabel1.setText("Administrar Alojamiento");
 
         jbAlojamientoGuardar.setText("Guardar");
+        jbAlojamientoGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAlojamientoGuardarActionPerformed(evt);
+            }
+        });
 
         jbBuscar.setText("Buscar");
 
@@ -73,33 +91,38 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
 
         jcbTipoAlojamiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hostel", "Hotel", "Cabaña" }));
 
+        jLabel6.setText("Tipo de Servicio:");
+
+        jCheckBoxDesayuno.setText("Desayuno");
+        jCheckBoxDesayuno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxDesayunoActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxMenu.setText("Menu Completo");
+        jCheckBoxMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuActionPerformed(evt);
+            }
+        });
+
+        jTextPane1.setText("El Menú incluye Almuerzo, Merienda y Cena.");
+        jScrollPane1.setViewportView(jTextPane1);
+
+        jLabel7.setText("Importe Diario:");
+
+        jtfImporteDiario.setText("Importe");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(jLabel1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(20, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jTextField2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jbBuscar))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jbAlojamientoGuardar)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jbAlojamientoModificar)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jbAlojamientoNuevo)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jbAlojamientoSalir)))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel2)
@@ -112,8 +135,45 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jcbTipoAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(133, Short.MAX_VALUE))
+                                    .addComponent(jcbTipoAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextField2)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jbAlojamientoGuardar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbAlojamientoModificar)
+                                        .addGap(46, 46, 46)
+                                        .addComponent(jbAlojamientoNuevo)))
+                                .addGap(32, 32, 32)
+                                .addComponent(jbAlojamientoSalir))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(232, 232, 232)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(204, 204, 204))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(26, 26, 26)
+                                .addComponent(jCheckBoxDesayuno))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfImporteDiario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbBuscar)
+                            .addComponent(jCheckBoxMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(141, 141, 141)
+                .addComponent(jLabel1)
+                .addGap(105, 105, 105))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,26 +196,75 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jcbTipoAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jCheckBoxDesayuno)
+                    .addComponent(jCheckBoxMenu))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jtfImporteDiario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAlojamientoGuardar)
                     .addComponent(jbAlojamientoModificar)
                     .addComponent(jbAlojamientoNuevo)
                     .addComponent(jbAlojamientoSalir))
-                .addGap(55, 55, 55))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbAlojamientoGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlojamientoGuardarActionPerformed
+        if (jtfNombreAlojamiento.getText().isEmpty() || jtfCiudadAlojamiento.getText().isEmpty() || jcbTipoAlojamiento.getSelectedItem()==null ){
+            JOptionPane.showMessageDialog(this,"Rellene correctamente los campos");
+            
+           
+        } else {
+            
+            Alojamiento alojamiento=new Alojamiento();
+            
+            alojamiento.setNombre(jtfNombreAlojamiento.getText());
+            alojamiento.getCiudadDestino().setNombre(jtfCiudadAlojamiento.getText());
+            alojamiento.setTipoAlojamiento((String)jcbTipoAlojamiento.getSelectedItem());
+            
+            
+            aloja.guardarAlojamiento(alojamiento);
+            
+            
+        }
+
+    }//GEN-LAST:event_jbAlojamientoGuardarActionPerformed
+
+    private void jCheckBoxDesayunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxDesayunoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxDesayunoActionPerformed
+
+    private void jCheckBoxMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxMenuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox jCheckBoxDesayuno;
+    private javax.swing.JCheckBox jCheckBoxMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JButton jbAlojamientoGuardar;
     private javax.swing.JButton jbAlojamientoModificar;
     private javax.swing.JButton jbAlojamientoNuevo;
@@ -163,6 +272,7 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbBuscar;
     private javax.swing.JComboBox<String> jcbTipoAlojamiento;
     private javax.swing.JTextField jtfCiudadAlojamiento;
+    private javax.swing.JTextField jtfImporteDiario;
     private javax.swing.JTextField jtfNombreAlojamiento;
     // End of variables declaration//GEN-END:variables
 }
