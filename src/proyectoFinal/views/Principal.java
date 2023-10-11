@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 public class Principal extends javax.swing.JFrame {
     
-    public static boolean logeado=false;
+    public static boolean logeado=true;
     
     public Principal() {
         initComponents();
