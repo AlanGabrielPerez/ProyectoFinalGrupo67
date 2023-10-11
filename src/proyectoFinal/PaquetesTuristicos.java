@@ -7,7 +7,9 @@ package proyectoFinal;
 
 import java.time.LocalDate;
 import java.time.Month;
+import proyectoFinal.AccessData.AlojamientoData;
 import proyectoFinal.AccessData.CiudadData;
+import proyectoFinal.Entidades.Alojamiento;
 import proyectoFinal.Entidades.Ciudad;
 
 /**
@@ -26,14 +28,14 @@ public class PaquetesTuristicos {
         Ciudad ElCalafate=new Ciudad("ElCalafate","Santa Cruz","Argentina",true, LocalDate.of(2000,12, 1),LocalDate.of(2000,8, 1),LocalDate.of(2000,4, 1));
         Ciudad caba = new Ciudad("CABA","Buenos Aires","Argentina",true,LocalDate.of(2000,11, 30),LocalDate.of(2000,4, 1),LocalDate.of(2000,12, 1));
         
-        CiudadData ciu=new CiudadData();
+        //CiudadData ciu=new CiudadData();
         //ciu.guardarCiudad(Cordoba);
         //ciu.guardarCiudad(Mendoza);
         //ciu.guardarCiudad(ElCalafate);
-        Ciudad ciuCiu = ciu.ciudadId(1);
+        //Ciudad ciuCiu = ciu.ciudadId(1);
 //        Cordoba.setNombre("Vieja cordoba");
 //        ciu.modificarCiudad(Cordoba);
-        ciu.eliminarCiudad(5);
+        //ciu.eliminarCiudad(5);
         //System.out.println(ciu.ciudadId(1).toString());
         //System.out.println("lista de ciudades:");
         //for(Ciudad c:ciu.listarCiudad()){
@@ -45,6 +47,9 @@ public class PaquetesTuristicos {
         //for(Ciudad c2:ciu.ciudadesInactivas()){
           //  System.out.println(c2);
         //}
-
+        
+        //Alojamiento alojamiento = new Alojamiento("Hostel","Los Hermeticos", true, "Desayuno",50000,Cordoba);
+        //AlojamientoData ad= new AlojamientoData();
+        //ad.guardarAlojamiento(alojamiento);
     }
 }

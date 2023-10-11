@@ -34,24 +34,26 @@ public class AlojamientoData {
 
     public void guardarAlojamiento(Alojamiento alojamiento) {
 
-        String sql = "INSERT INTO `alojamiento`(`tipoAlojamiento`,`estado`, `servicio`, `importeDiario`, `ciudadDest`) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO `alojamiento`( `tipoAlojamiento`, `nombre`, `estado`, `servicio`, `importeDiario`, `ciudadDest`) VALUES (?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             
             ps.setString(1, alojamiento.getTipoAlojamiento());
-            ps.setBoolean(2, alojamiento.isEstado());
-            ps.setString(3, alojamiento.getServicio());
-            ps.setDouble(4, alojamiento.getImporteDiario());
-            ps.setString(5, alojamiento.getCiudadDestino().getNombre());
-            ps.executeUpdate(sql);
+            ps.setString(2, alojamiento.getNombre());    
+            ps.setBoolean(3, alojamiento.isEstado());    
+            ps.setString(4, alojamiento.getServicio()); 
+            ps.setDouble(5, alojamiento.getImporteDiario());     
+            ps.setString(6, alojamiento.getCiudadDestino().getNombre());      
+            
+            ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
 
             if (rs.next()) {
 
-                alojamiento.setIdAlojamiento(1);
+                alojamiento.setIdAlojamiento(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Alojamiento guardado");
 
             }
