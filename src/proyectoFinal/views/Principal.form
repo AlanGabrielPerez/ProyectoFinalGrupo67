@@ -60,7 +60,7 @@
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="}"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if(logeado){"/>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="if(logeado){"/>
               </AuxValues>
             </MenuItem>
           </SubComponents>
@@ -108,7 +108,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="Desktop" alignment="0" max="32767" attributes="0"/>
+          <Component id="Desktop" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

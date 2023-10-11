@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class Principal extends javax.swing.JFrame {
     
@@ -95,12 +96,12 @@ public class Principal extends javax.swing.JFrame {
         }
 
         jmDesconectarse.setText("Desconectarse");
+        jmDesconectarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmDesconectarseActionPerformed(evt);
+            }
+        });
         if(logeado){
-            jmDesconectarse.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jmDesconectarseActionPerformed(evt);
-                }
-            });
             jmAdministrar.add(jmDesconectarse);
         }
 
@@ -123,7 +124,7 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Desktop)
+            .addComponent(Desktop, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -189,8 +190,16 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmAlojamientoActionPerformed
 
     private void jmDesconectarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDesconectarseActionPerformed
-        
-        logeado = false;
+       ImageIcon icono = new ImageIcon("src/Icons/salida32.png");
+        int op = JOptionPane.showConfirmDialog(null, "Seguro desea salir",
+            "Salir", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icono);
+        if (op == 0) {
+            this.logeado = false;
+            jmAdministrar.remove(jmCiudad);
+            jmAdministrar.remove(jmAlojamiento);
+            jmAdministrar.remove(jmPasaje);
+            jmAdministrar.remove(jmDesconectarse);
+        }
     }//GEN-LAST:event_jmDesconectarseActionPerformed
 
   
