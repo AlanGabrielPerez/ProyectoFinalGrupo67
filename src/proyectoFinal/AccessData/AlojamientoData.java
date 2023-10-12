@@ -118,5 +118,36 @@ public class AlojamientoData {
         }
     return a;
     }
-
+    
+    public void modificarAlojamiento(Alojamiento alojamiento){
+        
+         String sql = "UPDATE `alojamiento` SET `tipoAlojamiento`=?,`nombre`=?,`estado`=?,`servicio`=?,`importeDiario`=?,`ciudadDest`=? WHERE idAlojamiento= ?";
+            
+          
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setString(1, alojamiento.getTipoAlojamiento());
+            ps.setString(2, alojamiento.getNombre());
+            ps.setBoolean(3, alojamiento.isEstado());
+            ps.setString(4, alojamiento.getServicio());
+            ps.setDouble(5, alojamiento.getImporteDiario());
+            
+            int exito = ps.executeUpdate();
+            
+            if (exito == 1){
+            JOptionPane.showMessageDialog(null, "Ciudad modificado");
+            } else {
+            JOptionPane.showMessageDialog(null, "Error al modificar");
+            
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en el mensaje sql");
+        }
+            
+            
+    }
 }
+    

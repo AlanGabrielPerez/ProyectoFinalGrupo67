@@ -5,9 +5,12 @@
  */
 package proyectoFinal.views;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import proyectoFinal.AccessData.AlojamientoData;
 import proyectoFinal.AccessData.CiudadData;
+import proyectoFinal.AccessData.Conexion;
 import proyectoFinal.Entidades.Alojamiento;
 import proyectoFinal.Entidades.Ciudad;
 
@@ -16,9 +19,12 @@ import proyectoFinal.Entidades.Ciudad;
  * @author julian
  */
 public class AdminAlojamiento extends javax.swing.JInternalFrame {
-    
+
     private AlojamientoData aloja = new AlojamientoData();
-    private CiudadData ciu=new CiudadData();
+    private CiudadData ciu = new CiudadData();
+    
+    //private Connection con;
+    
 
     /**
      * Creates new form AdminAlojamiento
@@ -26,6 +32,7 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
     public AdminAlojamiento() {
         initComponents();
         agregarCiudad();
+        //con = Conexion.getConnection();
     }
 
     /**
@@ -87,6 +94,11 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
         jLabel4.setText("Categoria(Tipo):");
 
         jbAlojamientoModificar.setText("Modificar");
+        jbAlojamientoModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAlojamientoModificarActionPerformed(evt);
+            }
+        });
 
         jbAlojamientoNuevo.setText("Nuevo");
         jbAlojamientoNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -230,51 +242,49 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
 
     private void jbAlojamientoGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlojamientoGuardarActionPerformed
         String servicio;
-        
+
         if (jtfNombreAlojamiento.getText().isEmpty() || jcbTipoAlojamiento.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
-            
+
         } else {
             Alojamiento alojamiento = new Alojamiento();
-            Ciudad c = (Ciudad)jComboBoxCiudad.getSelectedItem();
+            Ciudad c = (Ciudad) jComboBoxCiudad.getSelectedItem();
             alojamiento.setCiudadDestino(c);
             alojamiento.setEstado(true);
             alojamiento.setNombre(jtfNombreAlojamiento.getText());
             alojamiento.setImporteDiario(Double.parseDouble(jtfImporteDiario.getText()));
-            alojamiento.setTipoAlojamiento((String)jcbTipoAlojamiento.getSelectedItem());
-            
+            alojamiento.setTipoAlojamiento((String) jcbTipoAlojamiento.getSelectedItem());
+
             double importeSuma = alojamiento.getImporteDiario();
 
             // Verificar qué servicios de comida se seleccionaron
             servicio = "";
             if (jCheckBoxDesayuno.isSelected()) {
-                servicio +=("Desayuno- ");
+                servicio += ("Desayuno- ");
                 importeSuma += 500;
             }
             if (jCheckBoxAlmuerzo.isSelected()) {
-                servicio +=(" Almuerzo- ");
+                servicio += (" Almuerzo- ");
                 importeSuma += 500;
             }
             if (jCheckBoxCena.isSelected()) {
                 servicio += (" Cena");
                 importeSuma += 500;
             }
-            
+
             alojamiento.setImporteDiario(importeSuma);
-            
+
             if (servicio.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Seleccione al menos un servicio de comida");
             } else {
                 alojamiento.setServicio(servicio);
                 aloja.guardarAlojamiento(alojamiento);
                 JOptionPane.showMessageDialog(this, "Usted eligió: " + servicio);
-                
+
             }
-            
+
         }
-        
-        
-        
+
 
     }//GEN-LAST:event_jbAlojamientoGuardarActionPerformed
 
@@ -292,7 +302,7 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbAlojamientoSalirActionPerformed
 
     private void jbAlojamientoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlojamientoNuevoActionPerformed
-        
+
         jtfAlojamientoId.setText("");
         jtfNombreAlojamiento.setText("");
         jComboBoxCiudad.setSelectedIndex(-1);
@@ -301,8 +311,15 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
         jCheckBoxDesayuno.setSelected(false);
         jCheckBoxAlmuerzo.setSelected(false);
         jCheckBoxCena.setSelected(false);
+        jtfImporteDiario.setText("");
 
     }//GEN-LAST:event_jbAlojamientoNuevoActionPerformed
+
+    private void jbAlojamientoModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlojamientoModificarActionPerformed
+        
+      
+        
+    }//GEN-LAST:event_jbAlojamientoModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -328,10 +345,10 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfNombreAlojamiento;
     // End of variables declaration//GEN-END:variables
 
-    private void agregarCiudad(){
-        
-        for (Ciudad c: ciu.listarCiudad()){
-            
+    private void agregarCiudad() {
+
+        for (Ciudad c : ciu.listarCiudad()) {
+
             jComboBoxCiudad.addItem(c);
         }
     }
