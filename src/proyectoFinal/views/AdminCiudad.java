@@ -5,6 +5,7 @@
  */
 package proyectoFinal.views;
 
+import java.sql.Date;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import proyectoFinal.AccessData.CiudadData;
@@ -16,7 +17,6 @@ import proyectoFinal.Entidades.Ciudad;
  */
 public class AdminCiudad extends javax.swing.JInternalFrame {
     CiudadData cd = new CiudadData();
-
     /**
      * Creates new form AdminCiudad
      */
@@ -69,6 +69,11 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
         });
 
         jbBuscarCiudad.setText("Buscar");
+        jbBuscarCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarCiudadActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Ciudad:");
 
@@ -92,8 +97,18 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
         jbCiudadModificar.setText("Modificar");
 
         jbCiudadNuevo.setText("Nuevo");
+        jbCiudadNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCiudadNuevoActionPerformed(evt);
+            }
+        });
 
         jbCiudadSalir.setText("Salir");
+        jbCiudadSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCiudadSalirActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Temporada Alta:");
 
@@ -208,7 +223,7 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfIngreseIdActionPerformed
 
     private void jbCiudadGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCiudadGuardarActionPerformed
-        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jtfIngreseId.getText().isEmpty() || jtfIngreseProvincia.getText().isEmpty()){
+        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jtfIngreseProvincia.getText().isEmpty()){
         JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
         } else {
             Ciudad ciudad = new Ciudad();
@@ -222,6 +237,38 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
          cd.guardarCiudad(ciudad);
         }
     }//GEN-LAST:event_jbCiudadGuardarActionPerformed
+
+    private void jbBuscarCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarCiudadActionPerformed
+        if (jtfIngreseId.getText() == ""){
+            if (comprobar(Integer.parseInt(jtfIngreseId.getText()))==true){
+         cd.ciudadId(Integer.parseInt(jtfIngreseId.getText()));
+         jTextField1.setText(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getNombre());
+         jtfIngreseProvincia.setText(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getProvincia());
+         jTextField2.setText(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getPais());
+         jDateChooser1.setDate(Date.valueOf(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getTemAlta()));
+         jDateChooser2.setDate(Date.valueOf(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getTemMedia()));
+         jDateChooser3.setDate(Date.valueOf(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getTemBaja()));
+            } else {
+            JOptionPane.showMessageDialog(this, "Ingrese un id correcto");
+            }
+        } else {
+        JOptionPane.showMessageDialog(this, "Ingrese un id en el campo");
+        }
+    }//GEN-LAST:event_jbBuscarCiudadActionPerformed
+
+    private void jbCiudadNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCiudadNuevoActionPerformed
+       jTextField1.setText("");
+       jTextField2.setText("");
+       jtfIngreseId.setText("");
+       jtfIngreseProvincia.setText("");
+       jDateChooser1.setDate(null);
+       jDateChooser2.setDate(null);
+       jDateChooser3.setDate(null);
+    }//GEN-LAST:event_jbCiudadNuevoActionPerformed
+
+    private void jbCiudadSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCiudadSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbCiudadSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -247,4 +294,14 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfIngreseId;
     private javax.swing.JTextField jtfIngreseProvincia;
     // End of variables declaration//GEN-END:variables
+
+    private boolean comprobar (int id){
+    boolean ok = false;
+    for (Ciudad c : cd.listarCiudad()){
+    if (c.getIdCiudad() == id){
+    ok = true;
+    }
+    }
+    return ok;
+    }
 }
