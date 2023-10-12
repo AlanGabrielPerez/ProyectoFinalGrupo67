@@ -95,6 +95,11 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
         });
 
         jbCiudadModificar.setText("Modificar");
+        jbCiudadModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCiudadModificarActionPerformed(evt);
+            }
+        });
 
         jbCiudadNuevo.setText("Nuevo");
         jbCiudadNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -223,7 +228,7 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfIngreseIdActionPerformed
 
     private void jbCiudadGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCiudadGuardarActionPerformed
-        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jtfIngreseProvincia.getText().isEmpty()){
+        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jtfIngreseProvincia.getText().isEmpty() || jDateChooser1.getDate()==null || jDateChooser2.getDate()==null || jDateChooser3.getDate()==null){
         JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
         } else {
             Ciudad ciudad = new Ciudad();
@@ -239,7 +244,7 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbCiudadGuardarActionPerformed
 
     private void jbBuscarCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarCiudadActionPerformed
-        if (jtfIngreseId.getText() == ""){
+        if (jtfIngreseId.getText() != ""){
             if (comprobar(Integer.parseInt(jtfIngreseId.getText()))==true){
          cd.ciudadId(Integer.parseInt(jtfIngreseId.getText()));
          jTextField1.setText(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getNombre());
@@ -269,6 +274,32 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
     private void jbCiudadSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCiudadSalirActionPerformed
         dispose();
     }//GEN-LAST:event_jbCiudadSalirActionPerformed
+
+    private void jbCiudadModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCiudadModificarActionPerformed
+     
+        if (jtfIngreseId.getText() != ""){ 
+        if(comprobar(Integer.parseInt(jtfIngreseId.getText()))==true){
+          if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jtfIngreseProvincia.getText().isEmpty() || jDateChooser1.getDate()==null || jDateChooser2.getDate()==null || jDateChooser3.getDate()==null){
+              JOptionPane.showMessageDialog(this, "Rellene los campos faltantes o use buscar por ID");
+          } else {
+           Ciudad ciudad = new Ciudad();    
+          ciudad.setEstado(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).isEstado());
+          ciudad.setNombre(jTextField1.getText());
+          ciudad.setPais(jTextField1.getText());
+          ciudad.setProvincia(jtfIngreseProvincia.getText());
+          ciudad.setTemAlta(jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+          ciudad.setTemMedia(jDateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+          ciudad.setTemBaja(jDateChooser3.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+          ciudad.setIdCiudad(Integer.parseInt(jtfIngreseId.getText()));
+          cd.modificarCiudad(ciudad);
+          }
+        } else {
+        JOptionPane.showMessageDialog(this, "Ingrese un valor existente");
+        }
+       } else {
+       JOptionPane.showMessageDialog(this, "Ingrese algun valor en el campo ID");
+       }
+    }//GEN-LAST:event_jbCiudadModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
