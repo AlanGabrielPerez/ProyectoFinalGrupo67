@@ -26,10 +26,13 @@ import proyectoFinal.Entidades.Ciudad;
 public class AlojamientoData {
 
     private Connection con;
+    
+    private CiudadData ciu=new CiudadData();
 
     public AlojamientoData() {
 
         con = Conexion.getConnection();
+        
     }            
 
     public void guardarAlojamiento(Alojamiento alojamiento) {
@@ -72,18 +75,21 @@ public class AlojamientoData {
         ArrayList<Alojamiento> alojamientos = new ArrayList<>();
 
         PreparedStatement ps;
+        
 
         try {
             ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+            
+            
 
             while (rs.next()) {
 
                 Alojamiento alojamiento = new Alojamiento();
                 alojamiento.setTipoAlojamiento(rs.getString("tipoAlojamiento"));
                 alojamiento.setNombre(rs.getString("nombre"));
-                alojamiento.getCiudadDestino().setNombre(rs.getString("ciudadDest"));
-
+                alojamiento.setCiudadDestino(ciu.buscarNombre(rs.getString("CiudadDest")));
+                
             }
 
             ps.close();
