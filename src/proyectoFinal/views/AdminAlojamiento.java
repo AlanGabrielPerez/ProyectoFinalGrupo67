@@ -242,11 +242,11 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
                 importeSuma += 500;
             }
             if (jCheckBoxAlmuerzo.isSelected()) {
-                servicio +=("Almuerzo- ");
+                servicio +=(" Almuerzo- ");
                 importeSuma += 500;
             }
             if (jCheckBoxCena.isSelected()) {
-                servicio += ("Cena");
+                servicio += (" Cena");
                 importeSuma += 500;
             }
             
