@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
 import proyectoFinal.Entidades.Pasaje;
@@ -21,6 +23,7 @@ import proyectoFinal.Entidades.Pasaje;
  */
 public class PasajeData {
     private Connection con;
+    private CiudadData cd = new CiudadData();
     
     public PasajeData() {
         con = Conexion.getConnection();
@@ -132,8 +135,8 @@ public class PasajeData {
             if (rs.next()){
             p = new Pasaje ();
             p.setIdPasaje(id);
-            p.getCiudadOrigen().setNombre(rs.getString("origen"));
-            p.getCiudadDestino().setNombre(rs.getString("destino"));
+            p.setCiudadOrigen(cd.buscarNombre(rs.getString("origen")));
+            p.setCiudadDestino(cd.buscarNombre(rs.getString("destino")));
             p.setEstado(rs.getBoolean("estado"));
             p.setImporte(rs.getDouble("importe"));
             p.setTipoDeTransporte(rs.getString("tipoTransporte"));
@@ -145,5 +148,34 @@ public class PasajeData {
         }
         return p;
     }
+    
+    public List<Pasaje> listarPasajes(){
+        ArrayList <Pasaje> lista = new ArrayList<>();
+        String sql =  "SELECT * FROM pasaje";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Pasaje p = new Pasaje();
+                p.setIdPasaje(rs.getInt("idPasaje"));
+                p.setTipoDeTransporte(rs.getString("tipoTransporte"));
+                p.setImporte(rs.getDouble("importe"));
+                p.setCiudadOrigen(cd.buscarNombre(rs.getString("origen")));
+                p.setCiudadDestino(cd.buscarNombre(rs.getString("destino")));
+                p.setEstado(rs.getBoolean("estado"));
+                
+                lista.add(p);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error SQL");
+        }
+        
+        return lista;
+        
+    }
+    
     
 }

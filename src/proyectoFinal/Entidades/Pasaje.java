@@ -88,9 +88,10 @@ public class Pasaje {
 
     @Override
     public String toString() {
-        return "pasaje{" + "idPasaje=" + idPasaje + ", tipoDeTransporte=" + tipoDeTransporte + ", importe=" + importe + ", ciudadOrigen=" + ciudadOrigen + ", estado=" + estado + '}';
+        return "Pasaje{" + "idPasaje=" + idPasaje + ", tipoDeTransporte=" + tipoDeTransporte + ", importe=" + importe + ", ciudadOrigen=" + ciudadOrigen + ", estado=" + estado + ", ciudadDestino=" + ciudadDestino + '}';
     }
-    
+
+   
     
     
 }

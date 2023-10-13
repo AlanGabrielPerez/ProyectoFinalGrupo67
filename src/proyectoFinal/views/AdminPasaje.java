@@ -1,13 +1,17 @@
 
 package proyectoFinal.views;
 
+import javax.swing.JOptionPane;
 import proyectoFinal.AccessData.CiudadData;
+import proyectoFinal.AccessData.PasajeData;
 import proyectoFinal.Entidades.Ciudad;
+import proyectoFinal.Entidades.Pasaje;
 
 
 public class AdminPasaje extends javax.swing.JInternalFrame {
 
     private CiudadData ciu = new CiudadData();
+    private PasajeData psDt = new PasajeData();
     
     
     public AdminPasaje() {
@@ -32,16 +36,16 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jtImporte = new javax.swing.JTextField();
+        Guardar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jrEstado = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jtID = new javax.swing.JTextField();
+        jbBuscar = new javax.swing.JButton();
 
         setClosable(true);
         setResizable(true);
@@ -61,7 +65,18 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Importe");
 
-        jButton1.setText("Modificar");
+        jtImporte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtImporteKeyTyped(evt);
+            }
+        });
+
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setText("Eliminar");
 
@@ -71,17 +86,24 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Estado");
 
-        jRadioButton1.setText("   ");
+        jrEstado.setText("   ");
 
         jLabel6.setText("ID");
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/lupa16.png"))); // NOI18N
-        jButton2.setToolTipText("Buscar");
-        jButton2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jtID.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jtID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtIDKeyTyped(evt);
+            }
+        });
+
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/lupa16.png"))); // NOI18N
+        jbBuscar.setToolTipText("Buscar");
+        jbBuscar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jbBuscar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbBuscarActionPerformed(evt);
             }
         });
 
@@ -108,17 +130,17 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel5))
                                 .addGap(2, 2, 2))
-                            .addComponent(jButton1))))
+                            .addComponent(Guardar))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jrEstado)
+                            .addComponent(jtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2))
+                                .addComponent(jbBuscar))
                             .addComponent(jcbOrigen, 0, 211, Short.MAX_VALUE)
                             .addComponent(jcbDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -137,8 +159,8 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtID, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -155,14 +177,14 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jRadioButton1))
+                    .addComponent(jrEstado))
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(Guardar)
                     .addComponent(jbEliminar)
                     .addComponent(jButton3)
                     .addComponent(jbSalir))
@@ -172,18 +194,63 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+            int id = Integer.parseInt(jtID.getText());
+            if (comprobar(id)){
+                Pasaje p = psDt.pasajeId(id);
+                System.out.println(p);
+                Ciudad origen = p.getCiudadOrigen();
+                Ciudad destino = p.getCiudadDestino();
+                
+                jcbTipo.setSelectedItem((String)p.getTipoDeTransporte());
+                jcbOrigen.getModel().setSelectedItem(p.getCiudadOrigen());                
+                jcbDestino.getModel().setSelectedItem(p.getCiudadDestino());
+                jtImporte.setText(p.getImporte()+"");
+                jrEstado.setSelected(p.isEstado());
+            }else {
+                JOptionPane.showMessageDialog(this, "No se encontro pasaje con id: "+id);
+            }
+            
+            
+       
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jcbOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbOrigenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbOrigenActionPerformed
 
+    private void jtIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtIDKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+        if (!numero) {
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtIDKeyTyped
+
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        Pasaje p = new Pasaje();
+        p.setTipoDeTransporte((String)jcbTipo.getSelectedItem());
+        p.setCiudadDestino((Ciudad)jcbDestino.getSelectedItem());
+        p.setCiudadOrigen((Ciudad)jcbOrigen.getSelectedItem());
+        p.setImporte(Double.parseDouble(jtImporte.getText()));
+        p.setEstado(jrEstado.isSelected());
+        
+        psDt.crearPasaje(p);
+    }//GEN-LAST:event_GuardarActionPerformed
+
+    private void jtImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtImporteKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = ((key >= 48 && key <= 57)|| key==46);
+        if (!numero) {
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtImporteKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Guardar;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -191,20 +258,20 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Ciudad> jcbDestino;
     private javax.swing.JComboBox<Ciudad> jcbOrigen;
     private javax.swing.JComboBox<String> jcbTipo;
+    private javax.swing.JRadioButton jrEstado;
+    private javax.swing.JTextField jtID;
+    private javax.swing.JTextField jtImporte;
     // End of variables declaration//GEN-END:variables
 
 private void cargarTipoTrasporte(){
    String[] tipos = {"Avion","Taxi","Omnibus","Combi","Tren"};
    
-   jcbTipo.addItem("-Seleccione-");
    for (String t:tipos){
        jcbTipo.addItem(t);   
    }
@@ -216,8 +283,18 @@ private void cargarCiudades(){
         jcbOrigen.addItem(c);
         jcbDestino.addItem(c);
         
-    }
-    
+    }   
 }
+
+ private boolean comprobar(int id){
+    boolean existe = false;
+    
+    for (Pasaje p: psDt.listarPasajes()){
+        if (p.getIdPasaje() == id ){
+            existe = true;
+        }
+    }    
+    return existe;
+ }
 
 }
