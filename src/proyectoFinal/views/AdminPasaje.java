@@ -1,6 +1,7 @@
 
 package proyectoFinal.views;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import proyectoFinal.AccessData.CiudadData;
 import proyectoFinal.AccessData.PasajeData;
@@ -18,6 +19,8 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
         initComponents();
         cargarTipoTrasporte();
         cargarCiudades();
+        setComponentes();
+        
     }
 
     /**
@@ -39,13 +42,14 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
         jtImporte = new javax.swing.JTextField();
         Guardar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbEstado = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jrEstado = new javax.swing.JRadioButton();
+        jrActivo = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
         jtID = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
+        jrInactivo = new javax.swing.JRadioButton();
 
         setClosable(true);
         setResizable(true);
@@ -79,14 +83,34 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
         });
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("jButton3");
+        jbEstado.setText("Dar de baja");
+        jbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEstadoActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Estado");
 
-        jrEstado.setText("   ");
+        jrActivo.setText(" Activo  ");
+        jrActivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrActivoActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("ID");
 
@@ -107,35 +131,40 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
             }
         });
 
+        jrInactivo.setText("Inactivo");
+        jrInactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrInactivoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5))
-                                .addGap(2, 2, 2))
-                            .addComponent(Guardar))))
+                        .addGap(92, 92, 92)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
+                        .addGap(2, 2, 2))
+                    .addComponent(Guardar))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jrEstado)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jrActivo)
+                                .addGap(18, 18, 18)
+                                .addComponent(jrInactivo))
                             .addComponent(jtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,11 +175,11 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
                             .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(57, 57, 57))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
+                        .addGap(2, 2, 2)
                         .addComponent(jbEliminar)
-                        .addGap(36, 36, 36)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addComponent(jbEstado)
+                        .addGap(28, 28, 28)
                         .addComponent(jbSalir)
                         .addGap(29, 29, 29))))
         );
@@ -181,12 +210,13 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jrEstado))
+                    .addComponent(jrActivo)
+                    .addComponent(jrInactivo))
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Guardar)
                     .addComponent(jbEliminar)
-                    .addComponent(jButton3)
+                    .addComponent(jbEstado)
                     .addComponent(jbSalir))
                 .addGap(20, 20, 20))
         );
@@ -195,24 +225,33 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+
+        if (!jtID.getText().isEmpty()) {
             int id = Integer.parseInt(jtID.getText());
-            if (comprobar(id)){
+            
+            if (comprobar(id)) {  
                 Pasaje p = psDt.pasajeId(id);
-                System.out.println(p);
                 Ciudad origen = p.getCiudadOrigen();
                 Ciudad destino = p.getCiudadDestino();
-                
-                jcbTipo.setSelectedItem((String)p.getTipoDeTransporte());
-                jcbOrigen.getModel().setSelectedItem(p.getCiudadOrigen());                
+
+                jcbTipo.setSelectedItem((String) p.getTipoDeTransporte());
+                jcbOrigen.getModel().setSelectedItem(p.getCiudadOrigen());
                 jcbDestino.getModel().setSelectedItem(p.getCiudadDestino());
-                jtImporte.setText(p.getImporte()+"");
-                jrEstado.setSelected(p.isEstado());
-            }else {
-                JOptionPane.showMessageDialog(this, "No se encontro pasaje con id: "+id);
+                jtImporte.setText(p.getImporte() + "");
+                if (p.isEstado()) {
+                    jrActivo.setSelected(true);
+                    jrActivoActionPerformed(evt);
+                } else {
+                    jrInactivo.setSelected(true);
+                    jrInactivoActionPerformed(evt);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontro pasaje con id: " + id);
+                setComponentes();
             }
-            
-            
-       
+        }
+
+
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jcbOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbOrigenActionPerformed
@@ -223,35 +262,128 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
         int key = evt.getKeyChar();
         boolean numero = key >= 48 && key <= 57;
         if (!numero) {
-
             evt.consume();
         }
     }//GEN-LAST:event_jtIDKeyTyped
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        Pasaje p = new Pasaje();
-        p.setTipoDeTransporte((String)jcbTipo.getSelectedItem());
-        p.setCiudadDestino((Ciudad)jcbDestino.getSelectedItem());
-        p.setCiudadOrigen((Ciudad)jcbOrigen.getSelectedItem());
-        p.setImporte(Double.parseDouble(jtImporte.getText()));
-        p.setEstado(jrEstado.isSelected());
         
-        psDt.crearPasaje(p);
+        if (camposVacios()) {
+            JOptionPane.showMessageDialog(this, "Rellene los campos correcmente");
+        } else {
+            Pasaje pasaje = setPasaje();
+            if (existePasaje(pasaje)) {
+                double importe = Double.parseDouble(jtImporte.getText());
+                if (importe == pasaje.getImporte()) {
+                    JOptionPane.showMessageDialog(this, "El pasaje ya existe");
+                } else {
+                    ImageIcon modificar = new ImageIcon("src/Icons/editar32.png");
+                    int op = JOptionPane.showConfirmDialog(null, "Seguro desea modificar pasaje: " + stringDatos(),
+                            "Modificar pasaje", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, modificar);
+                    if (op == 0) {
+                        pasaje.setImporte(importe);
+                        psDt.modificarPasaje(pasaje);
+                    }
+                }
+            } else {
+                ImageIcon agregar = new ImageIcon("src/Icons/agregar32.png");
+                int op = JOptionPane.showConfirmDialog(null, "Seguro desea crear Pasaje: " + stringDatos(),
+                        "Crear pasaje", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, agregar);
+                if (op == 0) {
+                    psDt.crearPasaje(pasaje);
+                }
+            }
+        }
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void jtImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtImporteKeyTyped
         int key = evt.getKeyChar();
-        boolean numero = ((key >= 48 && key <= 57)|| key==46);
+        boolean numero = ((key >= 48 && key <= 57) || key == 46);
         if (!numero) {
-
             evt.consume();
         }
     }//GEN-LAST:event_jtImporteKeyTyped
 
+    private void jrActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrActivoActionPerformed
+        if (jrActivo.isSelected()) {
+            jrInactivo.setSelected(false);
+            jbEstado.setText("Dar de baja");
+        }else {
+            jrInactivo.setSelected(true);
+            jrInactivoActionPerformed(evt);
+        }
+
+    }//GEN-LAST:event_jrActivoActionPerformed
+
+    private void jrInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrInactivoActionPerformed
+        if (jrInactivo.isSelected()) {
+            jrActivo.setSelected(false);
+            jbEstado.setText("     Activar     ");
+        }else{
+            jrActivo.setSelected(true);
+            jrActivoActionPerformed(evt);
+        }
+    }//GEN-LAST:event_jrInactivoActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+
+        ImageIcon icono = new ImageIcon("src/Icons/errorDatabase32.png");
+        if (camposVacios()) {
+            JOptionPane.showMessageDialog(this, "Los campos deben estar completos");
+        } else {
+            Pasaje pasaje = setPasaje();
+            if (existePasaje(pasaje)) {
+                int op = JOptionPane.showConfirmDialog(null, "Seguro desea eliminar el Pasaje: "+stringDatos()
+                  +" de la base de datos.","Eliminar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icono);
+                if (op == 0) {
+                    psDt.eliminarPasaje(pasaje.getIdPasaje());
+                    setComponentes();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No existe pasaje");
+            }
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadoActionPerformed
+       if (camposVacios()){
+           JOptionPane.showMessageDialog(this, "Los campos deben estar completos");
+       }else{
+           Pasaje pasaje = setPasaje();
+            if (existePasaje(pasaje)) {
+                if(pasaje.isEstado()==jrActivo.isSelected()){
+                    if (jrActivo.isSelected()){
+                        psDt.activarPasaje(pasaje.getIdPasaje(), false);
+                        JOptionPane.showMessageDialog(this, "Pasaje: "+ stringDatos() +" fue dado de baja.");
+                    }else{
+                         psDt.activarPasaje(pasaje.getIdPasaje(), true);
+                         JOptionPane.showMessageDialog(this, "Pasaje: "+stringDatos()+" fue activado.");
+                    }
+                }else{
+                    if (jrActivo.isSelected()){
+                        JOptionPane.showMessageDialog(this, "El pasaje: "+stringDatos()+" ya esta dado de baja.");
+                    }else{
+                        JOptionPane.showMessageDialog(this, "El pasaje: "+stringDatos()+" ya esta activo.");
+                    }
+                }
+                jtID.setText(pasaje.getIdPasaje()+"");
+                jbBuscarActionPerformed(evt);
+                
+                
+            }else{
+                JOptionPane.showMessageDialog(this, "No existe pasaje");
+            }
+       
+       }
+    }//GEN-LAST:event_jbEstadoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Guardar;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -260,41 +392,110 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbEstado;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Ciudad> jcbDestino;
     private javax.swing.JComboBox<Ciudad> jcbOrigen;
     private javax.swing.JComboBox<String> jcbTipo;
-    private javax.swing.JRadioButton jrEstado;
+    private javax.swing.JRadioButton jrActivo;
+    private javax.swing.JRadioButton jrInactivo;
     private javax.swing.JTextField jtID;
     private javax.swing.JTextField jtImporte;
     // End of variables declaration//GEN-END:variables
 
-private void cargarTipoTrasporte(){
-   String[] tipos = {"Avion","Taxi","Omnibus","Combi","Tren"};
-   
-   for (String t:tipos){
-       jcbTipo.addItem(t);   
-   }
-    
-}
+    private void cargarTipoTrasporte() {
+        String[] tipos = {"Avion", "Taxi", "Omnibus", "Combi", "Tren"};
 
-private void cargarCiudades(){
-    for (Ciudad c:ciu.listarCiudad()){
-        jcbOrigen.addItem(c);
-        jcbDestino.addItem(c);
-        
-    }   
-}
-
- private boolean comprobar(int id){
-    boolean existe = false;
-    
-    for (Pasaje p: psDt.listarPasajes()){
-        if (p.getIdPasaje() == id ){
-            existe = true;
+        for (String t : tipos) {
+            jcbTipo.addItem(t);
         }
-    }    
-    return existe;
- }
 
+    }
+
+    private void cargarCiudades() {
+        for (Ciudad c : ciu.listarCiudad()) {
+            jcbOrigen.addItem(c);
+            jcbDestino.addItem(c);
+
+        }
+    }
+
+    private boolean comprobar(int id) {
+        boolean existe = false;
+
+        for (Pasaje p : psDt.listarPasajes()) {
+            if (p.getIdPasaje() == id) {
+                existe = true;
+            }
+        }
+        return existe;
+    }
+
+    private boolean existePasaje(Pasaje p) {
+
+        String tipo = p.getTipoDeTransporte();
+        String Origen = p.getCiudadOrigen().getNombre();
+        String Destino = p.getCiudadDestino().getNombre();
+        boolean existe = false;
+
+        for (Pasaje pasa : psDt.listarPasajes()) {
+
+            String pasTipo = pasa.getTipoDeTransporte();
+            String pasOrigen = pasa.getCiudadOrigen().getNombre();
+            String pasDestino = pasa.getCiudadDestino().getNombre();
+
+            if (pasTipo.equals(tipo) && pasOrigen.equals(Origen) && pasDestino.equals(Destino)) {
+                existe = true;
+                p.setEstado(pasa.isEstado());
+                p.setIdPasaje(pasa.getIdPasaje());
+                p.setImporte(pasa.getImporte());
+                break;
+            }
+        }
+
+        return existe;
+    }
+
+    private Pasaje setPasaje() {
+        Pasaje p = new Pasaje();
+        p.setTipoDeTransporte((String) jcbTipo.getSelectedItem());
+        p.setCiudadDestino((Ciudad) jcbDestino.getSelectedItem());
+        p.setCiudadOrigen((Ciudad) jcbOrigen.getSelectedItem());
+        p.setImporte(Double.parseDouble(jtImporte.getText()));
+        p.setEstado(jrActivo.isSelected());
+
+        return p;
+    }
+
+    private void setComponentes() {
+
+        jcbTipo.setSelectedIndex(-1);
+        jcbOrigen.setSelectedIndex(-1);
+        jcbDestino.setSelectedIndex(-1);
+        jrActivo.setSelected(true);
+        jtImporte.setText("0.0");
+    }
+
+    private boolean camposVacios() {
+        boolean vacios = false;
+        String tipo = (String) jcbTipo.getSelectedItem();
+        Ciudad destino = (Ciudad) jcbDestino.getSelectedItem();
+        Ciudad origen = (Ciudad) jcbOrigen.getSelectedItem();
+        String importe = jtImporte.getText();
+
+        if (importe.isEmpty() || destino == null || origen == null || tipo == null) {
+            vacios = true;
+        }
+        return vacios;
+    }
+    
+    private String stringDatos(){
+        
+        String tipo = (String) jcbTipo.getSelectedItem();
+        Ciudad destino = (Ciudad) jcbDestino.getSelectedItem();
+        Ciudad origen = (Ciudad) jcbOrigen.getSelectedItem();
+        
+        return tipo +" con destino " +destino.getNombre()+","+destino.getProvincia()
+                        +"\ndesde "+origen.getNombre()+", "+origen.getProvincia();        
+    }
 }

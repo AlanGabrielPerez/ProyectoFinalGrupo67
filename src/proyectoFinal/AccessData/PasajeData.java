@@ -54,19 +54,17 @@ public class PasajeData {
         
     }
     
-    public void eliminarPasaje(int id){
-    String sql = "UPDATE `pasaje` SET `estado`='0' WHERE idPasaje = ? estado = 1";
+    public void activarPasaje(int id, boolean estado){
+    String sql = "UPDATE `pasaje` SET `estado`=? WHERE idPasaje = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-             int exito = ps.executeUpdate();
+            ps.setBoolean(1, estado);
+            ps.setInt(2, id);
+            int exito = ps.executeUpdate();
              
-             if (exito == 1){
-             JOptionPane.showMessageDialog(null, "Pasaje eliminado");
-             } else {
-             JOptionPane.showMessageDialog(null, "Error al eliminar el pasaje");
-             }
-             
+             if (exito != 1){
+                  JOptionPane.showMessageDialog(null, "Error al actualizar el estado del pasaje");
+             }              
              ps.close();
             
         } catch (SQLException ex) {
@@ -88,12 +86,35 @@ public class PasajeData {
             int exito = ps.executeUpdate();
             
             if (exito == 1){
-            JOptionPane.showMessageDialog(null, "Alumno modificado");
+            JOptionPane.showMessageDialog(null, "Pasaje modificado");
             } 
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error en el sql");
         }
+    }
+    
+        public void eliminarPasaje(int id) {
+        String sql = "DELETE FROM `pasaje` WHERE idPasaje = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,id);
+
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Pasaje eliminado");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al eliminar");
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en el mensaje sql");
+        }
+
     }
     
     public List listaTransporte (String pasaje) {
