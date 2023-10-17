@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
 import proyectoFinal.Entidades.Pasaje;
@@ -21,6 +23,7 @@ import proyectoFinal.Entidades.Pasaje;
  */
 public class PasajeData {
     private Connection con;
+    private CiudadData cd = new CiudadData();
     
     public PasajeData() {
         con = Conexion.getConnection();
@@ -51,19 +54,17 @@ public class PasajeData {
         
     }
     
-    public void eliminarPasaje(int id){
-    String sql = "UPDATE `pasaje` SET `estado`='0' WHERE idPasaje = ? estado = 1";
+    public void activarPasaje(int id, boolean estado){
+    String sql = "UPDATE `pasaje` SET `estado`=? WHERE idPasaje = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-             int exito = ps.executeUpdate();
+            ps.setBoolean(1, estado);
+            ps.setInt(2, id);
+            int exito = ps.executeUpdate();
              
-             if (exito == 1){
-             JOptionPane.showMessageDialog(null, "Pasaje eliminado");
-             } else {
-             JOptionPane.showMessageDialog(null, "Error al eliminar el pasaje");
-             }
-             
+             if (exito != 1){
+                  JOptionPane.showMessageDialog(null, "Error al actualizar el estado del pasaje");
+             }              
              ps.close();
             
         } catch (SQLException ex) {
@@ -85,12 +86,35 @@ public class PasajeData {
             int exito = ps.executeUpdate();
             
             if (exito == 1){
-            JOptionPane.showMessageDialog(null, "Alumno modificado");
+            JOptionPane.showMessageDialog(null, "Pasaje modificado");
             } 
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error en el sql");
         }
+    }
+    
+        public void eliminarPasaje(int id) {
+        String sql = "DELETE FROM `pasaje` WHERE idPasaje = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,id);
+
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Pasaje eliminado");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al eliminar");
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en el mensaje sql");
+        }
+
     }
     
     public List listaTransporte (String pasaje) {
@@ -132,8 +156,8 @@ public class PasajeData {
             if (rs.next()){
             p = new Pasaje ();
             p.setIdPasaje(id);
-            p.getCiudadOrigen().setNombre(rs.getString("origen"));
-            p.getCiudadDestino().setNombre(rs.getString("destino"));
+            p.setCiudadOrigen(cd.buscarNombre(rs.getString("origen")));
+            p.setCiudadDestino(cd.buscarNombre(rs.getString("destino")));
             p.setEstado(rs.getBoolean("estado"));
             p.setImporte(rs.getDouble("importe"));
             p.setTipoDeTransporte(rs.getString("tipoTransporte"));
@@ -145,5 +169,34 @@ public class PasajeData {
         }
         return p;
     }
+    
+    public List<Pasaje> listarPasajes(){
+        ArrayList <Pasaje> lista = new ArrayList<>();
+        String sql =  "SELECT * FROM pasaje";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Pasaje p = new Pasaje();
+                p.setIdPasaje(rs.getInt("idPasaje"));
+                p.setTipoDeTransporte(rs.getString("tipoTransporte"));
+                p.setImporte(rs.getDouble("importe"));
+                p.setCiudadOrigen(cd.buscarNombre(rs.getString("origen")));
+                p.setCiudadDestino(cd.buscarNombre(rs.getString("destino")));
+                p.setEstado(rs.getBoolean("estado"));
+                
+                lista.add(p);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error SQL");
+        }
+        
+        return lista;
+        
+    }
+    
     
 }

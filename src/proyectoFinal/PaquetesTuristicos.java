@@ -28,7 +28,8 @@ public class PaquetesTuristicos {
         Ciudad ElCalafate=new Ciudad("ElCalafate","Santa Cruz","Argentina",true, LocalDate.of(2000,12, 1),LocalDate.of(2000,8, 1),LocalDate.of(2000,4, 1));
         Ciudad caba = new Ciudad("CABA","Buenos Aires","Argentina",true,LocalDate.of(2000,11, 30),LocalDate.of(2000,4, 1),LocalDate.of(2000,12, 1));
         
-        //CiudadData ciu=new CiudadData();
+       
+       // CiudadData ciu=new CiudadData();
         //ciu.guardarCiudad(Cordoba);
         //ciu.guardarCiudad(Mendoza);
         //ciu.guardarCiudad(ElCalafate);
@@ -51,5 +52,9 @@ public class PaquetesTuristicos {
         //Alojamiento alojamiento = new Alojamiento("Hostel","Los Hermeticos", true, "Desayuno",50000,Cordoba);
         //AlojamientoData ad= new AlojamientoData();
         //ad.guardarAlojamiento(alojamiento);
+        
+       // ciu.guardarCiudad(caba);
+        //System.out.println(ciu.buscarNombre("CABA").toString());
+        
     }
 }
