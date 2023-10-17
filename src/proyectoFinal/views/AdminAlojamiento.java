@@ -5,12 +5,9 @@
  */
 package proyectoFinal.views;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import proyectoFinal.AccessData.AlojamientoData;
 import proyectoFinal.AccessData.CiudadData;
-import proyectoFinal.AccessData.Conexion;
 import proyectoFinal.Entidades.Alojamiento;
 import proyectoFinal.Entidades.Ciudad;
 
@@ -22,10 +19,8 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
 
     private AlojamientoData aloja = new AlojamientoData();
     private CiudadData ciu = new CiudadData();
-    
-    //private Connection con;
-    
 
+    //private Connection con;
     /**
      * Creates new form AdminAlojamiento
      */
@@ -316,9 +311,57 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbAlojamientoNuevoActionPerformed
 
     private void jbAlojamientoModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlojamientoModificarActionPerformed
-        
-      
-        
+
+        if (jtfAlojamientoId.getText() != "") {
+
+            if (comprobar(Integer.parseInt(jtfAlojamientoId.getText())) == true) {
+
+                if (jtfNombreAlojamiento.getText().isEmpty() || jComboBoxCiudad.getSelectedItem() == null || jcbTipoAlojamiento.getSelectedItem() == null || jtfImporteDiario.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Rellene los campos faltantes o use buscar por ID");
+
+                } else {
+
+                    Alojamiento alojamiento = new Alojamiento();
+
+                    alojamiento.setEstado(true);
+                    alojamiento.setIdAlojamiento(Integer.parseInt(jtfAlojamientoId.getText()));
+                    alojamiento.setNombre(jtfNombreAlojamiento.getText());
+                    alojamiento.setCiudadDestino((Ciudad) jComboBoxCiudad.getSelectedItem());
+                    alojamiento.setTipoAlojamiento((String) jcbTipoAlojamiento.getSelectedItem());
+
+                    double importeSuma = alojamiento.getImporteDiario();
+                    String servicio = "";
+
+                    if (jCheckBoxDesayuno.isSelected()) {
+                        servicio += ("Desayuno- ");
+                        importeSuma += 500;
+
+                    }
+                    if (jCheckBoxAlmuerzo.isSelected()) {
+                        servicio += (" Almuerzo- ");
+                        importeSuma += 500;
+                    }
+                    if (jCheckBoxCena.isSelected()) {
+                        servicio += (" Cena");
+                        importeSuma += 500;
+                    }
+
+                    alojamiento.setServicio(servicio);
+
+                    alojamiento.setImporteDiario(importeSuma);
+
+                    aloja.modificarAlojamiento(alojamiento);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Ingrese un valor existente");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Ingrese algun valor en el campo ID");
+        }
+
+
     }//GEN-LAST:event_jbAlojamientoModificarActionPerformed
 
 
@@ -353,6 +396,17 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
         }
     }
 
+    private boolean comprobar(int id) {
+        boolean ok = false;
+        for (Ciudad c : ciu.listarCiudad()) {
+            for (Ciudad c2 : ciu.ciudadesInactivas()) {
+                if (c.getIdCiudad() == id || c2.getIdCiudad() == id) {
+                    ok = true;
+                }
+            }
+            ok = true;
+        }
+        return ok;
+    }
+
 }
-
-
