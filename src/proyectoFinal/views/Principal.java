@@ -110,6 +110,11 @@ public class Principal extends javax.swing.JFrame {
         jmPresupuestos.setText("Presupuestos");
 
         jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jmPresupuestos.add(jMenuItem1);
 
         jMenuBar1.add(jmPresupuestos);
@@ -201,6 +206,15 @@ public class Principal extends javax.swing.JFrame {
             jmAdministrar.remove(jmDesconectarse);
         }
     }//GEN-LAST:event_jmDesconectarseActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Desktop.removeAll();
+        Desktop.repaint();
+        Presupuesto presupuesto = new Presupuesto ();
+        presupuesto.setVisible(true);
+        Desktop.add(presupuesto);
+        Desktop.moveToFront(presupuesto);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
   
     public static void main(String args[]) {
