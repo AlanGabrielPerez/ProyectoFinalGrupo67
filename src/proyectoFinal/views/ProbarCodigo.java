@@ -1,15 +1,29 @@
 package proyectoFinal.views;
 
+import javax.swing.table.DefaultTableModel;
 import proyectoFinal.AccessData.CiudadData;
+import proyectoFinal.AccessData.PasajeData;
 import proyectoFinal.Entidades.Ciudad;
+import proyectoFinal.Entidades.Pasaje;
 
 
 public class ProbarCodigo extends javax.swing.JInternalFrame {
 
     CiudadData ciu = new CiudadData();
+    PasajeData pd = new PasajeData();
+    
+        private static DefaultTableModel modelo = new DefaultTableModel() {
+
+        public boolean isCellEditable(int fila, int columna) {
+
+            return false;
+        }
+    };
+        
         
     public ProbarCodigo() {
         initComponents();
+         armarCabecera();
     }
 
     /**
@@ -22,11 +36,13 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         jcbOrigen = new javax.swing.JComboBox<>();
         jtBuscar = new javax.swing.JTextField();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        setClosable(true);
+
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -37,7 +53,13 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable);
+
+        jcbOrigen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbOrigenActionPerformed(evt);
+            }
+        });
 
         jtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -90,11 +112,38 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jtBuscarKeyReleased
 
+    private void jcbOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbOrigenActionPerformed
+       cargarJTable();
+    }//GEN-LAST:event_jcbOrigenActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     private javax.swing.JComboBox<Ciudad> jcbOrigen;
     private javax.swing.JTextField jtBuscar;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabecera() {
+        modelo.setColumnCount(0);
+        modelo.addColumn("id");
+        modelo.addColumn("Transporte");
+        modelo.addColumn("Destino");
+        modelo.addColumn("Valor");
+      
+        
+        jTable.setModel(modelo);
+    }
+
+    private void cargarJTable(){
+        Ciudad origen = (Ciudad) jcbOrigen.getSelectedItem();
+        modelo.setRowCount(0);
+        for (Pasaje p: pd.listarPasajes()){
+            if (p.isEstado() && p.getCiudadOrigen().getNombre().equals(origen.getNombre())){
+                modelo.addRow(new Object[]{p.getIdPasaje(),p.getTipoDeTransporte(),p.getCiudadDestino(),p.getImporte()});
+            }
+            
+        }
+    }
+    
 }
