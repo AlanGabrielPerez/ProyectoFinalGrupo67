@@ -109,7 +109,7 @@ public class Principal extends javax.swing.JFrame {
 
         jmPresupuestos.setText("Presupuestos");
 
-        jMenuItem1.setText("Armar presupuesto");
+        jMenuItem1.setText("jMenuItem1");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -210,7 +210,9 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         Desktop.removeAll();
         Desktop.repaint();
-        PresupuestoV2 presupuesto = new PresupuestoV2();
+
+        Presupuesto presupuesto = new Presupuesto ();
+
         presupuesto.setVisible(true);
         Desktop.add(presupuesto);
         Desktop.moveToFront(presupuesto);
