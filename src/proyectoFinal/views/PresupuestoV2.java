@@ -5,15 +5,35 @@
  */
 package proyectoFinal.views;
 
+import java.time.LocalDate;
+import javax.swing.table.DefaultTableModel;
 import proyectoFinal.AccessData.AlojamientoData;
+import proyectoFinal.Entidades.Alojamiento;
+import proyectoFinal.Entidades.Ciudad;
+import proyectoFinal.Entidades.Paquete;
 
 public class PresupuestoV2 extends javax.swing.JInternalFrame {
-    
+
     private AlojamientoData ad = new AlojamientoData();
+    private Paquete paquete =  new Paquete();
+
+    private static DefaultTableModel modelo = new DefaultTableModel() {
+
+        public boolean isCellEditable(int fila, int columna) {
+
+            return false;
+        }
+    };
         
     public PresupuestoV2() {
         initComponents();
+        Ciudad caba = new Ciudad("CABA","Buenos Aires","Argentina",true,LocalDate.of(2000,11, 30),LocalDate.of(2000,4, 1),LocalDate.of(2000,12, 1));
+        paquete.setDestino(caba);
         TiposAlojamientos();
+        armarCabecera();
+        jrPorProvincia.setSelected(true);
+        
+        
     }
 
     /**
@@ -25,7 +45,6 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jInternalFrame1 = new javax.swing.JInternalFrame();
         jrPorCiudad = new javax.swing.JRadioButton();
         jrPorProvincia = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -36,19 +55,6 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
         jbAtras = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-
-        jInternalFrame1.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
 
         setClosable(true);
 
@@ -78,6 +84,12 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable);
+
+        jcbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTipoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel1.setText("Tipo");
@@ -194,9 +206,12 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jrPorCiudadActionPerformed
 
+    private void jcbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoActionPerformed
+       cargarTabla();
+    }//GEN-LAST:event_jcbTipoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -216,10 +231,63 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
             jcbTipo.addItem(t);
         }    
     }
+        
+    private void armarCabecera() {
+        modelo.setColumnCount(0);
+        modelo.addColumn("Tipo");
+        modelo.addColumn("Ciudad");
+        modelo.addColumn("Provincia");
+        modelo.addColumn("Valor diario");
+        
+        jTable.setModel(modelo);
+    }
     
     private void cargarTabla(){
+       /*
+        modelo.setRowCount(0);
+        for(Alojamiento a: ad.listaAlojamiento()){
+            Ciudad c = a.getCiudadDestino();
+            System.out.println(a.getTipoAlojamiento());
+            modelo.addRow(new Object[]{a.getTipoAlojamiento(),c.getNombre(),c.getProvincia(),a.getImporteDiario()});
+        }
+      */
+       
+        modelo.setRowCount(0);
+        if (jrPorCiudad.isSelected()){
+    
+            for (Alojamiento a: ad.listaAlojamiento()){
+                Ciudad c = a.getCiudadDestino();
+                if (jcbTipo.getSelectedIndex()==0){                    
+                    if(c.getNombre().equals(paquete.getDestino().getNombre())){                     
+                        modelo.addRow(new Object[]{a.getTipoAlojamiento(),c.getNombre(),c.getProvincia(),a.getImporteDiario()});
+                    }
+                }else {
+                    if (c.getNombre().equals(paquete.getDestino().getNombre())&& a.getTipoAlojamiento().equals((String)jcbTipo.getSelectedItem())){
+                     modelo.addRow(new Object[]{a.getTipoAlojamiento(),c.getNombre(),c.getProvincia(),a.getImporteDiario()});                    
+                    }
+                }
+            }
         
+        }else{
+               
+                for (Alojamiento a: ad.listaAlojamiento()){
+                Ciudad c = a.getCiudadDestino();
+                if (jcbTipo.getSelectedIndex()==0){
+                    if(c.getProvincia().equals(paquete.getDestino().getProvincia())){
+                        modelo.addRow(new Object[]{a.getTipoAlojamiento(),c.getNombre(),c.getProvincia(),a.getImporteDiario()});
+                    }
+                }else {
+                    if (c.getProvincia().equals(paquete.getDestino().getProvincia())&& a.getTipoAlojamiento().equals((String)jcbTipo.getSelectedItem())){
+                        modelo.addRow(new Object[]{a.getTipoAlojamiento(),c.getNombre(),c.getProvincia(),a.getImporteDiario()});                    
+                    }
+                }
+            }
+            
+        }
+        
+       
     
     }
+
 
 }
