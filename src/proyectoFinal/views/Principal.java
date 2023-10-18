@@ -109,7 +109,7 @@ public class Principal extends javax.swing.JFrame {
 
         jmPresupuestos.setText("Presupuestos");
 
-        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.setText("Armar presupuesto");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -252,7 +252,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane Desktop;
+    public static javax.swing.JDesktopPane Desktop;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jmAdministrar;
