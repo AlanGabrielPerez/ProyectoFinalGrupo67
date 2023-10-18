@@ -103,6 +103,41 @@ public class AlojamientoData {
 
     }
     
+    public List<Alojamiento> alojamientoInactivo() {
+
+        String sql = "SELECT * FROM  alojamiento WHERE estado = 0";
+
+        ArrayList<Alojamiento> alojamientos = new ArrayList<>();
+
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Alojamiento a = new Alojamiento();
+                a.setCiudadDestino(ciu.buscarNombre(rs.getString("ciudadDest")));
+                a.setIdAlojamiento(rs.getInt("idAlojamiento"));
+                a.setEstado(rs.getBoolean("estado"));
+                a.setImporteDiario(rs.getDouble("importeDiario"));
+                a.setServicio(rs.getString("servicio"));
+                a.setNombre(rs.getString("nombre"));
+                a.setTipoAlojamiento(rs.getString("tipoAlojamiento"));
+                alojamientos.add(a);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en la conexión SQL");
+        }
+
+        return alojamientos;
+
+    }
+    
     public Alojamiento alojamientoId(int id){
     String sql = "SELECT * FROM `alojamiento` WHERE `idAlojamiento` = ?";
     Alojamiento a = null;
@@ -140,6 +175,8 @@ public class AlojamientoData {
             ps.setBoolean(3, alojamiento.isEstado());
             ps.setString(4, alojamiento.getServicio());
             ps.setDouble(5, alojamiento.getImporteDiario());
+            ps.setString(6, alojamiento.getCiudadDestino().getNombre() );
+            ps.setInt(7, alojamiento.getIdAlojamiento() );
             
             int exito = ps.executeUpdate();
             
