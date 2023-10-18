@@ -70,26 +70,27 @@ public class AlojamientoData {
 
     public List<Alojamiento> listaAlojamiento() {
 
-        String sql = "SELECT tipoAlojamiento, nombre, ciudadDest FROM Alojamiento WHERE estado = 1";
+        String sql = "SELECT * FROM  alojamiento WHERE estado = 1";
 
         ArrayList<Alojamiento> alojamientos = new ArrayList<>();
 
         PreparedStatement ps;
-        
 
         try {
             ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
-            
 
             while (rs.next()) {
 
-                Alojamiento alojamiento = new Alojamiento();
-                alojamiento.setTipoAlojamiento(rs.getString("tipoAlojamiento"));
-                alojamiento.setNombre(rs.getString("nombre"));
-                alojamiento.setCiudadDestino(ciu.buscarNombre(rs.getString("CiudadDest")));
-                
+                Alojamiento a = new Alojamiento();
+                a.setCiudadDestino(ciu.buscarNombre(rs.getString("ciudadDest")));
+                a.setIdAlojamiento(rs.getInt("idAlojamiento"));
+                a.setEstado(rs.getBoolean("estado"));
+                a.setImporteDiario(rs.getDouble("importeDiario"));
+                a.setServicio(rs.getString("servicio"));
+                a.setNombre(rs.getString("nombre"));
+                a.setTipoAlojamiento(rs.getString("tipoAlojamiento"));
+                alojamientos.add(a);
             }
 
             ps.close();
@@ -111,12 +112,13 @@ public class AlojamientoData {
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
             a = new Alojamiento();
-            a.getCiudadDestino().setNombre(rs.getString("ciudadDest"));
+            a.setCiudadDestino(ciu.buscarNombre(rs.getString("ciudadDest")));
             a.setIdAlojamiento(id);
             a.setEstado(rs.getBoolean("estado")); 
             a.setImporteDiario(rs.getDouble("importeDiario"));
             a.setServicio(rs.getString("servicio"));
             a.setNombre(rs.getString("nombre"));
+            a.setTipoAlojamiento(rs.getString("tipoAlojamiento"));
             }
             ps.close();
         } catch (SQLException ex) {
