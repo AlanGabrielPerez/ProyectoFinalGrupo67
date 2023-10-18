@@ -210,7 +210,9 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         Desktop.removeAll();
         Desktop.repaint();
+
         Presupuesto presupuesto = new Presupuesto ();
+
         presupuesto.setVisible(true);
         Desktop.add(presupuesto);
         Desktop.moveToFront(presupuesto);
