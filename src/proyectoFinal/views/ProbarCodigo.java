@@ -1,11 +1,15 @@
 package proyectoFinal.views;
 
+import java.awt.Component;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import proyectoFinal.AccessData.CiudadData;
 import proyectoFinal.AccessData.PasajeData;
 import proyectoFinal.Entidades.Ciudad;
@@ -102,24 +106,27 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(92, 92, 92)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jdcIda, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64)
                         .addComponent(jdcVuelta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jcbOrigen, javax.swing.GroupLayout.Alignment.LEADING, 0, 235, Short.MAX_VALUE)
-                            .addComponent(jtBuscar, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                            .addComponent(jcbOrigen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
                 .addComponent(jtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -211,6 +218,12 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
       
         
         jTable.setModel(modelo);
+         
+        
+        modelo.addRow(new Object[]{"            ","                             ","                                                                                     ","                             "});
+        resizeColumnWidth(jTable);
+        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        
     }
 
     private void cargarJTable(Ciudad origen){
@@ -222,5 +235,28 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
             
         }
     }
+    
+    private void resizeColumnWidth(JTable table) {
+    
+    TableColumnModel columnModel = table.getColumnModel();
+   
+    for (int column = 0; column < table.getColumnCount(); column++) {
+        
+        int width = 35; //Min Width
+        
+        for (int row = 0; row < table.getRowCount(); row++) {
+          
+            TableCellRenderer renderer = table.getCellRenderer(row, column);
+            Component comp = table.prepareRenderer(renderer, row, column);
+            width = Math.max(comp.getPreferredSize().width + 1, width);
+
+         }
+
+        
+        columnModel.getColumn(column).setPreferredWidth(width);
+    }
+}
+    
+    
     
 }

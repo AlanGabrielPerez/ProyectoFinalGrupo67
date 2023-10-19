@@ -229,7 +229,7 @@ public class Principal extends javax.swing.JFrame {
         Desktop.removeAll();
         Desktop.repaint();
 
-        Presupuesto presupuesto = new Presupuesto ();
+        PresupuestoV2 presupuesto = new PresupuestoV2 ();
 
         presupuesto.setVisible(true);
         Desktop.add(presupuesto);
