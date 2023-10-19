@@ -181,7 +181,7 @@ public class AlojamientoData {
             int exito = ps.executeUpdate();
             
             if (exito == 1){
-            JOptionPane.showMessageDialog(null, "Ciudad modificado");
+            JOptionPane.showMessageDialog(null, "Ciudad modificada");
             } else {
             JOptionPane.showMessageDialog(null, "Error al modificar");
             

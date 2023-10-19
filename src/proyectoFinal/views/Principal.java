@@ -42,6 +42,7 @@ public class Principal extends javax.swing.JFrame {
         jmPresupuestos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,6 +126,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jmPresupuestos.add(jMenuItem2);
+
+        jMenuItem3.setText("jMenuItem3");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jmPresupuestos.add(jMenuItem3);
 
         jMenuBar1.add(jmPresupuestos);
 
@@ -238,6 +247,20 @@ public class Principal extends javax.swing.JFrame {
         Desktop.moveToFront(presupuesto);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        
+        Desktop.removeAll();
+        Desktop.repaint();
+
+        PresupuestoV3 presupuesto = new PresupuestoV3 ();
+
+        presupuesto.setVisible(true);
+        Desktop.add(presupuesto);
+        Desktop.moveToFront(presupuesto);
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -276,6 +299,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu jmAdministrar;
     private javax.swing.JMenuItem jmAlojamiento;
     private javax.swing.JMenuItem jmCiudad;
