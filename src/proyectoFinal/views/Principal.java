@@ -41,6 +41,7 @@ public class Principal extends javax.swing.JFrame {
         jmDesconectarse = new javax.swing.JMenuItem();
         jmPresupuestos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,13 +110,21 @@ public class Principal extends javax.swing.JFrame {
 
         jmPresupuestos.setText("Presupuestos");
 
-        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.setText("Armar presupuesto");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
         jmPresupuestos.add(jMenuItem1);
+
+        jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jmPresupuestos.add(jMenuItem2);
 
         jMenuBar1.add(jmPresupuestos);
 
@@ -218,6 +227,17 @@ public class Principal extends javax.swing.JFrame {
         Desktop.moveToFront(presupuesto);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Desktop.removeAll();
+        Desktop.repaint();
+
+        ProbarCodigo presupuesto = new ProbarCodigo ();
+
+        presupuesto.setVisible(true);
+        Desktop.add(presupuesto);
+        Desktop.moveToFront(presupuesto);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -252,9 +272,10 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane Desktop;
+    public static javax.swing.JDesktopPane Desktop;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jmAdministrar;
     private javax.swing.JMenuItem jmAlojamiento;
     private javax.swing.JMenuItem jmCiudad;

@@ -194,5 +194,31 @@ public class AlojamientoData {
             
             
     }
+       
+    public Alojamiento buscarNombre(String nombre) {
+        String sql = "SELECT * FROM `alojamiento` WHERE nombre='?'";
+        Alojamiento a = new Alojamiento();
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1,nombre);
+            ResultSet rs = ps.executeQuery();
+            System.out.println(rs.next());
+            if (rs.next()) {
+                a.setCiudadDestino(ciu.buscarNombre(rs.getString("ciudadDest")));
+                a.setIdAlojamiento(rs.getInt("idAlojamiento"));
+                a.setEstado(rs.getBoolean("estado"));
+                a.setImporteDiario(rs.getDouble("importeDiario"));
+                a.setServicio(rs.getString("servicio"));
+                a.setNombre(rs.getString(nombre));
+                a.setTipoAlojamiento(rs.getString("tipoAlojamiento"));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en la conexión SQL");
+        }
+        return a;
+    }
+    
 }
     

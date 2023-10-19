@@ -5,8 +5,12 @@
  */
 package proyectoFinal.views;
 
+import java.awt.Component;
 import java.time.LocalDate;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import proyectoFinal.AccessData.AlojamientoData;
 import proyectoFinal.Entidades.Alojamiento;
 import proyectoFinal.Entidades.Ciudad;
@@ -32,7 +36,9 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
         TiposAlojamientos();
         armarCabecera();
         jrPorProvincia.setSelected(true);
-        
+        cargarTabla();
+        resizeColumnWidth(jTable);
+        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         
     }
 
@@ -55,6 +61,8 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
         jbAtras = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jtAlojamientoSelec = new javax.swing.JTextField();
+        jbElegir = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -115,62 +123,80 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("- Seleccionar Alojamiento -");
 
+        jtAlojamientoSelec.setEditable(false);
+
+        jbElegir.setText("Seleccionar");
+        jbElegir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbElegirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(jrPorCiudad)
-                        .addGap(95, 95, 95)
-                        .addComponent(jrPorProvincia)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(280, 280, 280)
+                        .addComponent(jbSiguiente))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jbElegir)
+                            .addGap(18, 18, 18)
+                            .addComponent(jtAlojamientoSelec, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                            .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbSiguiente)
-                                .addGap(9, 9, 9))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(jLabel3)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(104, 104, 104)
+                                .addComponent(jLabel3))))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jrPorCiudad)
+                .addGap(101, 101, 101)
+                .addComponent(jrPorProvincia)
+                .addGap(103, 103, 103))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel2)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel3)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrPorCiudad)
                     .addComponent(jrPorProvincia))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 25, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbElegir)
+                    .addComponent(jtAlojamientoSelec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -210,6 +236,12 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
        cargarTabla();
     }//GEN-LAST:event_jcbTipoActionPerformed
 
+    private void jbElegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbElegirActionPerformed
+       int id =(int)jTable.getValueAt(jTable.getSelectedRow(),0);
+        paquete.setAlojamiento(ad.alojamientoId(id));
+        jtAlojamientoSelec.setText(paquete.getAlojamiento().toString());
+    }//GEN-LAST:event_jbElegirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -218,15 +250,17 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
     private javax.swing.JButton jbAtras;
+    private javax.swing.JButton jbElegir;
     private javax.swing.JButton jbSiguiente;
     private javax.swing.JComboBox<String> jcbTipo;
     private javax.swing.JRadioButton jrPorCiudad;
     private javax.swing.JRadioButton jrPorProvincia;
+    private javax.swing.JTextField jtAlojamientoSelec;
     // End of variables declaration//GEN-END:variables
 
     private void TiposAlojamientos(){
         String[] tipos = {"Hostel","Hotel","Cabaña","Departamento"};
-        jcbTipo.addItem("-Seleccione-");
+        jcbTipo.addItem("Ver todos");
         for (String t:tipos){
             jcbTipo.addItem(t);
         }    
@@ -234,7 +268,9 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
         
     private void armarCabecera() {
         modelo.setColumnCount(0);
+        modelo.addColumn("id");
         modelo.addColumn("Tipo");
+        modelo.addColumn("Nombre");
         modelo.addColumn("Ciudad");
         modelo.addColumn("Provincia");
         modelo.addColumn("Valor diario");
@@ -243,14 +279,6 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     }
     
     private void cargarTabla(){
-       /*
-        modelo.setRowCount(0);
-        for(Alojamiento a: ad.listaAlojamiento()){
-            Ciudad c = a.getCiudadDestino();
-            System.out.println(a.getTipoAlojamiento());
-            modelo.addRow(new Object[]{a.getTipoAlojamiento(),c.getNombre(),c.getProvincia(),a.getImporteDiario()});
-        }
-      */
        
         modelo.setRowCount(0);
         if (jrPorCiudad.isSelected()){
@@ -259,11 +287,11 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
                 Ciudad c = a.getCiudadDestino();
                 if (jcbTipo.getSelectedIndex()==0){                    
                     if(c.getNombre().equals(paquete.getDestino().getNombre())){                     
-                        modelo.addRow(new Object[]{a.getTipoAlojamiento(),c.getNombre(),c.getProvincia(),a.getImporteDiario()});
+                        modelo.addRow(new Object[]{a.getIdAlojamiento(),a.getTipoAlojamiento(),a.getNombre(),c.getNombre(),c.getProvincia(),"   "+a.getImporteDiario()+"  "});
                     }
                 }else {
                     if (c.getNombre().equals(paquete.getDestino().getNombre())&& a.getTipoAlojamiento().equals((String)jcbTipo.getSelectedItem())){
-                     modelo.addRow(new Object[]{a.getTipoAlojamiento(),c.getNombre(),c.getProvincia(),a.getImporteDiario()});                    
+                     modelo.addRow(new Object[]{a.getIdAlojamiento(),a.getTipoAlojamiento(),a.getNombre(),c.getNombre(),c.getProvincia(),"   "+a.getImporteDiario()+"  "});                    
                     }
                 }
             }
@@ -274,20 +302,46 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
                 Ciudad c = a.getCiudadDestino();
                 if (jcbTipo.getSelectedIndex()==0){
                     if(c.getProvincia().equals(paquete.getDestino().getProvincia())){
-                        modelo.addRow(new Object[]{a.getTipoAlojamiento(),c.getNombre(),c.getProvincia(),a.getImporteDiario()});
+                        modelo.addRow(new Object[]{a.getIdAlojamiento(),a.getTipoAlojamiento(),a.getNombre(),c.getNombre(),c.getProvincia(),"   "+a.getImporteDiario()+"  "});
                     }
                 }else {
                     if (c.getProvincia().equals(paquete.getDestino().getProvincia())&& a.getTipoAlojamiento().equals((String)jcbTipo.getSelectedItem())){
-                        modelo.addRow(new Object[]{a.getTipoAlojamiento(),c.getNombre(),c.getProvincia(),a.getImporteDiario()});                    
+                        modelo.addRow(new Object[]{a.getIdAlojamiento(),a.getTipoAlojamiento(),a.getNombre(),c.getNombre(),c.getProvincia(),"   "+a.getImporteDiario()+"  "});                    
                     }
                 }
             }
             
         }
         
-       
+      
     
     }
 
+    private void resizeColumnWidth(JTable table) {
+    //Se obtiene el modelo de la columna
+    TableColumnModel columnModel = table.getColumnModel();
+    //Se obtiene el total de las columnas
+    for (int column = 0; column < table.getColumnCount(); column++) {
+        //Establecemos un valor minimo para el ancho de la columna
+        int width = 40; //Min Width
+        //Obtenemos el numero de filas de la tabla
+        for (int row = 0; row < table.getRowCount(); row++) {
+            //Obtenemos el renderizador de la tabla
+            TableCellRenderer renderer = table.getCellRenderer(row, column);
+            //Creamos un objeto para preparar el renderer
+            Component comp = table.prepareRenderer(renderer, row, column);
+            //Establecemos el width segun el valor maximo del ancho de la columna
+            width = Math.max(comp.getPreferredSize().width + 1, width);
+
+         }
+        //Se establece una condicion para no sobrepasar el valor de 300
+        //Esto es Opcional
+//        if (width > 300) {
+//            width = 300;
+//        }
+        
+        columnModel.getColumn(column).setPreferredWidth(width);
+    }
+}
 
 }
