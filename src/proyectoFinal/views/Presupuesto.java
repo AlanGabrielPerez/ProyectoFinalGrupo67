@@ -8,11 +8,14 @@ package proyectoFinal.views;
 import java.awt.Desktop;
 import static java.awt.SystemColor.desktop;
 import java.time.ZoneId;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectoFinal.AccessData.CiudadData;
+import proyectoFinal.AccessData.PasajeData;
 import proyectoFinal.Entidades.Ciudad;
 import proyectoFinal.Entidades.Paquete;
+import proyectoFinal.Entidades.Pasaje;
 import static proyectoFinal.views.Principal.Desktop;
 
 /**
@@ -21,9 +24,10 @@ import static proyectoFinal.views.Principal.Desktop;
  */
 public class Presupuesto extends javax.swing.JInternalFrame {
  CiudadData cd = new CiudadData();
- public static Paquete paquete;
+ PasajeData pd = new PasajeData();
+ public static Paquete paquete = new Paquete();
  private static DefaultTableModel modelo = new DefaultTableModel(){
- public boolean isCellEditable(){
+ public boolean isCellEditable(int fila, int columna){
  return false;
  }
  };
@@ -34,6 +38,8 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         initComponents();
         cargarCiudades();
         construirCabecera();
+        cargarTable();
+        seteoFechas();
     }
 
     /**
@@ -55,8 +61,8 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jVuelta = new com.toedter.calendar.JDateChooser();
+        jIda = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -95,6 +101,12 @@ public class Presupuesto extends javax.swing.JInternalFrame {
             }
         });
 
+        jIda.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jIdaPropertyChange(evt);
+            }
+        });
+
         jButton1.setText("Siguiente");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,14 +132,23 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                 jTable1ComponentAdded(evt);
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         jLabel6.setText("Seleccion:");
 
-        jTextField2.setText("jTextField2");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
             }
         });
 
@@ -182,11 +203,11 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jIda, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(24, 24, 24)
                                 .addComponent(jLabel4)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jVuelta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -206,10 +227,10 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jVuelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jIda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -252,18 +273,13 @@ public class Presupuesto extends javax.swing.JInternalFrame {
      Desktop.add(presupuestoV2);
      Desktop.moveToFront(presupuestoV2);
      
-     if (jComboBox1.getSelectedItem()!=null){
-     paquete.setOrigen((Ciudad)jComboBox1.getSelectedItem());
-     } else {
-     JOptionPane.showMessageDialog(this, "Seleccione una ciudad de origen");
-     }
-     if (jDateChooser1.getDate()!=null){
-        paquete.setFechaIn(jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+     if (jVuelta.getDate()!=null){
+        paquete.setFechaIn(jVuelta.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
      } else {
      JOptionPane.showMessageDialog(this, "Seleccione una fecha de ida");
      }
-     if (jDateChooser2.getDate()!=null){
-      paquete.setFechaOut(jDateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+     if (jIda.getDate()!=null){
+      paquete.setFechaOut(jIda.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
      } else {
      JOptionPane.showMessageDialog(this, "Seleccione una fecha de regreso");
      }
@@ -290,17 +306,52 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+             jComboBox1.removeAllItems();
+        for (Ciudad c: cd.listarCiudad()){
+        if (jTextField2.getText() != ""){
+          if (c.getNombre().toLowerCase().startsWith(jTextField2.getText())){
+             jComboBox1.addItem(c);    
+          }
+        } else {
+         jComboBox1.addItem(c);
+        }
+       }
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jIdaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jIdaPropertyChange
+     java.util.Date selectedDate = jIda.getDate();
+           
+         if (selectedDate != null){ //Si se selecciona una fecha
+            jVuelta.setEnabled(true); //activar el dateChooser de vuelta
+            
+            Calendar calendar = Calendar.getInstance(); 
+            calendar.setTime(selectedDate);             
+            calendar.add(Calendar.DAY_OF_MONTH, 1); // establece al dia siguiente del jdc IDA
+           
+            jVuelta.setMinSelectableDate(calendar.getTime()); //setea el minimo del jdc VUELTA
+         
+         }
+    }//GEN-LAST:event_jIdaPropertyChange
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       int id =(int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+       jTextField3.setText(pd.pasajeId(id)+"");
+      paquete.setPasaje(pd.pasajeId(id));
+      paquete.setDestino(pd.pasajeId(id).getCiudadDestino());
+      paquete.setOrigen(pd.pasajeId(id).getCiudadOrigen());
+    }//GEN-LAST:event_jTable1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LebelTitulo;
     private javax.swing.JLabel LebelTitulo1;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<Ciudad> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDayChooser jDayChooser1;
     private com.toedter.calendar.JDayChooser jDayChooser2;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private com.toedter.calendar.JDateChooser jIda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -314,6 +365,7 @@ public class Presupuesto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextPane jTextPane1;
+    private com.toedter.calendar.JDateChooser jVuelta;
     // End of variables declaration//GEN-END:variables
     private void cargarCiudades() {
         for (Ciudad c : cd.listarCiudad()) {
@@ -323,11 +375,31 @@ public class Presupuesto extends javax.swing.JInternalFrame {
     }
     private void construirCabecera(){
     modelo.setColumnCount(0);
-    modelo.addColumn("Transporte");
-    modelo.addColumn("Precio");
-    modelo.addColumn("Destino");
- 
-    jTable1.setModel(modelo);
+        modelo.addColumn("id");
+        modelo.addColumn("Transporte");
+        modelo.addColumn("Destino");
+        modelo.addColumn("Valor");
+      
+        
+        jTable1.setModel(modelo);
+    }
+    
+    private void cargarTable(){
+       modelo.setRowCount(0);
+       Ciudad ciu = (Ciudad) jComboBox1.getSelectedItem();
+        for (Pasaje p: pd.listarPasajes()){
+            if (p.isEstado() && p.getCiudadOrigen().getNombre().equals(ciu.getNombre())){
+                modelo.addRow(new Object[]{p.getIdPasaje(),p.getTipoDeTransporte(),p.getCiudadDestino(),p.getImporte()});
+            }
+            
+        }
+    }
+    
+    private void seteoFechas(){
+            jVuelta.setEnabled(false);
+        Calendar calendar = Calendar.getInstance();
+        java.util.Date fechaActual = calendar.getTime();
+        jIda.setMinSelectableDate(fechaActual);
     }
     
     private boolean comprobar (String nom){
