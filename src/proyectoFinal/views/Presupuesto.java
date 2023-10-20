@@ -122,13 +122,6 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-<<<<<<< Updated upstream
-        jLabel6.setText("Seleccion:");
-
-        jTextField2.setText("jTextField2");
-
-=======
->>>>>>> Stashed changes
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField3KeyReleased(evt);
@@ -145,8 +138,7 @@ public class Presupuesto extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-<<<<<<< HEAD
-<<<<<<< Updated upstream
+
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,9 +148,7 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35))
                     .addGroup(layout.createSequentialGroup()
-=======
                         .addContainerGap()
->>>>>>> parent of 4010a75 (View Presupuesto - ProbarCod)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
@@ -178,16 +168,6 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                                     .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-<<<<<<< HEAD
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(LebelTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(130, 130, 130)))))
-=======
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -211,8 +191,7 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                         .addGap(149, 149, 149)
                         .addComponent(jLabel5)
                         .addGap(0, 0, Short.MAX_VALUE)))
->>>>>>> Stashed changes
-=======
+
                         .addGap(149, 149, 149)
                         .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
@@ -220,7 +199,6 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
->>>>>>> parent of 4010a75 (View Presupuesto - ProbarCod)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -247,26 +225,16 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                 .addComponent(jLabel5)
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< Updated upstream
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-<<<<<<< HEAD
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
-=======
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
->>>>>>> Stashed changes
-=======
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
->>>>>>> parent of 4010a75 (View Presupuesto - ProbarCod)
         );
 
         pack();
