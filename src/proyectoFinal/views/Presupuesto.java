@@ -11,10 +11,8 @@ import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectoFinal.AccessData.CiudadData;
-import proyectoFinal.AccessData.PasajeData;
 import proyectoFinal.Entidades.Ciudad;
 import proyectoFinal.Entidades.Paquete;
-import proyectoFinal.Entidades.Pasaje;
 import static proyectoFinal.views.Principal.Desktop;
 
 /**
@@ -23,7 +21,6 @@ import static proyectoFinal.views.Principal.Desktop;
  */
 public class Presupuesto extends javax.swing.JInternalFrame {
  CiudadData cd = new CiudadData();
- PasajeData pd = new PasajeData();
  public static Paquete paquete;
  private static DefaultTableModel modelo = new DefaultTableModel(){
  public boolean isCellEditable(){
@@ -37,7 +34,6 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         initComponents();
         cargarCiudades();
         construirCabecera();
-        cargarTable();
     }
 
     /**
@@ -65,6 +61,8 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         LebelTitulo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -124,7 +122,6 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-<<<<<<< Updated upstream
         jLabel6.setText("Seleccion:");
 
         jTextField2.setText("jTextField2");
@@ -134,8 +131,6 @@ public class Presupuesto extends javax.swing.JInternalFrame {
             }
         });
 
-=======
->>>>>>> Stashed changes
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField3KeyReleased(evt);
@@ -160,7 +155,6 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-<<<<<<< Updated upstream
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,31 +196,6 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(LebelTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(130, 130, 130)))))
-=======
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addGap(45, 45, 45)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jComboBox1, 0, 149, Short.MAX_VALUE)
-                                            .addComponent(jTextField3))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField1))
-                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE)))
->>>>>>> Stashed changes
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -259,7 +228,6 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< Updated upstream
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -267,11 +235,6 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
-=======
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
->>>>>>> Stashed changes
         );
 
         pack();
@@ -296,30 +259,27 @@ public class Presupuesto extends javax.swing.JInternalFrame {
      }
      if (jDateChooser1.getDate()!=null){
         paquete.setFechaIn(jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-         jDateChooser2.setMinSelectableDate(jDateChooser1.getDate());
      } else {
      JOptionPane.showMessageDialog(this, "Seleccione una fecha de ida");
      }
-     if (jDateChooser2.getDate()!=null && jDateChooser2.getDate().before(jDateChooser1.getDate())){
+     if (jDateChooser2.getDate()!=null){
       paquete.setFechaOut(jDateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
      } else {
-     JOptionPane.showMessageDialog(this, "Seleccione una fecha de regreso correcta");
+     JOptionPane.showMessageDialog(this, "Seleccione una fecha de regreso");
      }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
-         jComboBox1.removeAllItems();
-         if (jTextField3.getText().isEmpty()){
-            for (Ciudad c: cd.listarCiudad()){
-                jComboBox1.addItem(c);
-            }
-        }else {
-            for (Ciudad c: cd.listarCiudad()){
-                if (c.getNombre().toLowerCase().startsWith(jTextField3.getText().toLowerCase())){
-                    jComboBox1.addItem(c);
-                }
-            }
+         removeAll();
+        for (Ciudad c: cd.listarCiudad()){
+        if (jTextField1.getText() != ""){
+          if (c.getNombre().toLowerCase().startsWith(jTextField1.getText())){
+             jComboBox1.addItem(c);    
+          }
+        } else {
+         jComboBox1.addItem(c);
         }
+       }
     }//GEN-LAST:event_jTextField3KeyReleased
 
     private void jTable1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jTable1ComponentAdded
@@ -345,11 +305,13 @@ public class Presupuesto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
@@ -366,12 +328,6 @@ public class Presupuesto extends javax.swing.JInternalFrame {
     modelo.addColumn("Destino");
  
     jTable1.setModel(modelo);
-    }
-    private void cargarTable(){
-        modelo.setRowCount(0);
-        for (Pasaje p: pd.listarPasajes()){
-            modelo.addRow(new Object[]{p.getTipoDeTransporte(),p.getImporte(),p.getCiudadDestino().toString()});  
-        }
     }
     
     private boolean comprobar (String nom){
