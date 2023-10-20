@@ -50,9 +50,9 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="jcbOrigen" max="32767" attributes="0"/>
+                                  <Component id="jcbDestino" alignment="0" min="-2" pref="211" max="-2" attributes="0"/>
                                   <Component id="jcbTipo" alignment="0" min="-2" pref="156" max="-2" attributes="0"/>
-                                  <Component id="jcbOrigen" alignment="0" pref="211" max="32767" attributes="0"/>
-                                  <Component id="jcbDestino" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
