@@ -5,6 +5,8 @@
  */
 package proyectoFinal.views;
 
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import javax.swing.JOptionPane;
 
 /**
@@ -52,7 +54,9 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        jtfDatos.setText("Datos");
+        setPreferredSize(new java.awt.Dimension(580, 500));
+
+        jtfDatos.setText("Ingrese su mail");
         jtfDatos.setToolTipText("");
         jtfDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,22 +166,21 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel11))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtfDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel10))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(50, 50, 50)
-                            .addComponent(jButton1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(jtfOrigenPresu, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel9)
-                            .addGap(18, 18, 18)
-                            .addComponent(jtfDestinoPresu, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtfOrigenPresu, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtfDestinoPresu, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(11, 11, 11)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,18 +223,53 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jtfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void habilitarCampos(boolean habilitar) {
+    jtfDatosPresu.setEnabled(habilitar);
+    jtfOrigenPresu.setEnabled(habilitar);
+    jtfTransportePresu.setEnabled(habilitar);
+    jtfHotelPresu.setEnabled(habilitar);
+    jtfFechaIn.setEnabled(habilitar);
+    jtfFechaOut.setEnabled(habilitar);
+    jtfTotal.setEnabled(habilitar);
+    jtfDestinoPresu.setEnabled(habilitar);
+}
+    
+    
     private void jtfDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDatosActionPerformed
         // TODO add your handling code here:
+      String correo = jtfDatos.getText();
+    if (esCorreoElectronicoValido(correo)) {
+        // El correo electrónico es válido
+        JOptionPane.showMessageDialog(this, "El correo es válido.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+        habilitarCampos(true); // Habilitar campos si el correo es válido
+    } else {
+        // El correo electrónico no es válido
+        JOptionPane.showMessageDialog(this, "Correo no válido. Ingrese un correo válido.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        habilitarCampos(false); // Deshabilitar campos si el correo no es válido
+    }
     }//GEN-LAST:event_jtfDatosActionPerformed
 
+    private boolean esCorreoElectronicoValido(String correo) {
+        // Patrón para validar direcciones de correo electrónico
+        String patron = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.com\\.ar|([A-Za-z0-9.-]+\\.com))$";
+
+        // Compilar el patrón
+        Pattern pattern = Pattern.compile(patron);
+
+        // Crear un objeto Matcher
+        Matcher matcher = pattern.matcher(correo);
+
+        // Verificar si el correo coincide con el patrón
+        return matcher.matches();
+    }
     private void jtfTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTotalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfTotalActionPerformed
@@ -246,15 +284,14 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
 
         if (option == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(null, "Felicitaciones! Has confirmado.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Has cancelado.", "Cancelación", JOptionPane.WARNING_MESSAGE);
-            
+
         }
     
-        
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
