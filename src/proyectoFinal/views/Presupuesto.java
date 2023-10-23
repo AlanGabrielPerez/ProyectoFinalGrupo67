@@ -276,7 +276,7 @@ public class Presupuesto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    if(jVuelta != null && jIda != null && paquete.getDestino() != null && paquete.getPasaje() != null && paquete.getOrigen() != null) {
+    if(jVuelta.getDate() != null && jIda.getDate() != null && paquete.getDestino() != null && paquete.getPasaje() != null && paquete.getOrigen() != null) {
      Desktop.removeAll();
      Desktop.repaint();
      PresupuestoV2 presupuestoV2 = new PresupuestoV2();
