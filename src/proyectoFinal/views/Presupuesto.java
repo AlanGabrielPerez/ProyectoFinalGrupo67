@@ -38,7 +38,6 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         initComponents();
         cargarCiudades();
         construirCabecera();
-        cargarTable();
         seteoFechas();
     }
 
@@ -98,6 +97,17 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField1KeyReleased(evt);
+            }
+        });
+
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox1MouseClicked(evt);
             }
         });
 
@@ -266,6 +276,7 @@ public class Presupuesto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    if(jVuelta != null && jIda != null && paquete.getDestino() != null && paquete.getPasaje() != null && paquete.getOrigen() != null) {
      Desktop.removeAll();
      Desktop.repaint();
      PresupuestoV2 presupuestoV2 = new PresupuestoV2();
@@ -283,6 +294,9 @@ public class Presupuesto extends javax.swing.JInternalFrame {
      } else {
      JOptionPane.showMessageDialog(this, "Seleccione una fecha de regreso");
      }
+    } else {
+    JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
@@ -342,6 +356,15 @@ public class Presupuesto extends javax.swing.JInternalFrame {
       paquete.setOrigen(pd.pasajeId(id).getCiudadOrigen());
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
+      Ciudad c = (Ciudad) jComboBox1.getSelectedItem();
+       cargarTable(c);
+    }//GEN-LAST:event_jComboBox1MouseClicked
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LebelTitulo;
@@ -384,7 +407,7 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         jTable1.setModel(modelo);
     }
     
-    private void cargarTable(){
+    private void cargarTable(Ciudad origen){
        modelo.setRowCount(0);
        Ciudad ciu = (Ciudad) jComboBox1.getSelectedItem();
         for (Pasaje p: pd.listarPasajes()){
