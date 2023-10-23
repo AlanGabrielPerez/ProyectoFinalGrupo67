@@ -7,6 +7,8 @@ package proyectoFinal.views;
 
 import java.awt.Component;
 import java.time.LocalDate;
+import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -15,12 +17,12 @@ import proyectoFinal.AccessData.AlojamientoData;
 import proyectoFinal.Entidades.Alojamiento;
 import proyectoFinal.Entidades.Ciudad;
 import proyectoFinal.Entidades.Paquete;
+import static proyectoFinal.views.Principal.Desktop;  
+import static proyectoFinal.views.Presupuesto.paquete;
 
 public class PresupuestoV2 extends javax.swing.JInternalFrame {
 
     private AlojamientoData ad = new AlojamientoData();
-    private Paquete paquete =  new Paquete();
-
     private static DefaultTableModel modelo = new DefaultTableModel() {
 
         public boolean isCellEditable(int fila, int columna) {
@@ -32,13 +34,11 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     public PresupuestoV2() {
         initComponents();
         Ciudad caba = new Ciudad("CABA","Buenos Aires","Argentina",true,LocalDate.of(2000,11, 30),LocalDate.of(2000,4, 1),LocalDate.of(2000,12, 1));
-        paquete.setDestino(caba);
+        //paquete.setDestino(caba);
         TiposAlojamientos();
         armarCabecera();
         jrPorProvincia.setSelected(true);
-        cargarTabla();
-        
-        
+        cargarTabla();        
     }
 
     /**
@@ -58,10 +58,13 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jbSiguiente = new javax.swing.JButton();
         jbAtras = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtAlojamientoSelec = new javax.swing.JTextField();
-        jbElegir = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jlDesayuno = new javax.swing.JLabel();
+        jlAlmuerzo = new javax.swing.JLabel();
+        jlCena = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -90,6 +93,11 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable);
 
         jcbTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -116,88 +124,95 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel2.setText("Paso 2:");
-
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("- Seleccionar Alojamiento -");
 
         jtAlojamientoSelec.setEditable(false);
 
-        jbElegir.setText("Seleccionar");
-        jbElegir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbElegirActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("Alojamiento");
+
+        jLabel5.setText("Servicios");
+
+        jlDesayuno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/casilla16.png"))); // NOI18N
+        jlDesayuno.setText("Desayuno");
+
+        jlAlmuerzo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/casilla16.png"))); // NOI18N
+        jlAlmuerzo.setText("Almuerzo");
+
+        jlCena.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/casilla16.png"))); // NOI18N
+        jlCena.setText("Cena");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addGap(64, 64, 64)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jrPorCiudad)
-                        .addGap(101, 101, 101)
-                        .addComponent(jrPorProvincia)
-                        .addGap(103, 103, 103))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jbElegir)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtAlojamientoSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jrPorCiudad)
+                        .addGap(101, 101, 101)
+                        .addComponent(jrPorProvincia))
+                    .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 9, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(153, 153, 153)
+                                    .addComponent(jLabel3))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jbAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbSiguiente)))
-                        .addGap(31, 31, 31))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(55, 55, 55)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jlDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(63, 63, 63)
+                                        .addComponent(jlAlmuerzo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jtAlojamientoSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(36, 36, 36))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(332, 332, 332)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlCena, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbSiguiente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel3)))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrPorCiudad)
                     .addComponent(jrPorProvincia))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbElegir)
-                    .addComponent(jtAlojamientoSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                    .addComponent(jtAlojamientoSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jlDesayuno)
+                    .addComponent(jlAlmuerzo)
+                    .addComponent(jlCena))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -219,11 +234,13 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrPorProvinciaActionPerformed
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
-        // TODO add your handling code here:
+        Presupuesto ventana1 = new Presupuesto ();
+        abrirVentana(ventana1);
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
-        // TODO add your handling code here:
+        PresupuestoV3 ventana3 = new PresupuestoV3 ();
+        abrirVentana(ventana3);
     }//GEN-LAST:event_jbSiguienteActionPerformed
 
     private void jrPorCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrPorCiudadActionPerformed
@@ -241,23 +258,28 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
        cargarTabla();
     }//GEN-LAST:event_jcbTipoActionPerformed
 
-    private void jbElegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbElegirActionPerformed
-       int id =(int)jTable.getValueAt(jTable.getSelectedRow(),0);
-        paquete.setAlojamiento(ad.alojamientoId(id));
-        jtAlojamientoSelec.setText(paquete.getAlojamiento().toString());
-    }//GEN-LAST:event_jbElegirActionPerformed
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+        int id =(int) jTable.getValueAt(jTable.getSelectedRow(), 0);
+        Alojamiento a = ad.alojamientoId(id);
+        
+        jtAlojamientoSelec.setText(a.getNombre()+"("+a.getTipoAlojamiento()+") - "+a.getCiudadDestino());
+        setServicios(a);
+    }//GEN-LAST:event_jTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
     private javax.swing.JButton jbAtras;
-    private javax.swing.JButton jbElegir;
     private javax.swing.JButton jbSiguiente;
     private javax.swing.JComboBox<String> jcbTipo;
+    private javax.swing.JLabel jlAlmuerzo;
+    private javax.swing.JLabel jlCena;
+    private javax.swing.JLabel jlDesayuno;
     private javax.swing.JRadioButton jrPorCiudad;
     private javax.swing.JRadioButton jrPorProvincia;
     private javax.swing.JTextField jtAlojamientoSelec;
@@ -289,70 +311,88 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
         
     }
     
-    private void cargarTabla(){
-       
+    private void cargarTabla() {
+
         modelo.setRowCount(0);
-        if (jrPorCiudad.isSelected()){
-    
-            for (Alojamiento a: ad.listaAlojamiento()){
+        if (jrPorCiudad.isSelected()) {
+
+            for (Alojamiento a : ad.listaAlojamiento()) {
                 Ciudad c = a.getCiudadDestino();
-                if (jcbTipo.getSelectedIndex()==0){                    
-                    if(c.getNombre().equals(paquete.getDestino().getNombre())){                     
-                        modelo.addRow(new Object[]{a.getIdAlojamiento(),a.getTipoAlojamiento(),a.getNombre(),c.getNombre(),c.getProvincia(),"   "+a.getImporteDiario()+"  "});
+                if (jcbTipo.getSelectedIndex() == 0) {
+                    if (c.getNombre().equals(paquete.getDestino().getNombre())) {
+                        modelo.addRow(new Object[]{a.getIdAlojamiento(), a.getTipoAlojamiento(), a.getNombre(), c.getNombre(), c.getProvincia(), "   " + a.getImporteDiario()});
                     }
-                }else {
-                    if (c.getNombre().equals(paquete.getDestino().getNombre())&& a.getTipoAlojamiento().equals((String)jcbTipo.getSelectedItem())){
-                     modelo.addRow(new Object[]{a.getIdAlojamiento(),a.getTipoAlojamiento(),a.getNombre(),c.getNombre(),c.getProvincia(),"   "+a.getImporteDiario()+"  "});                    
+                } else {
+                    if (c.getNombre().equals(paquete.getDestino().getNombre()) && a.getTipoAlojamiento().equals((String) jcbTipo.getSelectedItem())) {
+                        modelo.addRow(new Object[]{a.getIdAlojamiento(), a.getTipoAlojamiento(), a.getNombre(), c.getNombre(), c.getProvincia(), "   " + a.getImporteDiario()});
                     }
                 }
             }
-        
-        }else{
-               
-                for (Alojamiento a: ad.listaAlojamiento()){
+        } else {
+
+            for (Alojamiento a : ad.listaAlojamiento()) {
                 Ciudad c = a.getCiudadDestino();
-                if (jcbTipo.getSelectedIndex()==0){
-                    if(c.getProvincia().equals(paquete.getDestino().getProvincia())){
-                        modelo.addRow(new Object[]{a.getIdAlojamiento(),a.getTipoAlojamiento(),a.getNombre(),c.getNombre(),c.getProvincia(),"   "+a.getImporteDiario()+"  "});
+                if (jcbTipo.getSelectedIndex() == 0) {
+                    if (c.getProvincia().equals(paquete.getDestino().getProvincia())) {
+                        modelo.addRow(new Object[]{a.getIdAlojamiento(), a.getTipoAlojamiento(), a.getNombre(), c.getNombre(), c.getProvincia(), "   " + a.getImporteDiario()});
                     }
-                }else {
-                    if (c.getProvincia().equals(paquete.getDestino().getProvincia())&& a.getTipoAlojamiento().equals((String)jcbTipo.getSelectedItem())){
-                        modelo.addRow(new Object[]{a.getIdAlojamiento(),a.getTipoAlojamiento(),a.getNombre(),c.getNombre(),c.getProvincia(),"   "+a.getImporteDiario()+"  "});                    
+                } else {
+                    if (c.getProvincia().equals(paquete.getDestino().getProvincia()) && a.getTipoAlojamiento().equals((String) jcbTipo.getSelectedItem())) {
+                        modelo.addRow(new Object[]{a.getIdAlojamiento(), a.getTipoAlojamiento(), a.getNombre(), c.getNombre(), c.getProvincia(), "   " + a.getImporteDiario()});
                     }
                 }
             }
-            
         }
-        
-      
-    
     }
 
     private void resizeColumnWidth(JTable table) {
-    //Se obtiene el modelo de la columna
+  
     TableColumnModel columnModel = table.getColumnModel();
-    //Se obtiene el total de las columnas
-    for (int column = 0; column < table.getColumnCount(); column++) {
-        //Establecemos un valor minimo para el ancho de la columna
-        int width = 35; //Min Width
-        //Obtenemos el numero de filas de la tabla
-        for (int row = 0; row < table.getRowCount(); row++) {
-            //Obtenemos el renderizador de la tabla
-            TableCellRenderer renderer = table.getCellRenderer(row, column);
-            //Creamos un objeto para preparar el renderer
-            Component comp = table.prepareRenderer(renderer, row, column);
-            //Establecemos el width segun el valor maximo del ancho de la columna
-            width = Math.max(comp.getPreferredSize().width + 1, width);
 
-         }
-        //Se establece una condicion para no sobrepasar el valor de 300
-        //Esto es Opcional
+    for (int column = 0; column < table.getColumnCount(); column++) {
+        
+        int width = 35; 
+        
+        for (int row = 0; row < table.getRowCount(); row++) {        
+            TableCellRenderer renderer = table.getCellRenderer(row, column);         
+            Component comp = table.prepareRenderer(renderer, row, column);            
+            width = Math.max(comp.getPreferredSize().width + 1, width);
+         }        
 //        if (width > 300) {
 //            width = 300;
-//        }
-        
+//        }        
         columnModel.getColumn(column).setPreferredWidth(width);
     }
 }
+    
+    private void abrirVentana (JInternalFrame ventana){
+        Desktop.removeAll();
+        Desktop.repaint();        
+        ventana.setVisible(true);
+        Desktop.add(ventana);
+        Desktop.moveToFront(ventana);
+    
+    }
 
+    private void setServicios(Alojamiento a){
+        ImageIcon casilla = new ImageIcon("src/Icons/casilla16.png");
+        ImageIcon marcada = new ImageIcon("src/Icons/casillaMarcada16.png");
+        
+        if (a.getServicio().contains("Desayuno")){
+            jlDesayuno.setIcon(marcada);
+        }else{
+            jlDesayuno.setIcon(casilla);
+        }
+        if (a.getServicio().contains("Almuerzo")){
+            jlAlmuerzo.setIcon(marcada);
+        }else{
+            jlAlmuerzo.setIcon(casilla);
+        }
+        if (a.getServicio().contains("Cena")){
+            jlCena.setIcon(marcada);
+        }else{
+            jlCena.setIcon(casilla);
+        }
+    }
+    
 }
