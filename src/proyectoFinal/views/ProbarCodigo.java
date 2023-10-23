@@ -33,6 +33,9 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
     public ProbarCodigo() {
         initComponents();
          armarCabecera();
+         for (Ciudad c: ciu.listarCiudad()){
+                jcbOrigen.addItem(c);
+            }
          
          jdcVuelta.setEnabled(false);
          //Fecha actual
@@ -70,9 +73,9 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable);
 
-        jcbOrigen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jcbOrigenMouseClicked(evt);
+        jcbOrigen.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbOrigenItemStateChanged(evt);
             }
         });
         jcbOrigen.addActionListener(new java.awt.event.ActionListener() {
@@ -177,11 +180,6 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jcbOrigenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbOrigenMouseClicked
-        Ciudad c = (Ciudad) jcbOrigen.getSelectedItem();
-        cargarJTable(c);
-    }//GEN-LAST:event_jcbOrigenMouseClicked
-
     private void jdcIdaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcIdaPropertyChange
       
         java.util.Date selectedDate = jdcIda.getDate();
@@ -197,6 +195,11 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
          
          }
     }//GEN-LAST:event_jdcIdaPropertyChange
+
+    private void jcbOrigenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbOrigenItemStateChanged
+         Ciudad c = (Ciudad) jcbOrigen.getSelectedItem();
+        cargarJTable(c);
+    }//GEN-LAST:event_jcbOrigenItemStateChanged
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
