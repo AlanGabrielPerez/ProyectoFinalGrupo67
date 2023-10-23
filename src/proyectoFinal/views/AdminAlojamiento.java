@@ -332,7 +332,7 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
                     alojamiento.setCiudadDestino((Ciudad) jComboBoxCiudad.getSelectedItem());
                     alojamiento.setTipoAlojamiento((String) jcbTipoAlojamiento.getSelectedItem());
 
-                    double importeSuma = alojamiento.getImporteDiario();
+                    double importeSuma = Double.parseDouble(jtfImporteDiario.getText());
                     String servicio = "";
 
                     if (jCheckBoxDesayuno.isSelected()) {

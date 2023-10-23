@@ -108,11 +108,6 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                 jComboBox1ItemStateChanged(evt);
             }
         });
-        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jComboBox1MouseClicked(evt);
-            }
-        });
 
         jIda.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -360,13 +355,9 @@ public class Presupuesto extends javax.swing.JInternalFrame {
       paquete.setOrigen(pd.pasajeId(id).getCiudadOrigen());
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
-      Ciudad c = (Ciudad) jComboBox1.getSelectedItem();
-       cargarTable(c);
-    }//GEN-LAST:event_jComboBox1MouseClicked
-
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        // TODO add your handling code here:
+        Ciudad c = (Ciudad) jComboBox1.getSelectedItem();
+       cargarTable(c);
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
 
