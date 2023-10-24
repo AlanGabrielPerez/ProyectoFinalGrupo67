@@ -34,7 +34,7 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     public PresupuestoV2() {
         initComponents();
         Ciudad caba = new Ciudad("CABA","Buenos Aires","Argentina",true,LocalDate.of(2000,11, 30),LocalDate.of(2000,4, 1),LocalDate.of(2000,12, 1));
-        //paquete.setDestino(caba);
+        paquete.setDestino(caba);
         TiposAlojamientos();
         armarCabecera();
         jrPorProvincia.setSelected(true);
