@@ -5,6 +5,7 @@
  */
 package proyectoFinal.views;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import proyectoFinal.AccessData.AlojamientoData;
 import proyectoFinal.AccessData.CiudadData;
@@ -20,14 +21,11 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
     private AlojamientoData aloja = new AlojamientoData();
     private CiudadData ciu = new CiudadData();
 
-    //private Connection con;
-    /**
-     * Creates new form AdminAlojamiento
-     */
+
     public AdminAlojamiento() {
         initComponents();
         agregarCiudad();
-        //con = Conexion.getConnection();
+        TiposAlojamientos();
     }
 
     /**
@@ -39,30 +37,31 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jbAlojamientoGuardar = new javax.swing.JButton();
         jbBuscar = new javax.swing.JButton();
         jbAlojamientoSalir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jtfNombreAlojamiento = new javax.swing.JTextField();
+        jtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jbAlojamientoModificar = new javax.swing.JButton();
         jbAlojamientoNuevo = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jtfAlojamientoId = new javax.swing.JTextField();
-        jcbTipoAlojamiento = new javax.swing.JComboBox<>();
+        jtID = new javax.swing.JTextField();
+        jcbTipo = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jCheckBoxDesayuno = new javax.swing.JCheckBox();
-        jCheckBoxAlmuerzo = new javax.swing.JCheckBox();
+        jcDesayuno = new javax.swing.JCheckBox();
+        jcAlmuerzo = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
-        jtfImporteDiario = new javax.swing.JTextField();
-        jCheckBoxCena = new javax.swing.JCheckBox();
+        jtImporte = new javax.swing.JTextField();
+        jcCena = new javax.swing.JCheckBox();
         jComboBoxCiudad = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jrActivo = new javax.swing.JRadioButton();
+        jrInactivo = new javax.swing.JRadioButton();
 
         setClosable(true);
-
-        jLabel1.setText("Administrar Alojamiento");
+        setTitle("Administar alojamiento");
 
         jbAlojamientoGuardar.setText("Guardar");
         jbAlojamientoGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +70,7 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
             }
         });
 
-        jbBuscar.setText("Buscar");
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/lupa16.png"))); // NOI18N
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
@@ -85,13 +84,11 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel2.setText("Alojamiento:");
+        jLabel2.setText("Nombre");
 
-        jtfNombreAlojamiento.setText("Nombre");
+        jLabel3.setText("Lugar");
 
-        jLabel3.setText("Lugar:");
-
-        jLabel4.setText("Categoria(Tipo):");
+        jLabel4.setText("Categoria");
 
         jbAlojamientoModificar.setText("Modificar");
         jbAlojamientoModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,107 +104,108 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel5.setText("Alojamiento ID:");
+        jLabel5.setText(" ID");
 
-        jtfAlojamientoId.setText("Ingrese ID");
-
-        jcbTipoAlojamiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hostel", "Hotel", "Cabaña" }));
-
-        jLabel6.setText("Tipo de Servicio:");
-
-        jCheckBoxDesayuno.setText("Desayuno");
-        jCheckBoxDesayuno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxDesayunoActionPerformed(evt);
+        jtID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtIDKeyTyped(evt);
             }
         });
 
-        jCheckBoxAlmuerzo.setText("Almuerzo");
-        jCheckBoxAlmuerzo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxAlmuerzoActionPerformed(evt);
+        jLabel6.setText("Servicios ");
+
+        jcDesayuno.setText("Desayuno");
+
+        jcAlmuerzo.setText("Almuerzo");
+
+        jLabel7.setText("Importe diario");
+
+        jtImporte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtImporteKeyTyped(evt);
             }
         });
 
-        jLabel7.setText("Importe Diario:");
+        jcCena.setText("Cena");
 
-        jtfImporteDiario.setText("Importe");
+        jLabel1.setText("Estado");
 
-        jCheckBoxCena.setText("Cena");
+        jrActivo.setText("Activo");
+        jrActivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrActivoActionPerformed(evt);
+            }
+        });
+
+        jrInactivo.setText("Inactivo");
+        jrInactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrInactivoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtfAlojamientoId))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbAlojamientoGuardar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbAlojamientoModificar)
-                                .addGap(46, 46, 46)
-                                .addComponent(jbAlojamientoNuevo)))
-                        .addGap(32, 32, 32)
-                        .addComponent(jbAlojamientoSalir)
-                        .addGap(204, 204, 204))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jtfNombreAlojamiento))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jcbTipoAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(26, 26, 26)
-                                .addComponent(jCheckBoxDesayuno)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(90, 90, 90)
-                                        .addComponent(jbBuscar))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jCheckBoxAlmuerzo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jCheckBoxCena, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(59, 59, 59)
-                                .addComponent(jComboBoxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtfImporteDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(141, 141, 141)
-                .addComponent(jLabel1)
-                .addGap(105, 105, 105))
+                .addGap(35, 35, 35)
+                .addComponent(jbAlojamientoGuardar)
+                .addGap(53, 53, 53)
+                .addComponent(jbAlojamientoModificar)
+                .addGap(69, 69, 69)
+                .addComponent(jbAlojamientoNuevo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbAlojamientoSalir)
+                .addGap(37, 37, 37))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(195, 195, 195)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(jbBuscar))
+                            .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jcDesayuno)
+                                .addGap(24, 24, 24)
+                                .addComponent(jcAlmuerzo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jcCena, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jrActivo)
+                                .addGap(35, 35, 35)
+                                .addComponent(jrInactivo))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel1))))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbBuscar)
-                    .addComponent(jLabel5)
-                    .addComponent(jtfAlojamientoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbBuscar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jtfNombreAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -215,24 +213,29 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jcbTipoAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jCheckBoxDesayuno)
-                    .addComponent(jCheckBoxAlmuerzo)
-                    .addComponent(jCheckBoxCena))
-                .addGap(22, 22, 22)
+                    .addComponent(jcDesayuno)
+                    .addComponent(jcAlmuerzo)
+                    .addComponent(jcCena))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jtfImporteDiario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                    .addComponent(jtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jrActivo)
+                    .addComponent(jrInactivo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAlojamientoGuardar)
                     .addComponent(jbAlojamientoModificar)
                     .addComponent(jbAlojamientoNuevo)
                     .addComponent(jbAlojamientoSalir))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -241,7 +244,7 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
     private void jbAlojamientoGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlojamientoGuardarActionPerformed
         String servicio;
 
-        if (jtfNombreAlojamiento.getText().isEmpty() || jcbTipoAlojamiento.getSelectedItem() == null) {
+        if (jtNombre.getText().isEmpty() || jcbTipo.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
 
         } else {
@@ -249,23 +252,23 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
             Ciudad c = (Ciudad) jComboBoxCiudad.getSelectedItem();
             alojamiento.setCiudadDestino(c);
             alojamiento.setEstado(true);
-            alojamiento.setNombre(jtfNombreAlojamiento.getText());
-            alojamiento.setImporteDiario(Double.parseDouble(jtfImporteDiario.getText()));
-            alojamiento.setTipoAlojamiento((String) jcbTipoAlojamiento.getSelectedItem());
+            alojamiento.setNombre(jtNombre.getText());
+            alojamiento.setImporteDiario(Double.parseDouble(jtImporte.getText()));
+            alojamiento.setTipoAlojamiento((String) jcbTipo.getSelectedItem());
 
             double importeSuma = alojamiento.getImporteDiario();
 
             // Verificar qué servicios de comida se seleccionaron
             servicio = "";
-            if (jCheckBoxDesayuno.isSelected()) {
+            if (jcDesayuno.isSelected()) {
                 servicio += ("Desayuno- ");
                 importeSuma += 500;
             }
-            if (jCheckBoxAlmuerzo.isSelected()) {
+            if (jcAlmuerzo.isSelected()) {
                 servicio += (" Almuerzo- ");
                 importeSuma += 500;
             }
-            if (jCheckBoxCena.isSelected()) {
+            if (jcCena.isSelected()) {
                 servicio += (" Cena");
                 importeSuma += 500;
             }
@@ -286,65 +289,62 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbAlojamientoGuardarActionPerformed
 
-    private void jCheckBoxDesayunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxDesayunoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxDesayunoActionPerformed
-
-    private void jCheckBoxAlmuerzoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxAlmuerzoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxAlmuerzoActionPerformed
-
     private void jbAlojamientoSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlojamientoSalirActionPerformed
-        dispose();
+      
+    dispose();
 
     }//GEN-LAST:event_jbAlojamientoSalirActionPerformed
 
     private void jbAlojamientoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlojamientoNuevoActionPerformed
 
-        jtfAlojamientoId.setText("");
-        jtfNombreAlojamiento.setText("");
+        jtID.setText("");
+        jtNombre.setText("");
         jComboBoxCiudad.setSelectedIndex(-1);
-        jcbTipoAlojamiento.setSelectedIndex(-1);
-
-        jCheckBoxDesayuno.setSelected(false);
-        jCheckBoxAlmuerzo.setSelected(false);
-        jCheckBoxCena.setSelected(false);
-        jtfImporteDiario.setText("");
+        jcbTipo.setSelectedIndex(-1);
+        jcDesayuno.setSelected(false);
+        jcAlmuerzo.setSelected(false);
+        jcCena.setSelected(false);
+        jtImporte.setText("");
+        jcAlmuerzo.setIcon(null);
+        jcCena.setIcon(null);
+        jcDesayuno.setIcon(null);
 
     }//GEN-LAST:event_jbAlojamientoNuevoActionPerformed
 
     private void jbAlojamientoModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlojamientoModificarActionPerformed
 
-        if (jtfAlojamientoId.getText() != "") {
-
-            if (comprobar(Integer.parseInt(jtfAlojamientoId.getText())) == true) {
-
-                if (jtfNombreAlojamiento.getText().isEmpty() || jComboBoxCiudad.getSelectedItem() == null || jcbTipoAlojamiento.getSelectedItem() == null || jtfImporteDiario.getText().isEmpty()) {
+        if (jtID.getText().isEmpty()){ 
+            JOptionPane.showMessageDialog(this, "Ingrese id del alojamiento a modificar.\n*se recomientda utilizar el boton de busqueda");
+            
+        } else {
+             int id =Integer.parseInt(jtID.getText());
+             if (comprobar(id)||comprobarInactivos(id)) {
+                if (jtNombre.getText().isEmpty()|| jtImporte.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Rellene los campos faltantes o use buscar por ID");
 
                 } else {
 
                     Alojamiento alojamiento = new Alojamiento();
 
-                    alojamiento.setEstado(true);
-                    alojamiento.setIdAlojamiento(Integer.parseInt(jtfAlojamientoId.getText()));
-                    alojamiento.setNombre(jtfNombreAlojamiento.getText());
+                    
+                    alojamiento.setIdAlojamiento(Integer.parseInt(jtID.getText()));
+                    alojamiento.setNombre(jtNombre.getText());
                     alojamiento.setCiudadDestino((Ciudad) jComboBoxCiudad.getSelectedItem());
-                    alojamiento.setTipoAlojamiento((String) jcbTipoAlojamiento.getSelectedItem());
+                    alojamiento.setTipoAlojamiento((String) jcbTipo.getSelectedItem());
 
-                    double importeSuma = Double.parseDouble(jtfImporteDiario.getText());
+                    double importeSuma = Double.parseDouble(jtImporte.getText());
                     String servicio = "";
 
-                    if (jCheckBoxDesayuno.isSelected()) {
+                    if (jcDesayuno.isSelected()) {
                         servicio += ("Desayuno- ");
                         importeSuma += 500;
 
                     }
-                    if (jCheckBoxAlmuerzo.isSelected()) {
+                    if (jcAlmuerzo.isSelected()) {
                         servicio += (" Almuerzo- ");
                         importeSuma += 500;
                     }
-                    if (jCheckBoxCena.isSelected()) {
+                    if (jcCena.isSelected()) {
                         servicio += (" Cena");
                         importeSuma += 500;
                     }
@@ -352,6 +352,8 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
                     alojamiento.setServicio(servicio);
 
                     alojamiento.setImporteDiario(importeSuma);
+                    
+                    alojamiento.setEstado(jrActivo.isSelected());
 
                     aloja.modificarAlojamiento(alojamiento);
                 }
@@ -359,9 +361,6 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Ingrese un valor existente");
             }
-
-        } else {
-            JOptionPane.showMessageDialog(this, "Ingrese algun valor en el campo ID");
         }
 
 
@@ -369,66 +368,70 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
-        if (jtfAlojamientoId.getText() != "") {
-
-            if (comprobar(Integer.parseInt(jtfAlojamientoId.getText())) == true) {
-
-                int id = Integer.parseInt(jtfAlojamientoId.getText());
+        if (jtID.getText() != "") {
+            int id = Integer.parseInt(jtID.getText());
+            if (comprobar(id) || comprobarInactivos(id)) {
                 Alojamiento alojamiento = aloja.alojamientoId(id);
 
-                jtfNombreAlojamiento.setText(alojamiento.getNombre());
-                if (alojamiento.getCiudadDestino().isEstado()) {
+                jtNombre.setText(alojamiento.getNombre());
+                jtNombre.setEditable(false);
+                
+                jComboBoxCiudad.getModel().setSelectedItem(alojamiento.getCiudadDestino());
+                jcbTipo.getModel().setSelectedItem(alojamiento.getTipoAlojamiento());
 
-                    jComboBoxCiudad.getModel().setSelectedItem(alojamiento.getCiudadDestino());
+                jtImporte.setText(alojamiento.getImporteDiario() + "");
 
-                    jcbTipoAlojamiento.getModel().setSelectedItem(alojamiento.getTipoAlojamiento());
+                jrActivo.setSelected(alojamiento.isEstado());
+                
+                setServicios(alojamiento);
+                
+                
+                
 
-                    if (alojamiento.getServicio().contains("Desayuno")) {
-
-                        jCheckBoxDesayuno.setSelected(true);
-
-                    } else {
-
-                        jCheckBoxDesayuno.setSelected(false);
-                    }
-
-                    if (alojamiento.getServicio().contains("Almuerzo")) {
-
-                        jCheckBoxAlmuerzo.setSelected(true);
-
-                    } else {
-
-                        jCheckBoxAlmuerzo.setSelected(false);
-
-                    }
-
-                    if (alojamiento.getServicio().contains("Cena")) {
-
-                        jCheckBoxCena.setSelected(true);
-
-                    } else {
-
-                        jCheckBoxCena.setSelected(false);
-                    }
-
-                    jtfImporteDiario.setText(alojamiento.getImporteDiario() + "");
-
-                } else {
-                    JOptionPane.showMessageDialog(this, "Ciudad inactiva");
-                }
-
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontro alojamiento ID: " + id);
             }
-
         }
 
 
     }//GEN-LAST:event_jbBuscarActionPerformed
 
+    private void jrActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrActivoActionPerformed
+        if (jrActivo.isSelected()) {
+            jrInactivo.setSelected(false);
+        }else {
+            jrInactivo.setSelected(true);
+            jrInactivoActionPerformed(evt);
+        }
+    }//GEN-LAST:event_jrActivoActionPerformed
+
+    private void jrInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrInactivoActionPerformed
+       if (jrInactivo.isSelected()) {
+            jrActivo.setSelected(false);
+        }else{
+            jrActivo.setSelected(true);
+            jrActivoActionPerformed(evt);
+        }
+    }//GEN-LAST:event_jrInactivoActionPerformed
+
+    private void jtIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtIDKeyTyped
+           int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtIDKeyTyped
+
+    private void jtImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtImporteKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = ((key >= 48 && key <= 57) || key == 46);
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtImporteKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBoxAlmuerzo;
-    private javax.swing.JCheckBox jCheckBoxCena;
-    private javax.swing.JCheckBox jCheckBoxDesayuno;
     private javax.swing.JComboBox<Ciudad> jComboBoxCiudad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -442,16 +445,22 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAlojamientoNuevo;
     private javax.swing.JButton jbAlojamientoSalir;
     private javax.swing.JButton jbBuscar;
-    private javax.swing.JComboBox<String> jcbTipoAlojamiento;
-    private javax.swing.JTextField jtfAlojamientoId;
-    private javax.swing.JTextField jtfImporteDiario;
-    private javax.swing.JTextField jtfNombreAlojamiento;
+    private javax.swing.JCheckBox jcAlmuerzo;
+    private javax.swing.JCheckBox jcCena;
+    private javax.swing.JCheckBox jcDesayuno;
+    private javax.swing.JComboBox<String> jcbTipo;
+    private javax.swing.JRadioButton jrActivo;
+    private javax.swing.JRadioButton jrInactivo;
+    private javax.swing.JTextField jtID;
+    private javax.swing.JTextField jtImporte;
+    private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void agregarCiudad() {
-
+    private void agregarCiudad() {        
         for (Ciudad c : ciu.listarCiudad()) {
-
+            jComboBoxCiudad.addItem(c);
+        }
+        for (Ciudad c: ciu.ciudadesInactivas()){
             jComboBoxCiudad.addItem(c);
         }
     }
@@ -459,19 +468,52 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
     private boolean comprobar(int id) {
         boolean ok = false;
         for (Alojamiento a : aloja.listaAlojamiento()) {
+            if (a.getIdAlojamiento() == id) {
 
-            for (Alojamiento a2 : aloja.alojamientoInactivo()) {
-
-                if (a.getIdAlojamiento() == id || a2.getIdAlojamiento() == id) {
-
-                    ok = true;
-                }
-
+                ok = true;
+                break;
             }
-
-            ok = true;
         }
         return ok;
+    }
+
+    private boolean comprobarInactivos(int id) {
+        boolean ok = false;
+        for (Alojamiento a2 : aloja.alojamientoInactivo()) {
+            if (a2.getIdAlojamiento() == id) {
+                ok = true;
+                break;
+            }
+        }
+        return ok;
+    }
+
+    private void TiposAlojamientos() {
+        String[] tipos = {"Hostel", "Hotel", "Cabaña", "Departamento"};
+        for (String t : tipos) {
+            jcbTipo.addItem(t);
+        }
+    }
+
+    private void setServicios(Alojamiento a) {
+        ImageIcon casilla = new ImageIcon("src/Icons/casilla16.png");
+        ImageIcon marcada = new ImageIcon("src/Icons/casillaMarcada16.png");
+
+        if (a.getServicio().contains("Desayuno")) {
+            jcDesayuno.setIcon(marcada);
+        } else {
+            jcDesayuno.setIcon(casilla);
+        }
+        if (a.getServicio().contains("Almuerzo")) {
+            jcAlmuerzo.setIcon(marcada);
+        } else {
+            jcAlmuerzo.setIcon(casilla);
+        }
+        if (a.getServicio().contains("Cena")) {
+            jcCena.setIcon(marcada);
+        } else {
+            jcCena.setIcon(casilla);
+        }
     }
 
 }

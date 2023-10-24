@@ -107,7 +107,7 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        jLabel1.setText("Tipo");
+        jLabel1.setText("Categoria");
 
         jbSiguiente.setText("Siguiente");
         jbSiguiente.addActionListener(new java.awt.event.ActionListener() {
@@ -147,15 +147,17 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
                         .addComponent(jrPorCiudad)
                         .addGap(101, 101, 101)
                         .addComponent(jrPorProvincia))
-                    .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
