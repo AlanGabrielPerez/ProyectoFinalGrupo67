@@ -27,6 +27,7 @@ public class PasajeData {
     
     public PasajeData() {
         con = Conexion.getConnection();
+        
     }
     
     public void crearPasaje(Pasaje pasaje){

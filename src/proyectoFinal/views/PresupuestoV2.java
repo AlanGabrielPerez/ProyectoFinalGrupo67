@@ -14,13 +14,19 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import proyectoFinal.AccessData.AlojamientoData;
+import proyectoFinal.AccessData.PasajeData;
 import proyectoFinal.Entidades.Alojamiento;
 import proyectoFinal.Entidades.Ciudad;
 import proyectoFinal.Entidades.Paquete;
+import proyectoFinal.Entidades.Pasaje;
 import static proyectoFinal.views.Principal.Desktop;  
 import static proyectoFinal.views.Presupuesto.paquete;
 
 public class PresupuestoV2 extends javax.swing.JInternalFrame {
+    
+    
+    
+    
 
     private AlojamientoData ad = new AlojamientoData();
     private static DefaultTableModel modelo = new DefaultTableModel() {
@@ -34,11 +40,13 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     public PresupuestoV2() {
         initComponents();
         Ciudad caba = new Ciudad("CABA","Buenos Aires","Argentina",true,LocalDate.of(2000,11, 30),LocalDate.of(2000,4, 1),LocalDate.of(2000,12, 1));
-        paquete.setDestino(caba);
+        //paquete.setDestino(caba);
         TiposAlojamientos();
         armarCabecera();
         jrPorProvincia.setSelected(true);
-        cargarTabla();        
+        cargarTabla();     
+        
+        
     }
 
     /**
@@ -394,5 +402,7 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
             jlCena.setIcon(casilla);
         }
     }
+    
+  
     
 }

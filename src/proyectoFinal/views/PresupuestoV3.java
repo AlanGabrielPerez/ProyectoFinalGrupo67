@@ -5,10 +5,18 @@
  */
 package proyectoFinal.views;
 
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import proyectoFinal.AccessData.AlojamientoData;
+import proyectoFinal.AccessData.CiudadData;
+import proyectoFinal.AccessData.PaqueteData;
+import proyectoFinal.AccessData.PasajeData;
+import proyectoFinal.Entidades.Ciudad;
+import proyectoFinal.Entidades.Paquete;
+import proyectoFinal.Entidades.Pasaje;
 import static proyectoFinal.views.Principal.Desktop;
 import static proyectoFinal.views.Presupuesto.paquete;
 
@@ -24,6 +32,32 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
     public PresupuestoV3() {
         initComponents();
         habilitarCampos(false);
+
+        CiudadData ciudaddata = new CiudadData();
+        
+//        
+//        Pasaje pasaje = new Pasaje();
+//        pasaje.setTipoDeTransporte("Avión");
+//        pasaje.setImporte(500.0);
+//        pasaje.setCiudadOrigen(ciudaddata.buscarNombre("Mendoza"));
+//        pasaje.setEstado(true);
+//        pasaje.setCiudadDestino(ciudaddata.buscarNombre("Cordoba"));
+//
+          PasajeData pasajeData = new PasajeData();
+          AlojamientoData ad=new AlojamientoData();
+//        pasajeData.crearPasaje(pasaje);
+//    
+
+        Paquete paquete = new Paquete();
+        paquete.setOrigen(ciudaddata.buscarNombre("Mendoza")); 
+        paquete.setDestino(ciudaddata.buscarNombre("Cordoba")); 
+        paquete.setPasaje(pasajeData.pasajeId(1)); 
+        paquete.setAlojamiento(ad.alojamientoId(4) );
+        paquete.setFechaIn(LocalDate.of(2023, 10, 1));
+        paquete.setFechaOut(LocalDate.of(2023, 10, 7)); 
+
+        System.out.println(paquete);
+        
     }
 
     /**
@@ -100,7 +134,6 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
         jtfTransportePresu.setEditable(false);
 
         jtfHotelPresu.setEditable(false);
-        jtfHotelPresu.setText("jTextField5");
 
         jtfFechaIn.setEditable(false);
 
@@ -140,10 +173,6 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfHotelPresu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jtfCantidadPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,6 +209,10 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
                         .addComponent(jtfDestinoPresu, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfHotelPresu))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(18, 18, 18)
