@@ -1,12 +1,9 @@
-
 package proyectoFinal.Entidades;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-
 
 public class Paquete {
-    
+
     private int idPaquete;
     private Ciudad origen;
     private Pasaje pasaje;
@@ -26,7 +23,6 @@ public class Paquete {
         this.fechaIn = fechaIn;
         this.fechaOut = fechaOut;
     }
-    
 
     public Paquete(int idPasaje, Ciudad origen, Pasaje pasaje, Alojamiento alojamiento, Ciudad Destino, LocalDate fechaIn, LocalDate FechaOut) {
         this.idPaquete = idPaquete;
@@ -61,9 +57,7 @@ public class Paquete {
     public void setFechaOut(LocalDate fechaOut) {
         this.fechaOut = fechaOut;
     }
- 
-    
-    
+
     public Ciudad getOrigen() {
         return origen;
     }
@@ -95,7 +89,10 @@ public class Paquete {
     public void setDestino(Ciudad Destino) {
         this.Destino = Destino;
     }
-   
-    
-    
+
+    @Override
+    public String toString() {
+        return "Paquete{" + "idPaquete=" + idPaquete + ", origen=" + origen + ", pasaje=" + pasaje + ", alojamiento=" + alojamiento + ", Destino=" + Destino + ", fechaIn=" + fechaIn + ", fechaOut=" + fechaOut + '}';
+    }
+
 }

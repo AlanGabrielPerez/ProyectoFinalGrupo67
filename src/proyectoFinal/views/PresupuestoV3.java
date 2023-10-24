@@ -5,9 +5,20 @@
  */
 package proyectoFinal.views;
 
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import proyectoFinal.AccessData.AlojamientoData;
+import proyectoFinal.AccessData.CiudadData;
+import proyectoFinal.AccessData.PaqueteData;
+import proyectoFinal.AccessData.PasajeData;
+import proyectoFinal.Entidades.Ciudad;
+import proyectoFinal.Entidades.Paquete;
+import proyectoFinal.Entidades.Pasaje;
+import static proyectoFinal.views.Principal.Desktop;
+import static proyectoFinal.views.Presupuesto.paquete;
 
 /**
  *
@@ -20,6 +31,33 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
      */
     public PresupuestoV3() {
         initComponents();
+        habilitarCampos(false);
+
+        CiudadData ciudaddata = new CiudadData();
+        
+//        
+//        Pasaje pasaje = new Pasaje();
+//        pasaje.setTipoDeTransporte("Avión");
+//        pasaje.setImporte(500.0);
+//        pasaje.setCiudadOrigen(ciudaddata.buscarNombre("Mendoza"));
+//        pasaje.setEstado(true);
+//        pasaje.setCiudadDestino(ciudaddata.buscarNombre("Cordoba"));
+//
+          PasajeData pasajeData = new PasajeData();
+          AlojamientoData ad=new AlojamientoData();
+//        pasajeData.crearPasaje(pasaje);
+//    
+
+        Paquete paquete = new Paquete();
+        paquete.setOrigen(ciudaddata.buscarNombre("Mendoza")); 
+        paquete.setDestino(ciudaddata.buscarNombre("Cordoba")); 
+        paquete.setPasaje(pasajeData.pasajeId(1)); 
+        paquete.setAlojamiento(ad.alojamientoId(4) );
+        paquete.setFechaIn(LocalDate.of(2023, 10, 1));
+        paquete.setFechaOut(LocalDate.of(2023, 10, 7)); 
+
+        System.out.println(paquete);
+        
     }
 
     /**
@@ -53,6 +91,7 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jbAtras = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(580, 500));
 
@@ -74,7 +113,7 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel1.setText("Presupuesto:");
 
-        jLabel2.setText("Datos");
+        jLabel2.setText("Nombre");
 
         jLabel3.setText("Origen:");
 
@@ -86,28 +125,21 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Fecha Out");
 
-        jLabel8.setText("Total");
+        jLabel8.setText("Importe Total");
 
         jtfDatosPresu.setEditable(false);
-        jtfDatosPresu.setText("jTextField2");
 
         jtfOrigenPresu.setEditable(false);
-        jtfOrigenPresu.setText("jTextField3");
 
         jtfTransportePresu.setEditable(false);
-        jtfTransportePresu.setText("jTextField4");
 
         jtfHotelPresu.setEditable(false);
-        jtfHotelPresu.setText("jTextField5");
 
         jtfFechaIn.setEditable(false);
-        jtfFechaIn.setText("jTextField6");
 
         jtfFechaOut.setEditable(false);
-        jtfFechaOut.setText("jTextField7");
 
         jtfTotal.setEditable(false);
-        jtfTotal.setText("jTextField8");
         jtfTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfTotalActionPerformed(evt);
@@ -115,8 +147,6 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
         });
 
         jLabel9.setText("Destino:");
-
-        jtfDestinoPresu.setText("jTextField1");
 
         jLabel10.setText("Datos para la busqueda");
 
@@ -129,37 +159,20 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
             }
         });
 
+        jbAtras.setText("Atrás");
+        jbAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAtrasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfFechaIn, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfFechaOut, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfHotelPresu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfTransportePresu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfDatosPresu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jtfCantidadPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,17 +182,49 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
                         .addComponent(jtfDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbAtras)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(11, 11, 11))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfOrigenPresu, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfTransportePresu))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jtfDatosPresu))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jtfOrigenPresu, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel9)))
                         .addGap(18, 18, 18)
                         .addComponent(jtfDestinoPresu, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(11, 11, 11)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfHotelPresu))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfTotal))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfFechaIn, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtfFechaOut, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -193,7 +238,7 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfCantidadPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -223,38 +268,40 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jtfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbAtras)
+                    .addComponent(jButton1))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void habilitarCampos(boolean habilitar) {
-    jtfDatosPresu.setEnabled(habilitar);
-    jtfOrigenPresu.setEnabled(habilitar);
-    jtfTransportePresu.setEnabled(habilitar);
-    jtfHotelPresu.setEnabled(habilitar);
-    jtfFechaIn.setEnabled(habilitar);
-    jtfFechaOut.setEnabled(habilitar);
-    jtfTotal.setEnabled(habilitar);
-    jtfDestinoPresu.setEnabled(habilitar);
-}
-    
-    
+        jtfDatosPresu.setEnabled(habilitar);
+        jtfOrigenPresu.setEnabled(habilitar);
+        jtfTransportePresu.setEnabled(habilitar);
+        jtfHotelPresu.setEnabled(habilitar);
+        jtfFechaIn.setEnabled(habilitar);
+        jtfFechaOut.setEnabled(habilitar);
+        jtfTotal.setEnabled(habilitar);
+        jtfDestinoPresu.setEnabled(habilitar);
+    }
+
+
     private void jtfDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDatosActionPerformed
         // TODO add your handling code here:
-      String correo = jtfDatos.getText();
-    if (esCorreoElectronicoValido(correo)) {
-        // El correo electrónico es válido
-        JOptionPane.showMessageDialog(this, "El correo es válido.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-        habilitarCampos(true); // Habilitar campos si el correo es válido
-    } else {
-        // El correo electrónico no es válido
-        JOptionPane.showMessageDialog(this, "Correo no válido. Ingrese un correo válido.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        habilitarCampos(false); // Deshabilitar campos si el correo no es válido
-    }
+        String correo = jtfDatos.getText();
+        if (esCorreoElectronicoValido(correo)) {
+            // El correo electrónico es válido
+            JOptionPane.showMessageDialog(this, "El correo es válido.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+            habilitarCampos(true); // Habilitar campos si el correo es válido
+        } else {
+            // El correo electrónico no es válido
+            JOptionPane.showMessageDialog(this, "Correo no válido. Ingrese un correo válido.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            habilitarCampos(false); // Deshabilitar campos si el correo no es válido
+        }
     }//GEN-LAST:event_jtfDatosActionPerformed
 
     private boolean esCorreoElectronicoValido(String correo) {
@@ -289,12 +336,25 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Has cancelado.", "Cancelación", JOptionPane.WARNING_MESSAGE);
 
         }
-    
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
+        // TODO add your handling code here:
+        int confirmacion = JOptionPane.showConfirmDialog(this, "Al volver atrás comenzarás de nuevo y se perderán los cambios. ¿Deseas continuar?", "Advertencia", JOptionPane.YES_NO_OPTION);
 
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            this.dispose();
+
+            PresupuestoV2 presupuesto = new PresupuestoV2();
+            presupuesto.setVisible(true);
+            Desktop.add(presupuesto);
+            Desktop.moveToFront(presupuesto);
+
+    }//GEN-LAST:event_jbAtrasActionPerformed
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -308,6 +368,7 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton jbAtras;
     private javax.swing.JTextField jtfCantidadPersonas;
     private javax.swing.JTextField jtfDatos;
     private javax.swing.JTextField jtfDatosPresu;

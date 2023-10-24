@@ -95,7 +95,7 @@ public class CiudadData {
             JOptionPane.showMessageDialog(null, "Ciudad dada de baja");
             
             } else {
-            JOptionPane.showMessageDialog(null, "Error al modificar");
+            JOptionPane.showMessageDialog(null, "Error al modificar, esta ciudad ya fue dada de baja");
             }
             
             ps.close();

@@ -262,36 +262,36 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         
     }
     
-    public static boolean esCorreoElectronicoValido(String correo) {
-        // Patrón para validar direcciones de correo electrónico
-        String patron = "^[A-Za-z0-9+_.-]+@(.+)$";
-        
-        // Compilar el patrón
-        Pattern pattern = Pattern.compile(patron);
-        
-        // Crear un objeto Matcher
-        Matcher matcher = pattern.matcher(correo);
-        
-        // Verificar si el correo coincide con el patrón
-        return matcher.matches();
-    }
+//    public static boolean esCorreoElectronicoValido(String correo) {
+//        // Patrón para validar direcciones de correo electrónico
+//        String patron = "^[A-Za-z0-9+_.-]+@(.+)$";
+//        
+//        // Compilar el patrón
+//        Pattern pattern = Pattern.compile(patron);
+//        
+//        // Crear un objeto Matcher
+//        Matcher matcher = pattern.matcher(correo);
+//        
+//        // Verificar si el correo coincide con el patrón
+//        return matcher.matches();
+//    }
 
-    public static void main(String[] args) {
-        String correo1 = "usuario@example.com";
-        String correo2 = "correoinvalido";
-        
-        if (esCorreoElectronicoValido(correo1)) {
-            System.out.println(correo1 + " es un correo electrónico válido.");
-        } else {
-            System.out.println(correo1 + " no es un correo electrónico válido.");
-        }
-        
-        if (esCorreoElectronicoValido(correo2)) {
-            System.out.println(correo2 + " es un correo electrónico válido.");
-        } else {
-            System.out.println(correo2 + " no es un correo electrónico válido.");
-        }
-    }
+//    public static void main(String[] args) {
+//        String correo1 = "usuario@example.com";
+//        String correo2 = "correoinvalido";
+//        
+//        if (esCorreoElectronicoValido(correo1)) {
+//            System.out.println(correo1 + " es un correo electrónico válido.");
+//        } else {
+//            System.out.println(correo1 + " no es un correo electrónico válido.");
+//        }
+//        
+//        if (esCorreoElectronicoValido(correo2)) {
+//            System.out.println(correo2 + " es un correo electrónico válido.");
+//        } else {
+//            System.out.println(correo2 + " no es un correo electrónico válido.");
+//        }
+//    }
 
     
 }

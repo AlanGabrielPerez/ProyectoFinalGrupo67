@@ -275,8 +275,14 @@
       </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jDateChooser1PropertyChange"/>
+      </Events>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jDateChooser2PropertyChange"/>
+      </Events>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser3">
     </Component>

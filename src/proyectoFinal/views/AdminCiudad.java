@@ -7,6 +7,7 @@ package proyectoFinal.views;
 
 import java.sql.Date;
 import java.time.ZoneId;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import proyectoFinal.AccessData.CiudadData;
 import proyectoFinal.Entidades.Ciudad;
@@ -123,6 +124,18 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
         jLabel7.setText("Temporada Media:");
 
         jLabel8.setText("Temporada Baja:");
+
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser1PropertyChange(evt);
+            }
+        });
+
+        jDateChooser2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser2PropertyChange(evt);
+            }
+        });
 
         jEliminar.setText("Eliminar");
         jEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -273,7 +286,7 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
 
     private void jbBuscarCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarCiudadActionPerformed
         if (jtfIngreseId.getText() != ""){
-            if (comprobar(Integer.parseInt(jtfIngreseId.getText()))==true){
+            if (comprobar(Integer.parseInt(jtfIngreseId.getText())) || comprobarInactivo(Integer.parseInt(jtfIngreseId.getText()))){
          cd.ciudadId(Integer.parseInt(jtfIngreseId.getText()));
          jTextField1.setText(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getNombre());
          jtfIngreseProvincia.setText(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getProvincia());
@@ -308,12 +321,11 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
     private void jbCiudadModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCiudadModificarActionPerformed
      
         if (jtfIngreseId.getText() != ""){ 
-        if(comprobar(Integer.parseInt(jtfIngreseId.getText()))==true){
+        if(comprobar(Integer.parseInt(jtfIngreseId.getText())) || comprobarInactivo(Integer.parseInt(jtfIngreseId.getText()))){
           if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jtfIngreseProvincia.getText().isEmpty() || jDateChooser1.getDate()==null || jDateChooser2.getDate()==null || jDateChooser3.getDate()==null){
               JOptionPane.showMessageDialog(this, "Rellene los campos faltantes o use buscar por ID");
           } else {
-           Ciudad ciudad = new Ciudad();    
-          ciudad.setEstado(jEstado.isSelected());
+          Ciudad ciudad = new Ciudad(); 
           ciudad.setNombre(jTextField1.getText());
           ciudad.setPais(jTextField1.getText());
           ciudad.setProvincia(jtfIngreseProvincia.getText());
@@ -321,7 +333,14 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
           ciudad.setTemMedia(jDateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
           ciudad.setTemBaja(jDateChooser3.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
           ciudad.setIdCiudad(Integer.parseInt(jtfIngreseId.getText()));
+          if (jEstado.isSelected()){
+          ciudad.setEstado(true);
           cd.modificarCiudad(ciudad);
+          } else {
+          ciudad.setEstado(cd.ciudadId(ciudad.getIdCiudad()).isEstado());
+          JOptionPane.showMessageDialog(this, "si desea borrar utilice el boton de borrado");
+          jEstado.setSelected(cd.ciudadId(ciudad.getIdCiudad()).isEstado());
+          }
           }
         } else {
         JOptionPane.showMessageDialog(this, "Ingrese un valor existente");
@@ -332,8 +351,45 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbCiudadModificarActionPerformed
 
     private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
-        // TODO add your handling code here:
+       if (jtfIngreseId.getText() == null ){
+       JOptionPane.showMessageDialog(this, "Rellene el campo de id");
+       } else if (comprobar(Integer.parseInt(jtfIngreseId.getText())) || comprobarInactivo(Integer.parseInt(jtfIngreseId.getText()))) {
+        Ciudad ciudad = new Ciudad();    
+          ciudad.setIdCiudad(Integer.parseInt(jtfIngreseId.getText()));
+          cd.eliminarCiudad(Integer.parseInt(jtfIngreseId.getText()));
+          jEstado.setSelected(false);
+       } else {
+         JOptionPane.showMessageDialog(this, "Utilice un id correcto");
+       } 
     }//GEN-LAST:event_jEliminarActionPerformed
+
+    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+       java.util.Date selectedDate = jDateChooser1.getDate();
+           
+         if (selectedDate != null){ //Si se selecciona una fecha
+            jDateChooser2.setEnabled(true); //activar el dateChooser de vuelta
+            
+            Calendar calendar = Calendar.getInstance(); 
+            calendar.setTime(selectedDate);             
+            calendar.add(Calendar.DAY_OF_MONTH, 1); // establece al dia siguiente del jdc IDA
+           
+            jDateChooser2.setMinSelectableDate(calendar.getTime()); //setea el minimo del jdc VUELTA
+         }
+    }//GEN-LAST:event_jDateChooser1PropertyChange
+
+    private void jDateChooser2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser2PropertyChange
+         java.util.Date selectedDate = jDateChooser2.getDate();
+           
+         if (selectedDate != null){ //Si se selecciona una fecha
+            jDateChooser3.setEnabled(true); //activar el dateChooser de vuelta
+            
+            Calendar calendar = Calendar.getInstance(); 
+            calendar.setTime(selectedDate);             
+            calendar.add(Calendar.DAY_OF_MONTH, 1); // establece al dia siguiente del jdc IDA
+           
+            jDateChooser3.setMinSelectableDate(calendar.getTime()); //setea el minimo del jdc VUELTA
+         }
+    }//GEN-LAST:event_jDateChooser2PropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -363,15 +419,24 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfIngreseProvincia;
     // End of variables declaration//GEN-END:variables
 
+    private boolean comprobarInactivo(int id){
+    boolean ok = false;
+    for (Ciudad c: cd.ciudadesInactivas()){
+    if(c.getIdCiudad() == id){
+    ok = true;
+    break;
+    }
+    }
+    return ok;
+    }
+    
     private boolean comprobar (int id){
     boolean ok = false;
     for (Ciudad c : cd.listarCiudad()){
-    for (Ciudad c2: cd.ciudadesInactivas()){    
-    if (c.getIdCiudad() == id || c2.getIdCiudad() == id){
+    if (c.getIdCiudad() == id){
     ok = true;
+    break;
     }
-    }
-    ok = true;
     }
     return ok;
     }
