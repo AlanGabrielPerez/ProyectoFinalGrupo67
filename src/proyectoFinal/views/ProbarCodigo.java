@@ -2,7 +2,9 @@ package proyectoFinal.views;
 
 import java.awt.Component;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.regex.Matcher;
@@ -12,9 +14,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
+import proyectoFinal.AccessData.AlojamientoData;
 import proyectoFinal.AccessData.CiudadData;
 import proyectoFinal.AccessData.PasajeData;
 import proyectoFinal.Entidades.Ciudad;
+import proyectoFinal.Entidades.Paquete;
 import proyectoFinal.Entidades.Pasaje;
 
 
@@ -22,6 +26,8 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
 
     CiudadData ciu = new CiudadData();
     PasajeData pd = new PasajeData();
+    AlojamientoData ad = new AlojamientoData();
+    Paquete ejemplo = new Paquete();
     
         private static DefaultTableModel modelo = new DefaultTableModel() {
 
@@ -34,7 +40,14 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         
     public ProbarCodigo() {
         initComponents();
-         armarCabecera();
+        armarCabecera();
+        cargarDatos(ejemplo);
+         
+         
+         jTextPane.setEditable(false);
+         jTextPane.setVisible(false);
+         
+         
          for (Ciudad c: ciu.listarCiudad()){
                 jcbOrigen.addItem(c);
             }
@@ -56,9 +69,13 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         jTable = new javax.swing.JTable();
         jcbOrigen = new javax.swing.JComboBox<>();
         jtBuscar = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jdcIda = new com.toedter.calendar.JDateChooser();
         jdcVuelta = new com.toedter.calendar.JDateChooser();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane = new javax.swing.JTextPane();
+        jButton1 = new javax.swing.JButton();
+        jtEmail = new javax.swing.JTextField();
+        jtPasajeros = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -92,64 +109,88 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Buscar destinos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jdcIda.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jdcIdaPropertyChange(evt);
             }
         });
 
+        jScrollPane2.setViewportView(jTextPane);
+
+        jButton1.setText("Mostrar ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jtEmail.setText("Email");
+
+        jtPasajeros.setText("pasajeros");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(66, 66, 66)
+                            .addComponent(jcbOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(44, 44, 44)
+                            .addComponent(jtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(106, 106, 106)
+                            .addComponent(jdcIda, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(64, 64, 64)
+                            .addComponent(jdcVuelta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jdcIda, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64)
-                        .addComponent(jdcVuelta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jcbOrigen, javax.swing.GroupLayout.Alignment.LEADING, 0, 235, Short.MAX_VALUE)
-                            .addComponent(jtBuscar, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(47, 47, 47)
+                        .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(jtPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(jtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                    .addComponent(jtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jdcVuelta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jdcIda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBuscarKeyReleased
+       
+        
+        
         jcbOrigen.removeAllItems();
         
         if (jtBuscar.getText().isEmpty()){
@@ -170,18 +211,6 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
      
     }//GEN-LAST:event_jcbOrigenActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jcbOrigen.getSelectedIndex()<0){
-            JOptionPane.showMessageDialog(this, "Selecione una ciudad de origen.");
-        
-        }else{
-            Ciudad c = (Ciudad) jcbOrigen.getSelectedItem();
-            //paquete.setOrigen()
-            cargarJTable(c);
-        
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jdcIdaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcIdaPropertyChange
       
         java.util.Date selectedDate = jdcIda.getDate();
@@ -199,19 +228,37 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jdcIdaPropertyChange
 
     private void jcbOrigenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbOrigenItemStateChanged
-         Ciudad c = (Ciudad) jcbOrigen.getSelectedItem();
-        cargarJTable(c);
+       
+        // APLICAR ESTO NO GENERA NULLPOINTER ASI
+        
+        if(jcbOrigen.getItemCount()>0){
+            Ciudad c = (Ciudad) jcbOrigen.getSelectedItem();
+            cargarJTable(c);
+        }
+        
+        
+        
     }//GEN-LAST:event_jcbOrigenItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTextPane.setVisible(true);
+        jTextPane.setText(armarPresupuesto(ejemplo));
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable;
+    private javax.swing.JTextPane jTextPane;
     private javax.swing.JComboBox<Ciudad> jcbOrigen;
     private com.toedter.calendar.JDateChooser jdcIda;
     private com.toedter.calendar.JDateChooser jdcVuelta;
     private javax.swing.JTextField jtBuscar;
+    private javax.swing.JTextField jtEmail;
+    private javax.swing.JTextField jtPasajeros;
     // End of variables declaration//GEN-END:variables
 
     private void armarCabecera() {
@@ -293,5 +340,27 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
 //        }
 //    }
 
+    private void cargarDatos(Paquete p){
+        p.setAlojamiento(ad.alojamientoId(1));
+        p.setOrigen(ciu.ciudadId(6));
+        p.setDestino(ciu.ciudadId(7));
+        p.setPasaje(pd.pasajeId(11));
+        p.setFechaIn(LocalDate.of(2023, Month.MARCH, 5));
+        p.setFechaOut(LocalDate.of(2023, Month.MARCH, 15));       
+    }
     
+    private String armarPresupuesto(Paquete p){
+        String presupuesto="";
+        presupuesto+="\t\tPresupuesto\n";
+        presupuesto+="\nEmail: "+jtEmail.getText();
+        presupuesto+= "\tcantidad de personas:  "+jtPasajeros.getText();
+        presupuesto+="\nFecha de salida :  "+p.getFechaIn();
+        presupuesto+="\tHasta:  "+p.getFechaOut();
+        presupuesto+="\nOrigen: "+p.getOrigen();
+        presupuesto+="\nDestino: "+p.getDestino();
+        
+        
+        
+        return presupuesto;
+    }
 }

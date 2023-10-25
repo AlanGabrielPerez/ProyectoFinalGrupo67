@@ -12,10 +12,7 @@ import proyectoFinal.AccessData.CiudadData;
 import proyectoFinal.Entidades.Alojamiento;
 import proyectoFinal.Entidades.Ciudad;
 
-/**
- *
- * @author julian
- */
+
 public class AdminAlojamiento extends javax.swing.JInternalFrame {
 
     private AlojamientoData aloja = new AlojamientoData();
@@ -248,7 +245,7 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
 
         Alojamiento alojamiento = new Alojamiento();
 
-        if (jcbCiudad.getItemCount()!=1) {
+        if (jcbCiudad.getItemCount()>1) {
             if (jtNombre.getText().isEmpty() || jcbTipo.getSelectedIndex()<0||jcbCiudad.getSelectedIndex()<0||jtImporte.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
             } else {
@@ -369,6 +366,7 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
                 
                 jcbCiudad.removeAllItems();
                 jcbCiudad.addItem(alojamiento.getCiudadDestino());
+                
                 jcbTipo.removeAllItems();
                 jcbTipo.addItem(alojamiento.getTipoAlojamiento());
 
@@ -380,6 +378,10 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
 
                 setServicios(alojamiento);
                 setCasillas(alojamiento);
+                
+                if(!alojamiento.getCiudadDestino().isEstado()){
+                    JOptionPane.showMessageDialog(this, "La ciudad de este alojamiento se encuentra inactiva.");
+                }
 
             } else {
                 JOptionPane.showMessageDialog(this, "No se encontro alojamiento ID: " + id);
@@ -453,9 +455,6 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
         jcbCiudad.removeAllItems();
         
         for (Ciudad c : ciu.listarCiudad()) {
-            jcbCiudad.addItem(c);
-        }
-        for (Ciudad c: ciu.ciudadesInactivas()){
             jcbCiudad.addItem(c);
         }
     }
