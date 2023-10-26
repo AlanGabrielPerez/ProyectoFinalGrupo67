@@ -11,20 +11,16 @@ public class Paquete {
     private Ciudad Destino;
     private LocalDate fechaIn;
     private LocalDate fechaOut;
+    private String email;
+    private double monto;
+    private int cantPasajeros;
 
     public Paquete() {
     }
 
-    public Paquete(Ciudad origen, Pasaje pasaje, Alojamiento alojamiento, Ciudad Destino, LocalDate fechaIn, LocalDate fechaOut) {
-        this.origen = origen;
-        this.pasaje = pasaje;
-        this.alojamiento = alojamiento;
-        this.Destino = Destino;
-        this.fechaIn = fechaIn;
-        this.fechaOut = fechaOut;
-    }
+ 
 
-    public Paquete(int idPasaje, Ciudad origen, Pasaje pasaje, Alojamiento alojamiento, Ciudad Destino, LocalDate fechaIn, LocalDate FechaOut) {
+    public Paquete(int idPaquete, Ciudad origen, Pasaje pasaje, Alojamiento alojamiento, Ciudad Destino, LocalDate fechaIn, LocalDate fechaOut, String email, double monto, int cantPasajeros) {
         this.idPaquete = idPaquete;
         this.origen = origen;
         this.pasaje = pasaje;
@@ -32,7 +28,47 @@ public class Paquete {
         this.Destino = Destino;
         this.fechaIn = fechaIn;
         this.fechaOut = fechaOut;
+        this.email = email;
+        this.monto = monto;
+        this.cantPasajeros = cantPasajeros;
     }
+
+    public Paquete(Ciudad origen, Pasaje pasaje, Alojamiento alojamiento, Ciudad Destino, LocalDate fechaIn, LocalDate fechaOut, String email, double monto, int cantPasajeros) {
+        this.origen = origen;
+        this.pasaje = pasaje;
+        this.alojamiento = alojamiento;
+        this.Destino = Destino;
+        this.fechaIn = fechaIn;
+        this.fechaOut = fechaOut;
+        this.email = email;
+        this.monto = monto;
+        this.cantPasajeros = cantPasajeros;
+    }
+    
+       public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    public int getCantPasajeros() {
+        return cantPasajeros;
+    }
+
+    public void setCantPasajeros(int cantPasajeros) {
+        this.cantPasajeros = cantPasajeros;
+    }
+  
 
     public int getIdPaquete() {
         return idPaquete;
@@ -92,7 +128,9 @@ public class Paquete {
 
     @Override
     public String toString() {
-        return "Paquete{" + "idPaquete=" + idPaquete + ", origen=" + origen + ", pasaje=" + pasaje + ", alojamiento=" + alojamiento + ", Destino=" + Destino + ", fechaIn=" + fechaIn + ", fechaOut=" + fechaOut + '}';
+        return "Paquete{" + "idPaquete=" + idPaquete + ", origen=" + origen + ", pasaje=" + pasaje + ", alojamiento=" + alojamiento + ", Destino=" + Destino + ", fechaIn=" + fechaIn + ", fechaOut=" + fechaOut + ", email=" + email + ", monto=" + monto + ", cantPasajeros=" + cantPasajeros + '}';
     }
+
+    
 
 }

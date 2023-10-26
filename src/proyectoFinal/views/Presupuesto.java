@@ -244,15 +244,7 @@ public class Presupuesto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jVuelta.getDate() != null && jIda.getDate() != null && paquete.getDestino() != null && paquete.getPasaje() != null && paquete.getOrigen() != null) {
-            Desktop.removeAll();
-            Desktop.repaint();
-            PresupuestoV2 presupuestoV2 = new PresupuestoV2();
-            presupuestoV2.setVisible(true);
-            Desktop.add(presupuestoV2);
-            Desktop.moveToFront(presupuestoV2);
-
-            if (jVuelta.getDate() != null) {
+         if (jVuelta.getDate() != null) {
                 paquete.setFechaIn(jVuelta.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             } else {
                 JOptionPane.showMessageDialog(this, "Seleccione una fecha de ida");
@@ -262,8 +254,15 @@ public class Presupuesto extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Seleccione una fecha de regreso");
             }
+        if (jVuelta.getDate() != null && jIda.getDate() != null && paquete.getDestino() != null && paquete.getPasaje() != null && paquete.getOrigen() != null) {
+            Desktop.removeAll();
+            Desktop.repaint();
+            PresupuestoV2 presupuestoV2 = new PresupuestoV2();
+            presupuestoV2.setVisible(true);
+            Desktop.add(presupuestoV2);
+            Desktop.moveToFront(presupuestoV2);
         } else {
-            JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
+        JOptionPane.showMessageDialog(this, "rellene correctamente los campos");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

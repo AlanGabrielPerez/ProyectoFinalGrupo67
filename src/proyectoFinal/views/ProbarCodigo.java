@@ -1,6 +1,7 @@
 package proyectoFinal.views;
 
 import java.awt.Color;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
 import javax.swing.JOptionPane;
@@ -75,6 +76,11 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
             }
         });
 
+        jtPasajeros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtPasajerosActionPerformed(evt);
+            }
+        });
         jtPasajeros.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtPasajerosKeyTyped(evt);
@@ -249,6 +255,12 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         Desktop.moveToFront(ventana2);
     }//GEN-LAST:event_jbAtrasActionPerformed
 
+    private void jtPasajerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPasajerosActionPerformed
+       if (jtPasajeros.getText() != ""){
+       paquete.setCantPasajeros(Integer.parseInt(jtPasajeros.getText()));
+       }
+    }//GEN-LAST:event_jtPasajerosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -336,10 +348,12 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
             if (email.substring(pos).endsWith(".com")) {
                 if ((tam - pos) > 6) {
                     valido = true;
+                    paquete.setEmail(email);
                 }
             } else if (email.substring(pos, tam - 3).endsWith(".com")) {
                 if ((tam - pos) > 9) {
                     valido = true;
+                    paquete.setEmail(email);
                 }
             }
         }
@@ -348,8 +362,8 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
 
     private String armarPresupuesto(Paquete p){
         String presupuesto="";
-        presupuesto+="Email: "+jtEmail.getText();
-        presupuesto+="\n\ncantidad de personas:  "+jtPasajeros.getText();
+        presupuesto+="Email: " + p.getEmail();
+        presupuesto+="\n\ncantidad de personas:  "+p.getCantPasajeros();
         presupuesto+="\n\nFecha de salida :  "+p.getFechaIn();
         presupuesto+="\n\nFecha de vuelta:  "+p.getFechaOut();
         presupuesto+="\n\nOrigen: "+p.getOrigen();
@@ -361,24 +375,33 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
             presupuesto+=" - Ida y vuelta";
         }
         presupuesto+="\n\nAlojamiento: "+p.getAlojamiento().getTipoAlojamiento()+" - "+p.getAlojamiento().getNombre();
-        presupuesto+="\n\nValor total: ";
+        presupuesto+="\n\nValor total: "+MontoTotal() + paquete.getMonto();
         
         return presupuesto;
     }
     
     private Double MontoTotal(){
         double monto=0;
-       // int cantDias = hacer la cuenta de dias paquete
+       
+       Duration duration = Duration.between(paquete.getFechaIn(), paquete.getFechaOut());
+       long cantDias = duration.toDays();
         if (jrVuelta.isSelected()){
-            monto += paquete.getPasaje().getImporte()*2;            
-        }else{
-            monto += paquete.getPasaje().getImporte();
+            monto += paquete.getPasaje().getImporte()*2;   
+            monto = monto * cantDias;
+            if (paquete.getFechaIn().isEqual(paquete.getDestino().getTemAlta()) || paquete.getFechaIn().isBefore(paquete.getDestino().getTemAlta())  && paquete.getFechaIn().isAfter(paquete.getDestino().getTemMedia())){
+            monto = monto * 0.25;
+            } else if (paquete.getFechaIn().isEqual(paquete.getDestino().getTemMedia()) || paquete.getFechaIn().isBefore(paquete.getDestino().getTemMedia()) && paquete.getFechaIn().isAfter(paquete.getDestino().getTemBaja())){
+            monto = monto * 0.10; 
+            }
+          if (paquete.getCantPasajeros() > 0){
+            monto = monto * paquete.getCantPasajeros();
+          }
         }
         //paquete.getAlojamiento().getImporteDiario() * cantdias;
         //CalcularTEMPORADA;        
-        //multiplicar x pasajetos
+        //multiplicar x pasajeros
         
-        
+        paquete.setMonto(monto);
         return monto;
     }
     
