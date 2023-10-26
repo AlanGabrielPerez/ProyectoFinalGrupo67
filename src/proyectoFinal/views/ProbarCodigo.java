@@ -31,7 +31,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         jlEmailValido.setVisible(false);
         jTextPane.setEditable(false);        
         jTextPane.setVisible(false);  
-        jTextPane.setBackground(Color.cyan);
+
     }
 
 
@@ -199,7 +199,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         } else {
             if (emailValido()) {
                 
-                jTextPane.setText(armarPresupuesto(ejemplo));
+                jTextPane.setText(armarPresupuesto(paquete));
                 jTextPane.setVisible(true);
                
                 jlEmailValido.setVisible(false);
