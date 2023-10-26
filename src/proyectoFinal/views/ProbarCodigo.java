@@ -365,4 +365,21 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         
         return presupuesto;
     }
+    
+    private Double MontoTotal(){
+        double monto=0;
+       // int cantDias = hacer la cuenta de dias paquete
+        if (jrVuelta.isSelected()){
+            monto += paquete.getPasaje().getImporte()*2;            
+        }else{
+            monto += paquete.getPasaje().getImporte();
+        }
+        //paquete.getAlojamiento().getImporteDiario() * cantdias;
+        //CalcularTEMPORADA;        
+        //multiplicar x pasajetos
+        
+        
+        return monto;
+    }
+    
 }
