@@ -250,7 +250,7 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
-        PresupuestoV3 ventana3 = new PresupuestoV3 ();
+        ProbarCodigo ventana3 = new ProbarCodigo ();
         abrirVentana(ventana3);
     }//GEN-LAST:event_jbSiguienteActionPerformed
 
@@ -272,7 +272,7 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         int id =(int) jTable.getValueAt(jTable.getSelectedRow(), 0);
         Alojamiento a = ad.alojamientoId(id);
-        
+        paquete.setAlojamiento(a);        
         jtAlojamientoSelec.setText(a.getNombre()+"("+a.getTipoAlojamiento()+") - "+a.getCiudadDestino());
         setServicios(a);
     }//GEN-LAST:event_jTableMouseClicked

@@ -26,10 +26,12 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         initComponents();
         cargarDatos(ejemplo);        
         
+        
         jrIda.setSelected(true);
         jlEmailValido.setVisible(false);
         jTextPane.setEditable(false);        
-        jTextPane.setVisible(false);      
+        jTextPane.setVisible(false);  
+        jTextPane.setBackground(Color.cyan);
     }
 
 
@@ -54,6 +56,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
+        jTextPane.setEditable(false);
         jTextPane.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jScrollPane2.setViewportView(jTextPane);
 
