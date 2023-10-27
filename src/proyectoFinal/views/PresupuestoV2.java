@@ -19,14 +19,10 @@ import proyectoFinal.Entidades.Alojamiento;
 import proyectoFinal.Entidades.Ciudad;
 import proyectoFinal.Entidades.Paquete;
 import proyectoFinal.Entidades.Pasaje;
-import static proyectoFinal.views.Principal.Desktop;  
+import static proyectoFinal.views.Principal.Desktop;
 import static proyectoFinal.views.Presupuesto.paquete;
 
 public class PresupuestoV2 extends javax.swing.JInternalFrame {
-    
-    
-    
-    
 
     private AlojamientoData ad = new AlojamientoData();
     private static DefaultTableModel modelo = new DefaultTableModel() {
@@ -36,17 +32,17 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
             return false;
         }
     };
-        
+
     public PresupuestoV2() {
         initComponents();
-        Ciudad caba = new Ciudad("CABA","Buenos Aires","Argentina",true,LocalDate.of(2000,11, 30),LocalDate.of(2000,4, 1),LocalDate.of(2000,12, 1));
-        //paquete.setDestino(caba);
+        Ciudad caba = new Ciudad("CABA", "Buenos Aires", "Argentina", true, LocalDate.of(2000, 11, 30), LocalDate.of(2000, 4, 1), LocalDate.of(2000, 12, 1));
+        paquete.setDestino(caba);
+        
         TiposAlojamientos();
         armarCabecera();
         jrPorProvincia.setSelected(true);
-        cargarTabla();     
-        
-        
+        cargarTabla();
+
     }
 
     /**
@@ -233,46 +229,46 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrPorProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrPorProvinciaActionPerformed
-        if(jrPorProvincia.isSelected()){
+        if (jrPorProvincia.isSelected()) {
             jrPorCiudad.setSelected(false);
             cargarTabla();
-           
-        }else{
+
+        } else {
             jrPorCiudad.setSelected(true);
             cargarTabla();
         }
     }//GEN-LAST:event_jrPorProvinciaActionPerformed
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
-        Presupuesto ventana1 = new Presupuesto ();
+        Presupuesto ventana1 = new Presupuesto();
         abrirVentana(ventana1);
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
-        PresupuestoV3 ventana3 = new PresupuestoV3 ();
+        PresupuestoV3 ventana3 = new PresupuestoV3();
         abrirVentana(ventana3);
     }//GEN-LAST:event_jbSiguienteActionPerformed
 
     private void jrPorCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrPorCiudadActionPerformed
-        if (jrPorCiudad.isSelected()){
+        if (jrPorCiudad.isSelected()) {
             jrPorProvincia.setSelected(false);
             cargarTabla();
-        }else {
-             jrPorProvincia.setSelected(true);
-             cargarTabla();
+        } else {
+            jrPorProvincia.setSelected(true);
+            cargarTabla();
         }
-        
+
     }//GEN-LAST:event_jrPorCiudadActionPerformed
 
     private void jcbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoActionPerformed
-       cargarTabla();
+        cargarTabla();
     }//GEN-LAST:event_jcbTipoActionPerformed
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
-        int id =(int) jTable.getValueAt(jTable.getSelectedRow(), 0);
+        int id = (int) jTable.getValueAt(jTable.getSelectedRow(), 0);
         Alojamiento a = ad.alojamientoId(id);
-        
-        jtAlojamientoSelec.setText(a.getNombre()+"("+a.getTipoAlojamiento()+") - "+a.getCiudadDestino());
+
+        jtAlojamientoSelec.setText(a.getNombre() + "(" + a.getTipoAlojamiento() + ") - " + a.getCiudadDestino());
         setServicios(a);
     }//GEN-LAST:event_jTableMouseClicked
 
@@ -295,14 +291,14 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtAlojamientoSelec;
     // End of variables declaration//GEN-END:variables
 
-    private void TiposAlojamientos(){
-        String[] tipos = {"Hostel","Hotel","Cabaña","Departamento"};
+    private void TiposAlojamientos() {
+        String[] tipos = {"Hostel", "Hotel", "Cabaña", "Departamento"};
         jcbTipo.addItem("Ver todos");
-        for (String t:tipos){
+        for (String t : tipos) {
             jcbTipo.addItem(t);
-        }    
+        }
     }
-        
+
     private void armarCabecera() {
         modelo.setColumnCount(0);
         modelo.addColumn("id");
@@ -311,20 +307,23 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
         modelo.addColumn("Ciudad");
         modelo.addColumn("Provincia");
         modelo.addColumn("Valor diario");
-        
+
         jTable.setModel(modelo);
-        
-        modelo.addRow(new Object[]{"  ","                      ","                                   ","                              ","                            ","                      "});
+
+        modelo.addRow(new Object[]{"  ", "                      ", "                                   ", "                              ", "                            ", "                      "});
         resizeColumnWidth(jTable);
         jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
-        
+
     }
-    
+
     private void cargarTabla() {
 
         modelo.setRowCount(0);
+        
+        
         if (jrPorCiudad.isSelected()) {
+            
+            
 
             for (Alojamiento a : ad.listaAlojamiento()) {
                 Ciudad c = a.getCiudadDestino();
@@ -337,6 +336,8 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
                         modelo.addRow(new Object[]{a.getIdAlojamiento(), a.getTipoAlojamiento(), a.getNombre(), c.getNombre(), c.getProvincia(), "   " + a.getImporteDiario()});
                     }
                 }
+                
+                
             }
         } else {
 
@@ -356,55 +357,53 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     }
 
     private void resizeColumnWidth(JTable table) {
-  
-    TableColumnModel columnModel = table.getColumnModel();
 
-    for (int column = 0; column < table.getColumnCount(); column++) {
-        
-        int width = 35; 
-        
-        for (int row = 0; row < table.getRowCount(); row++) {        
-            TableCellRenderer renderer = table.getCellRenderer(row, column);         
-            Component comp = table.prepareRenderer(renderer, row, column);            
-            width = Math.max(comp.getPreferredSize().width + 1, width);
-         }        
+        TableColumnModel columnModel = table.getColumnModel();
+
+        for (int column = 0; column < table.getColumnCount(); column++) {
+
+            int width = 35;
+
+            for (int row = 0; row < table.getRowCount(); row++) {
+                TableCellRenderer renderer = table.getCellRenderer(row, column);
+                Component comp = table.prepareRenderer(renderer, row, column);
+                width = Math.max(comp.getPreferredSize().width + 1, width);
+            }
 //        if (width > 300) {
 //            width = 300;
 //        }        
-        columnModel.getColumn(column).setPreferredWidth(width);
+            columnModel.getColumn(column).setPreferredWidth(width);
+        }
     }
-}
-    
-    private void abrirVentana (JInternalFrame ventana){
+
+    private void abrirVentana(JInternalFrame ventana) {
         Desktop.removeAll();
-        Desktop.repaint();        
+        Desktop.repaint();
         ventana.setVisible(true);
         Desktop.add(ventana);
         Desktop.moveToFront(ventana);
-    
+
     }
 
-    private void setServicios(Alojamiento a){
+    private void setServicios(Alojamiento a) {
         ImageIcon casilla = new ImageIcon("src/Icons/casilla16.png");
         ImageIcon marcada = new ImageIcon("src/Icons/casillaMarcada16.png");
-        
-        if (a.getServicio().contains("Desayuno")){
+
+        if (a.getServicio().contains("Desayuno")) {
             jlDesayuno.setIcon(marcada);
-        }else{
+        } else {
             jlDesayuno.setIcon(casilla);
         }
-        if (a.getServicio().contains("Almuerzo")){
+        if (a.getServicio().contains("Almuerzo")) {
             jlAlmuerzo.setIcon(marcada);
-        }else{
+        } else {
             jlAlmuerzo.setIcon(casilla);
         }
-        if (a.getServicio().contains("Cena")){
+        if (a.getServicio().contains("Cena")) {
             jlCena.setIcon(marcada);
-        }else{
+        } else {
             jlCena.setIcon(casilla);
         }
     }
-    
-  
-    
+
 }
