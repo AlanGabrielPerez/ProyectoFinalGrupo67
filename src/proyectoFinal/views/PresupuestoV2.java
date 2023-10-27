@@ -35,9 +35,7 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
 
     public PresupuestoV2() {
         initComponents();
-        Ciudad caba = new Ciudad("CABA", "Buenos Aires", "Argentina", true, LocalDate.of(2000, 11, 30), LocalDate.of(2000, 4, 1), LocalDate.of(2000, 12, 1));
-        paquete.setDestino(caba);
-        
+        Ciudad caba = new Ciudad("CABA", "Buenos Aires", "Argentina", true, LocalDate.of(2000, 11, 30), LocalDate.of(2000, 4, 1), LocalDate.of(2000, 12, 1)); 
         TiposAlojamientos();
         armarCabecera();
         jrPorProvincia.setSelected(true);
@@ -246,8 +244,8 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
-        PresupuestoV3 ventana3 = new PresupuestoV3();
-        abrirVentana(ventana3);
+        ProbarCodigo probar = new ProbarCodigo();
+        abrirVentana(probar);
     }//GEN-LAST:event_jbSiguienteActionPerformed
 
     private void jrPorCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrPorCiudadActionPerformed
@@ -268,8 +266,9 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         int id = (int) jTable.getValueAt(jTable.getSelectedRow(), 0);
         Alojamiento a = ad.alojamientoId(id);
-
+        
         jtAlojamientoSelec.setText(a.getNombre() + "(" + a.getTipoAlojamiento() + ") - " + a.getCiudadDestino());
+        paquete.setAlojamiento(a);
         setServicios(a);
     }//GEN-LAST:event_jTableMouseClicked
 

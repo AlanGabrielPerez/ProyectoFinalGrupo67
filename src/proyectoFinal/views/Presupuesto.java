@@ -38,6 +38,7 @@ public class Presupuesto extends javax.swing.JInternalFrame {
     public Presupuesto() {
         initComponents();
         cargarCiudades();
+        jcbOrigen.setSelectedIndex(-1);
         construirCabecera();
         seteoFechas();
     }
@@ -245,12 +246,12 @@ public class Presupuesto extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          if (jVuelta.getDate() != null) {
-                paquete.setFechaIn(jVuelta.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                paquete.setFechaOut(jVuelta.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             } else {
                 JOptionPane.showMessageDialog(this, "Seleccione una fecha de ida");
             }
             if (jIda.getDate() != null) {
-                paquete.setFechaOut(jIda.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                paquete.setFechaIn(jIda.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             } else {
                 JOptionPane.showMessageDialog(this, "Seleccione una fecha de regreso");
             }
@@ -295,21 +296,24 @@ public class Presupuesto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jIdaPropertyChange
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        
+       if (jTable1.getValueAt(jTable1.getSelectedRow(), 0) != null){
         int id = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+        
         jtDestino.setText(pd.pasajeId(id).getIdPasaje() + ", " + pd.pasajeId(id).getTipoDeTransporte() + ", " + pd.pasajeId(id).getCiudadDestino() + ", " + pd.pasajeId(id).getImporte());
         mostrarFechas(pd.pasajeId(id).getCiudadDestino());
         paquete.setPasaje(pd.pasajeId(id));
         paquete.setDestino(pd.pasajeId(id).getCiudadDestino());
         paquete.setOrigen(pd.pasajeId(id).getCiudadOrigen());
+       } 
     }//GEN-LAST:event_jTable1MouseClicked
-
+  
     private void jcbOrigenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbOrigenItemStateChanged
-
+      if(jcbOrigen.getSelectedIndex() >= 0){
         if (jcbOrigen.getItemCount() > 0) {
             Ciudad c = (Ciudad) jcbOrigen.getSelectedItem();
             cargarTable(c);
         }
+      }
     }//GEN-LAST:event_jcbOrigenItemStateChanged
 
 

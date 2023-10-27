@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import proyectoFinal.AccessData.AlojamientoData;
 import proyectoFinal.AccessData.CiudadData;
+import proyectoFinal.AccessData.PaqueteData;
 import proyectoFinal.AccessData.PasajeData;
 import proyectoFinal.Entidades.Ciudad;
 import proyectoFinal.Entidades.Paquete;
@@ -23,6 +24,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
     PasajeData pd = new PasajeData();
     AlojamientoData ad = new AlojamientoData();
     Paquete ejemplo = new Paquete();    
+    PaqueteData pad = new PaqueteData();
         
     public ProbarCodigo() {
         initComponents();
@@ -120,6 +122,11 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         });
 
         jbConfirmar.setText("Confirmar");
+        jbConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConfirmarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -262,6 +269,20 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
        }
     }//GEN-LAST:event_jtPasajerosActionPerformed
 
+    private void jbConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarActionPerformed
+        if (jtPasajeros.getText() != null && jtEmail.getText() != null){
+        int option = JOptionPane.showConfirmDialog(null, "¿Estas seguro de querer aprobar el presupuesto?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Felicitaciones! Has confirmado.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+            pad.armarPaquete(paquete);
+        } else {
+            JOptionPane.showMessageDialog(null, "Has cancelado.", "Cancelación", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jbConfirmarActionPerformed
+        else {
+          JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -377,7 +398,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
             presupuesto+=" - Ida y vuelta";
         }
         presupuesto+="\n\nAlojamiento: "+p.getAlojamiento().getTipoAlojamiento()+" - "+p.getAlojamiento().getNombre();
-        presupuesto+="\n\nValor total: "+MontoTotal() + paquete.getMonto();
+        presupuesto+="\n\nValor total: "+ MontoTotal();
         
         return presupuesto;
     }
@@ -386,28 +407,39 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         double monto=0;
 
         
-        long cantDias = ChronoUnit.DAYS.between(paquete.getFechaIn(), paquete.getFechaOut());
+        long cantDias = Math.abs(ChronoUnit.DAYS.between(paquete.getFechaOut(), paquete.getFechaIn()));
+        
+        System.out.println(cantDias);
         if (jrVuelta.isSelected()){
             monto += paquete.getPasaje().getImporte()*2;   
-            monto = monto * cantDias;
-            if (paquete.getFechaIn().isEqual(paquete.getDestino().getTemAlta()) || paquete.getFechaIn().isBefore(paquete.getDestino().getTemAlta())  && paquete.getFechaIn().isAfter(paquete.getDestino().getTemMedia())){
-            monto = monto * 0.25;
-            } else if (paquete.getFechaIn().isEqual(paquete.getDestino().getTemMedia()) || paquete.getFechaIn().isBefore(paquete.getDestino().getTemMedia()) && paquete.getFechaIn().isAfter(paquete.getDestino().getTemBaja())){
-            monto = monto * 0.10; 
+            double dias = paquete.getAlojamiento().getImporteDiario()*cantDias;
+            monto += dias;
+            if  (paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemAlta().getMonth()) >= 0  && paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemAlta().getMonth()) <= 4  ){
+            double m = monto * 0.25;
+            monto += m;
+            } else if (paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemMedia().getMonth()) >= 0  && paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemMedia().getMonth()) <= 4 ){
+            double m = monto * 0.10; 
+            monto = m;
+            } else if (paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemBaja().getMonth()) >= 0  && paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemBaja().getMonth()) <= 4 ){
+            monto = monto;
             }
           if (paquete.getCantPasajeros() > 0){
             monto = monto * paquete.getCantPasajeros();
           }
         } else {
             monto = paquete.getPasaje().getImporte();
-            if (paquete.getFechaIn().isEqual(paquete.getDestino().getTemAlta()) || paquete.getFechaIn().isBefore(paquete.getDestino().getTemAlta())  && paquete.getFechaIn().isAfter(paquete.getDestino().getTemMedia())){
-            monto = monto * 0.25;
-            } else if (paquete.getFechaIn().isEqual(paquete.getDestino().getTemMedia()) || paquete.getFechaIn().isBefore(paquete.getDestino().getTemMedia()) && paquete.getFechaIn().isAfter(paquete.getDestino().getTemBaja())){
-            monto = monto * 0.10; 
-            }
+            if  (paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemAlta().getMonth()) >= 0  && paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemAlta().getMonth()) <= 4  ){
+            double m = monto * 0.25;
+            monto += m;
+            } else if (paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemMedia().getMonth()) >= 0  && paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemMedia().getMonth()) <= 4 ){
+            double m = monto * 0.10; 
+            monto += m;
+            } else if (paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemBaja().getMonth()) >= 0  && paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemBaja().getMonth()) <= 4 ){
+          monto = monto;
+          }
           if (paquete.getCantPasajeros() > 0){
             monto = monto * paquete.getCantPasajeros();
-          }
+          } 
         } 
         //paquete.getAlojamiento().getImporteDiario() * cantdias;
         //CalcularTEMPORADA;        
