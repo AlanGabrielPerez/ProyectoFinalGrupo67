@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -363,6 +364,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
     private String armarPresupuesto(Paquete p){
         String presupuesto="";
         presupuesto+="Email: " + p.getEmail();
+        p.setCantPasajeros(Integer.parseInt(jtPasajeros.getText()));
         presupuesto+="\n\ncantidad de personas:  "+p.getCantPasajeros();
         presupuesto+="\n\nFecha de salida :  "+p.getFechaIn();
         presupuesto+="\n\nFecha de vuelta:  "+p.getFechaOut();
@@ -382,9 +384,9 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
     
     private Double MontoTotal(){
         double monto=0;
-       
-       Duration duration = Duration.between(paquete.getFechaIn(), paquete.getFechaOut());
-       long cantDias = duration.toDays();
+
+        
+        long cantDias = ChronoUnit.DAYS.between(paquete.getFechaIn(), paquete.getFechaOut());
         if (jrVuelta.isSelected()){
             monto += paquete.getPasaje().getImporte()*2;   
             monto = monto * cantDias;
@@ -396,7 +398,17 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
           if (paquete.getCantPasajeros() > 0){
             monto = monto * paquete.getCantPasajeros();
           }
-        }
+        } else {
+            monto = paquete.getPasaje().getImporte();
+            if (paquete.getFechaIn().isEqual(paquete.getDestino().getTemAlta()) || paquete.getFechaIn().isBefore(paquete.getDestino().getTemAlta())  && paquete.getFechaIn().isAfter(paquete.getDestino().getTemMedia())){
+            monto = monto * 0.25;
+            } else if (paquete.getFechaIn().isEqual(paquete.getDestino().getTemMedia()) || paquete.getFechaIn().isBefore(paquete.getDestino().getTemMedia()) && paquete.getFechaIn().isAfter(paquete.getDestino().getTemBaja())){
+            monto = monto * 0.10; 
+            }
+          if (paquete.getCantPasajeros() > 0){
+            monto = monto * paquete.getCantPasajeros();
+          }
+        } 
         //paquete.getAlojamiento().getImporteDiario() * cantdias;
         //CalcularTEMPORADA;        
         //multiplicar x pasajeros
