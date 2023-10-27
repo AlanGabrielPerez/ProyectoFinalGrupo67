@@ -54,9 +54,21 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Administrar pasaje");
 
+        jcbOrigen.setMaximumSize(new java.awt.Dimension(250, 26));
+        jcbOrigen.setMinimumSize(new java.awt.Dimension(250, 26));
+        jcbOrigen.setPreferredSize(new java.awt.Dimension(250, 26));
         jcbOrigen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbOrigenActionPerformed(evt);
+            }
+        });
+
+        jcbDestino.setMaximumSize(new java.awt.Dimension(250, 26));
+        jcbDestino.setMinimumSize(new java.awt.Dimension(250, 26));
+        jcbDestino.setPreferredSize(new java.awt.Dimension(250, 26));
+        jcbDestino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbDestinoActionPerformed(evt);
             }
         });
 
@@ -141,44 +153,40 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(91, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel6))
-                                .addGap(55, 55, 55)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jrActivo)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jrInactivo))
-                                    .addComponent(jtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jbBuscar))
-                                    .addComponent(jcbOrigen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jcbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jbEliminar)
-                                .addGap(69, 69, 69)
-                                .addComponent(jbEstado)
-                                .addGap(50, 50, 50))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
                         .addComponent(Guardar)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addComponent(jbSalir)
-                .addGap(24, 24, 24))
+                        .addGap(42, 42, 42)
+                        .addComponent(jbEliminar)
+                        .addGap(35, 35, 35)
+                        .addComponent(jbEstado)
+                        .addGap(47, 47, 47)
+                        .addComponent(jbSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6))
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbBuscar))
+                            .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jrActivo)
+                                .addGap(18, 18, 18)
+                                .addComponent(jrInactivo))
+                            .addComponent(jcbDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcbOrigen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,6 +388,10 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
        }
     }//GEN-LAST:event_jbEstadoActionPerformed
 
+    private void jcbDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbDestinoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbDestinoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Guardar;
@@ -403,7 +415,7 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarTipoTrasporte() {
-        String[] tipos = {"Avion", "Taxi", "Omnibus", "Combi", "Tren"};
+        String[] tipos = {"Avion", "Taxi", "Omnibus", "Combi", "Tren","Buquebus"};
 
         for (String t : tipos) {
             jcbTipo.addItem(t);
