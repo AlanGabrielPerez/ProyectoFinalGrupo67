@@ -26,7 +26,7 @@ public class PaqueteData {
     }
     
     public void armarPaquete(Paquete paquete) {
-        String sql = "INSERT INTO paquete(idOrigen, idPasaje, idAlojamiento, idDestino, fechaIn, fechaOut) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO `paquete`( `idOrigen`, `idPasaje`, `idAlojamiento`, `idDestino`, `fechaIn`, `fechaOut`, `email`, `monto`, `cantPasajeros`) VALUES (?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -36,6 +36,9 @@ public class PaqueteData {
             ps.setInt(4, paquete.getDestino().getIdCiudad());
             ps.setDate(5, Date.valueOf(paquete.getFechaIn()));
             ps.setDate(6, Date.valueOf(paquete.getFechaOut()));
+            ps.setString(7, paquete.getEmail());
+            ps.setDouble(8, paquete.getMonto());
+            ps.setInt(9, paquete.getCantPasajeros());
 
             ps.executeUpdate();
 
@@ -91,6 +94,9 @@ public class PaqueteData {
                paquete.setPasaje(pasaje.pasajeId(rs.getInt("idPasaje")));
                paquete.setFechaIn(rs.getDate("fechaIn").toLocalDate());
                paquete.setFechaOut(rs.getDate("fechaOut").toLocalDate());
+               paquete.setEmail(rs.getString("email"));
+               paquete.setMonto(rs.getDouble("monto"));
+               paquete.setCantPasajeros(rs.getInt("cantPasajeros"));
             }else {
                 JOptionPane.showMessageDialog(null,"No se encontro el paquete");
            

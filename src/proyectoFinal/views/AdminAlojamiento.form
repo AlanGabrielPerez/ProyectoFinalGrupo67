@@ -58,13 +58,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jcCena" min="-2" pref="74" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jtImporte" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jrActivo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                  <Component id="jrInactivo" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Component id="jtImporte" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jrActivo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="jrInactivo" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
