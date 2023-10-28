@@ -58,7 +58,7 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
         jrInactivo = new javax.swing.JRadioButton();
 
         setClosable(true);
-        setTitle("Administar alojamiento");
+        setTitle("Administar alojamientos");
 
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -175,12 +175,11 @@ public class AdminAlojamiento extends javax.swing.JInternalFrame {
                                         .addComponent(jcAlmuerzo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jcCena, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jtImporte, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jrActivo)
-                                    .addGap(35, 35, 35)
-                                    .addComponent(jrInactivo)))))
+                            .addComponent(jtImporte)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jrActivo)
+                                .addGap(35, 35, 35)
+                                .addComponent(jrInactivo))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

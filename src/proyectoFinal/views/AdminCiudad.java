@@ -6,6 +6,7 @@
 package proyectoFinal.views;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
@@ -23,6 +24,8 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
      */
     public AdminCiudad() {
         initComponents();
+        jrInactivo.setSelected(true);
+        jrVerano.setSelected(true);
     }
 
     /**
@@ -35,7 +38,6 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jtfIngreseId = new javax.swing.JTextField();
         jbBuscarCiudad = new javax.swing.JButton();
@@ -50,46 +52,59 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
         jbCiudadNuevo = new javax.swing.JButton();
         jbCiudadSalir = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jEliminar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jEstado = new javax.swing.JCheckBox();
+        jrActivo = new javax.swing.JRadioButton();
+        jrInactivo = new javax.swing.JRadioButton();
+        jrInvierno = new javax.swing.JRadioButton();
+        jrVerano = new javax.swing.JRadioButton();
 
         setClosable(true);
+        setTitle("Administrar ciudades");
 
-        jLabel1.setText("Administrar Ciudad");
+        jLabel2.setText("ID");
 
-        jLabel2.setText("Ingrese:");
-
-        jtfIngreseId.setText("ID");
         jtfIngreseId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfIngreseIdActionPerformed(evt);
             }
         });
+        jtfIngreseId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfIngreseIdKeyTyped(evt);
+            }
+        });
 
-        jbBuscarCiudad.setText("Buscar");
+        jbBuscarCiudad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/lupa16.png"))); // NOI18N
         jbBuscarCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarCiudadActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Ciudad:");
+        jLabel3.setText("Ciudad");
 
-        jLabel4.setText("Provincia:");
+        jLabel4.setText("Provincia");
 
-        jLabel5.setText("Pais:");
+        jLabel5.setText("Pais");
 
-        jTextField1.setText("Ingresar");
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
-        jtfIngreseProvincia.setText("Ingresar");
+        jtfIngreseProvincia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfIngreseProvinciaKeyTyped(evt);
+            }
+        });
 
-        jTextField2.setText("Ingresar");
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
 
         jbCiudadGuardar.setText("Guardar");
         jbCiudadGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -119,23 +134,7 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel6.setText("Temporada Alta:");
-
-        jLabel7.setText("Temporada Media:");
-
-        jLabel8.setText("Temporada Baja:");
-
-        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jDateChooser1PropertyChange(evt);
-            }
-        });
-
-        jDateChooser2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jDateChooser2PropertyChange(evt);
-            }
-        });
+        jLabel6.setText("Temporada Alta");
 
         jEliminar.setText("Eliminar");
         jEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +143,35 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel9.setText("Estado:");
+        jLabel9.setText("Estado");
+
+        jrActivo.setText("Activa");
+        jrActivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrActivoActionPerformed(evt);
+            }
+        });
+
+        jrInactivo.setText("Inactiva");
+        jrInactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrInactivoActionPerformed(evt);
+            }
+        });
+
+        jrInvierno.setText("Invierno");
+        jrInvierno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrInviernoActionPerformed(evt);
+            }
+        });
+
+        jrVerano.setText("Verano");
+        jrVerano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrVeranoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,112 +180,91 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(216, 216, 216)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jtfIngreseId, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(92, 92, 92)
-                                        .addComponent(jbBuscarCiudad))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jTextField2))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel4)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jtfIngreseProvincia))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jEstado))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel6))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(0, 65, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(27, 27, 27)
                         .addComponent(jbCiudadGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(31, 31, 31)
                         .addComponent(jbCiudadModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(32, 32, 32)
                         .addComponent(jbCiudadNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jEliminar)
+                        .addGap(33, 33, 33)
+                        .addComponent(jbCiudadSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
                         .addGap(46, 46, 46)
-                        .addComponent(jbCiudadSalir)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jtfIngreseId, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(28, 28, 28)
+                                    .addComponent(jbBuscarCiudad))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jtfIngreseProvincia, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jrInvierno)
+                                .addGap(55, 55, 55)
+                                .addComponent(jrVerano)
+                                .addGap(3, 3, 3))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9)
+                        .addGap(46, 46, 46)
+                        .addComponent(jrActivo)
+                        .addGap(65, 65, 65)
+                        .addComponent(jrInactivo)
+                        .addGap(75, 75, 75)))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbBuscarCiudad)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel2))
+                    .addComponent(jtfIngreseId, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jtfIngreseId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscarCiudad))
-                .addGap(18, 18, 18)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jtfIngreseProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfIngreseProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jEstado)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jrActivo)
+                    .addComponent(jrInactivo)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jrInvierno)
+                    .addComponent(jrVerano)
                     .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbCiudadGuardar)
-                            .addComponent(jbCiudadModificar)
-                            .addComponent(jbCiudadNuevo)
-                            .addComponent(jbCiudadSalir)
-                            .addComponent(jEliminar)))
-                    .addComponent(jLabel8))
-                .addGap(15, 15, 15))
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbCiudadModificar)
+                    .addComponent(jbCiudadNuevo)
+                    .addComponent(jbCiudadSalir)
+                    .addComponent(jEliminar)
+                    .addComponent(jbCiudadGuardar))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -269,37 +275,46 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfIngreseIdActionPerformed
 
     private void jbCiudadGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCiudadGuardarActionPerformed
-        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jtfIngreseProvincia.getText().isEmpty() || jDateChooser1.getDate()==null || jDateChooser2.getDate()==null || jDateChooser3.getDate()==null){
-        JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
+        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jtfIngreseProvincia.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
         } else {
             Ciudad ciudad = new Ciudad();
-            ciudad.setEstado(jEstado.isSelected());
+            ciudad.setEstado(jrActivo.isSelected());
             ciudad.setNombre(jTextField1.getText());
             ciudad.setPais(jTextField2.getText());
             ciudad.setProvincia(jtfIngreseProvincia.getText());
-            ciudad.setTemAlta(jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            ciudad.setTemMedia(jDateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            ciudad.setTemBaja(jDateChooser3.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-         cd.guardarCiudad(ciudad);
+            setFechas(ciudad);
+            cd.guardarCiudad(ciudad);
         }
     }//GEN-LAST:event_jbCiudadGuardarActionPerformed
 
     private void jbBuscarCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarCiudadActionPerformed
-        if (jtfIngreseId.getText() != ""){
-            if (comprobar(Integer.parseInt(jtfIngreseId.getText())) || comprobarInactivo(Integer.parseInt(jtfIngreseId.getText()))){
-         cd.ciudadId(Integer.parseInt(jtfIngreseId.getText()));
-         jTextField1.setText(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getNombre());
-         jtfIngreseProvincia.setText(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getProvincia());
-         jTextField2.setText(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getPais());
-         jDateChooser1.setDate(Date.valueOf(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getTemAlta()));
-         jDateChooser2.setDate(Date.valueOf(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getTemMedia()));
-         jDateChooser3.setDate(Date.valueOf(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).getTemBaja()));
-         jEstado.setSelected(cd.ciudadId(Integer.parseInt(jtfIngreseId.getText())).isEstado());
+        if (jtfIngreseId.getText() != "") {
+            int id = Integer.parseInt(jtfIngreseId.getText());
+            if (comprobar(Integer.parseInt(jtfIngreseId.getText())) || comprobarInactivo(Integer.parseInt(jtfIngreseId.getText()))) {
+                cd.ciudadId(id);
+                jTextField1.setText(cd.ciudadId(id).getNombre());
+                jtfIngreseProvincia.setText(cd.ciudadId(id).getProvincia());
+                jTextField2.setText(cd.ciudadId(id).getPais());
+                if (cd.ciudadId(id).getTemAlta().getMonthValue() == 1) {
+                    jrVerano.setSelected(true);
+                    jrInvierno.setSelected(false);
+                } else {
+                    jrVerano.setSelected(false);
+                    jrInvierno.setSelected(true);
+                }
+                if (cd.ciudadId(id).isEstado()){
+                    jrActivo.setSelected(true);
+                    jrInactivo.setSelected(false);
+                }else{
+                    jrActivo.setSelected(false);
+                    jrInactivo.setSelected(true);
+                }
             } else {
-            JOptionPane.showMessageDialog(this, "Ingrese un id correcto");
+                JOptionPane.showMessageDialog(this, "Ingrese un id correcto");
             }
         } else {
-        JOptionPane.showMessageDialog(this, "Ingrese un id en el campo");
+            JOptionPane.showMessageDialog(this, "Ingrese un id en el campo");
         }
     }//GEN-LAST:event_jbBuscarCiudadActionPerformed
 
@@ -308,10 +323,10 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
        jTextField2.setText("");
        jtfIngreseId.setText("");
        jtfIngreseProvincia.setText("");
-       jDateChooser1.setDate(null);
-       jDateChooser2.setDate(null);
-       jDateChooser3.setDate(null);
-       jEstado.setSelected(false);
+       jrVerano.setSelected(true);
+       jrInvierno.setSelected(false);
+       jrActivo.setSelected(false);
+       jrInactivo.setSelected(true);
     }//GEN-LAST:event_jbCiudadNuevoActionPerformed
 
     private void jbCiudadSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCiudadSalirActionPerformed
@@ -319,35 +334,33 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbCiudadSalirActionPerformed
 
     private void jbCiudadModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCiudadModificarActionPerformed
-     
-        if (jtfIngreseId.getText() != ""){ 
-        if(comprobar(Integer.parseInt(jtfIngreseId.getText())) || comprobarInactivo(Integer.parseInt(jtfIngreseId.getText()))){
-          if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jtfIngreseProvincia.getText().isEmpty() || jDateChooser1.getDate()==null || jDateChooser2.getDate()==null || jDateChooser3.getDate()==null){
-              JOptionPane.showMessageDialog(this, "Rellene los campos faltantes o use buscar por ID");
-          } else {
-          Ciudad ciudad = new Ciudad(); 
-          ciudad.setNombre(jTextField1.getText());
-          ciudad.setPais(jTextField1.getText());
-          ciudad.setProvincia(jtfIngreseProvincia.getText());
-          ciudad.setTemAlta(jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-          ciudad.setTemMedia(jDateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-          ciudad.setTemBaja(jDateChooser3.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-          ciudad.setIdCiudad(Integer.parseInt(jtfIngreseId.getText()));
-          if (jEstado.isSelected()){
-          ciudad.setEstado(true);
-          cd.modificarCiudad(ciudad);
-          } else {
-          ciudad.setEstado(cd.ciudadId(ciudad.getIdCiudad()).isEstado());
-          JOptionPane.showMessageDialog(this, "si desea borrar utilice el boton de borrado");
-          jEstado.setSelected(cd.ciudadId(ciudad.getIdCiudad()).isEstado());
-          }
-          }
+
+        if (jtfIngreseId.getText() != "") {
+            if (comprobar(Integer.parseInt(jtfIngreseId.getText())) || comprobarInactivo(Integer.parseInt(jtfIngreseId.getText()))) {
+                if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jtfIngreseProvincia.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Rellene los campos faltantes o use buscar por ID");
+                } else {
+                    Ciudad ciudad = new Ciudad();
+                    ciudad.setNombre(jTextField1.getText());
+                    ciudad.setPais(jTextField1.getText());
+                    ciudad.setProvincia(jtfIngreseProvincia.getText());
+                    setFechas(ciudad);
+                    ciudad.setIdCiudad(Integer.parseInt(jtfIngreseId.getText()));
+                    if (jrActivo.isSelected()) {
+                        ciudad.setEstado(true);
+                        cd.modificarCiudad(ciudad);
+                    } else {
+                        ciudad.setEstado(cd.ciudadId(ciudad.getIdCiudad()).isEstado());
+                        JOptionPane.showMessageDialog(this, "si desea borrar utilice el boton de borrado");
+                        jrActivo.setSelected(cd.ciudadId(ciudad.getIdCiudad()).isEstado());
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Ingrese un valor existente");
+            }
         } else {
-        JOptionPane.showMessageDialog(this, "Ingrese un valor existente");
+            JOptionPane.showMessageDialog(this, "Ingrese algun valor en el campo ID");
         }
-       } else {
-       JOptionPane.showMessageDialog(this, "Ingrese algun valor en el campo ID");
-       }
     }//GEN-LAST:event_jbCiudadModificarActionPerformed
 
     private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
@@ -357,56 +370,85 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
         Ciudad ciudad = new Ciudad();    
           ciudad.setIdCiudad(Integer.parseInt(jtfIngreseId.getText()));
           cd.eliminarCiudad(Integer.parseInt(jtfIngreseId.getText()));
-          jEstado.setSelected(false);
+          jrActivo.setSelected(false);
        } else {
          JOptionPane.showMessageDialog(this, "Utilice un id correcto");
        } 
     }//GEN-LAST:event_jEliminarActionPerformed
 
-    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
-       java.util.Date selectedDate = jDateChooser1.getDate();
-           
-         if (selectedDate != null){ //Si se selecciona una fecha
-            jDateChooser2.setEnabled(true); //activar el dateChooser de vuelta
-            
-            Calendar calendar = Calendar.getInstance(); 
-            calendar.setTime(selectedDate);             
-            calendar.add(Calendar.DAY_OF_MONTH, 1); // establece al dia siguiente del jdc IDA
-           
-            jDateChooser2.setMinSelectableDate(calendar.getTime()); //setea el minimo del jdc VUELTA
-         }
-    }//GEN-LAST:event_jDateChooser1PropertyChange
+    private void jrActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrActivoActionPerformed
+        if (jrActivo.isSelected()){
+            jrInactivo.setSelected(false);
+        }else{
+            jrInactivo.setSelected(true);
+        }
+    }//GEN-LAST:event_jrActivoActionPerformed
 
-    private void jDateChooser2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser2PropertyChange
-         java.util.Date selectedDate = jDateChooser2.getDate();
-           
-         if (selectedDate != null){ //Si se selecciona una fecha
-            jDateChooser3.setEnabled(true); //activar el dateChooser de vuelta
-            
-            Calendar calendar = Calendar.getInstance(); 
-            calendar.setTime(selectedDate);             
-            calendar.add(Calendar.DAY_OF_MONTH, 1); // establece al dia siguiente del jdc IDA
-           
-            jDateChooser3.setMinSelectableDate(calendar.getTime()); //setea el minimo del jdc VUELTA
-         }
-    }//GEN-LAST:event_jDateChooser2PropertyChange
+    private void jrInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrInactivoActionPerformed
+        if (jrInactivo.isSelected()){
+            jrActivo.setSelected(false);
+        }else{
+            jrActivo.setSelected(true);
+        }
+    }//GEN-LAST:event_jrInactivoActionPerformed
+
+    private void jrInviernoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrInviernoActionPerformed
+        if(jrInvierno.isSelected()){
+            jrVerano.setSelected(false);
+        }else{
+            jrVerano.setSelected(true);
+        }
+    }//GEN-LAST:event_jrInviernoActionPerformed
+
+    private void jrVeranoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrVeranoActionPerformed
+        if (jrVerano.isSelected()){
+            jrInvierno.setSelected(false);
+        }else{
+            jrInvierno.setSelected(true);
+        }
+    }//GEN-LAST:event_jrVeranoActionPerformed
+
+    private void jtfIngreseIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfIngreseIdKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfIngreseIdKeyTyped
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+        if (numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jtfIngreseProvinciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfIngreseProvinciaKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+        if (numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfIngreseProvinciaKeyTyped
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+        if (numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField2KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JButton jEliminar;
-    private javax.swing.JCheckBox jEstado;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -415,29 +457,48 @@ public class AdminCiudad extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbCiudadModificar;
     private javax.swing.JButton jbCiudadNuevo;
     private javax.swing.JButton jbCiudadSalir;
+    private javax.swing.JRadioButton jrActivo;
+    private javax.swing.JRadioButton jrInactivo;
+    private javax.swing.JRadioButton jrInvierno;
+    private javax.swing.JRadioButton jrVerano;
     private javax.swing.JTextField jtfIngreseId;
     private javax.swing.JTextField jtfIngreseProvincia;
     // End of variables declaration//GEN-END:variables
 
-    private boolean comprobarInactivo(int id){
-    boolean ok = false;
-    for (Ciudad c: cd.ciudadesInactivas()){
-    if(c.getIdCiudad() == id){
-    ok = true;
-    break;
+    private boolean comprobarInactivo(int id) {
+        boolean ok = false;
+        for (Ciudad c : cd.ciudadesInactivas()) {
+            if (c.getIdCiudad() == id) {
+                ok = true;
+                break;
+            }
+        }
+        return ok;
     }
-    }
-    return ok;
+
+    private boolean comprobar(int id) {
+        boolean ok = false;
+        for (Ciudad c : cd.listarCiudad()) {
+            if (c.getIdCiudad() == id) {
+                ok = true;
+                break;
+            }
+        }
+        return ok;
     }
     
-    private boolean comprobar (int id){
-    boolean ok = false;
-    for (Ciudad c : cd.listarCiudad()){
-    if (c.getIdCiudad() == id){
-    ok = true;
-    break;
+    private void setFechas(Ciudad c){
+    
+        if (jrVerano.isSelected()){
+            c.setTemAlta(LocalDate.of(2000,1, 1));
+            c.setTemMedia(LocalDate.of(2000,9, 1));
+            c.setTemBaja(LocalDate.of(2000,5, 1));
+        }else{
+            c.setTemAlta(LocalDate.of(2000,5, 1));
+            c.setTemMedia(LocalDate.of(2000,1, 1));
+            c.setTemBaja(LocalDate.of(2000,9, 1));
+        }
+    
     }
-    }
-    return ok;
-    }
+    
 }

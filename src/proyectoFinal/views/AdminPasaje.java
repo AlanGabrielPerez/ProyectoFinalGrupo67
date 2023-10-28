@@ -52,7 +52,7 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
         jrInactivo = new javax.swing.JRadioButton();
 
         setClosable(true);
-        setTitle("Administrar pasaje");
+        setTitle("Administrar pasajes");
 
         jcbOrigen.setMaximumSize(new java.awt.Dimension(250, 26));
         jcbOrigen.setMinimumSize(new java.awt.Dimension(250, 26));
@@ -126,6 +126,11 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
         jLabel6.setText("ID");
 
         jtID.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jtID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtIDActionPerformed(evt);
+            }
+        });
         jtID.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtIDKeyTyped(evt);
@@ -391,6 +396,10 @@ public class AdminPasaje extends javax.swing.JInternalFrame {
     private void jcbDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbDestinoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbDestinoActionPerformed
+
+    private void jtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtIDActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

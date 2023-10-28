@@ -5,6 +5,7 @@
  */
 package proyectoFinal.views;
 
+import java.awt.Color;
 import java.awt.Desktop;
 import static java.awt.SystemColor.desktop;
 import java.time.ZoneId;
@@ -84,6 +85,12 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         jcbOrigen.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jcbOrigenItemStateChanged(evt);
+            }
+        });
+
+        jVuelta.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jVueltaPropertyChange(evt);
             }
         });
 
@@ -282,10 +289,10 @@ public class Presupuesto extends javax.swing.JInternalFrame {
 
     private void jIdaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jIdaPropertyChange
         java.util.Date selectedDate = jIda.getDate();
-
+       
         if (selectedDate != null) { //Si se selecciona una fecha
             jVuelta.setEnabled(true); //activar el dateChooser de vuelta
-
+            jVuelta.setDate(null);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(selectedDate);
             calendar.add(Calendar.DAY_OF_MONTH, 1); // establece al dia siguiente del jdc IDA
@@ -298,12 +305,14 @@ public class Presupuesto extends javax.swing.JInternalFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
        if (jTable1.getValueAt(jTable1.getSelectedRow(), 0) != null){
         int id = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
-        
+       
         jtDestino.setText(pd.pasajeId(id).getIdPasaje() + ", " + pd.pasajeId(id).getTipoDeTransporte() + ", " + pd.pasajeId(id).getCiudadDestino() + ", " + pd.pasajeId(id).getImporte());
         mostrarFechas(pd.pasajeId(id).getCiudadDestino());
         paquete.setPasaje(pd.pasajeId(id));
         paquete.setDestino(pd.pasajeId(id).getCiudadDestino());
         paquete.setOrigen(pd.pasajeId(id).getCiudadOrigen());
+        temporada(pd.pasajeId(id).getCiudadDestino());
+        
        } 
     }//GEN-LAST:event_jTable1MouseClicked
   
@@ -315,6 +324,12 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         }
       }
     }//GEN-LAST:event_jcbOrigenItemStateChanged
+
+    private void jVueltaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jVueltaPropertyChange
+        if(paquete.getPasaje()!=null){
+            temporada(paquete.getDestino());
+        }
+    }//GEN-LAST:event_jVueltaPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -396,5 +411,35 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         jlFMedia.setText("Media: "+c.getTemMedia().format(formato));
         jlFAlta.setText("Alta: "+c.getTemAlta().format(formato));
     }
+    
+    private void temporada(Ciudad c) {
+        
+        jlFAlta.setForeground(Color.BLACK);
+        jlFMedia.setForeground(Color.BLACK);
+        jlFBaja.setForeground(Color.BLACK);
+        
+        if (jIda.getDate() != null && jVuelta.getDate() != null) {
+            java.util.Date fIda = jIda.getDate();
+            int mesIda = fIda.getMonth();
+            if (c.getTemAlta().getMonthValue() == 1) {//tempVerano
+                if (mesIda < 5) {
+                    jlFAlta.setForeground(Color.RED);
+                } else if (mesIda >= 5 && mesIda < 8) {
+                    jlFBaja.setForeground(Color.RED);
+                } else {
+                    jlFMedia.setForeground(Color.RED);
+                }
+            } else {                                  //tempInvierno
+                if (mesIda < 5) {
+                    jlFMedia.setForeground(Color.RED);
+                } else if (mesIda >= 5 && mesIda < 8) {
+                    jlFAlta.setForeground(Color.RED);
+                } else {
+                    jlFBaja.setForeground(Color.RED);
+                }
+            }
+        }
+    }
+
     
 }

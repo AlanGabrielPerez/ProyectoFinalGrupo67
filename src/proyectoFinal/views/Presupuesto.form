@@ -168,6 +168,9 @@
       </AuxValues>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jVuelta">
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jVueltaPropertyChange"/>
+      </Events>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jIda">
       <Events>
