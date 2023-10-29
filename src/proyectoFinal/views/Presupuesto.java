@@ -6,13 +6,18 @@
 package proyectoFinal.views;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Desktop;
 import static java.awt.SystemColor.desktop;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import proyectoFinal.AccessData.CiudadData;
 import proyectoFinal.AccessData.PasajeData;
 import proyectoFinal.Entidades.Ciudad;
@@ -73,8 +78,9 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         jlFBaja = new javax.swing.JLabel();
         jlFMedia = new javax.swing.JLabel();
         jlFAlta = new javax.swing.JLabel();
+        jbCancelar = new javax.swing.JButton();
 
-        setClosable(true);
+        setTitle("Paso 1");
 
         jLabel1.setText("Origen: ");
 
@@ -152,6 +158,13 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         jlFAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/calendario16.png"))); // NOI18N
         jlFAlta.setText("Alta:");
 
+        jbCancelar.setText("Cancelar");
+        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,7 +185,10 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                                 .addComponent(jlFAlta)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jbCancelar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel6)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -244,7 +260,9 @@ public class Presupuesto extends javax.swing.JInternalFrame {
                     .addComponent(jlFMedia)
                     .addComponent(jlFAlta))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
 
@@ -331,6 +349,20 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jVueltaPropertyChange
 
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        ImageIcon icono = new ImageIcon("src/Icons/pasaje32.png");
+        int op = JOptionPane.showConfirmDialog(null, "Si cancela se perderan todos los cambios actuales.\n¿Seguro desa volver atas?",
+                "Cancelar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icono);
+        if (op == 0) {
+            paquete.setPasaje(null);
+            paquete.setFechaIn(null);
+            paquete.setFechaOut(null);
+            paquete.setOrigen(null);
+            paquete.setDestino(null);
+            dispose();
+        }
+    }//GEN-LAST:event_jbCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LebelTitulo;
@@ -347,6 +379,7 @@ public class Presupuesto extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private com.toedter.calendar.JDateChooser jVuelta;
+    private javax.swing.JButton jbCancelar;
     private javax.swing.JComboBox<Ciudad> jcbOrigen;
     private javax.swing.JLabel jlFAlta;
     private javax.swing.JLabel jlFBaja;
@@ -371,6 +404,9 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         modelo.addColumn("Valor");
 
         jTable1.setModel(modelo);
+        modelo.addRow(new Object[]{"            ","                             ","                                                                                    ","                           "});
+        resizeColumnWidth(jTable1);
+        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     }
 
     private void cargarTable(Ciudad origen) {
@@ -441,5 +477,24 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         }
     }
 
-    
+    private void resizeColumnWidth(JTable table) {
+
+        TableColumnModel columnModel = table.getColumnModel();
+
+        for (int column = 0; column < table.getColumnCount(); column++) {
+
+            int width = 35; //Min Width
+
+            for (int row = 0; row < table.getRowCount(); row++) {
+
+                TableCellRenderer renderer = table.getCellRenderer(row, column);
+                Component comp = table.prepareRenderer(renderer, row, column);
+                width = Math.max(comp.getPreferredSize().width + 1, width);
+
+            }
+
+            columnModel.getColumn(column).setPreferredWidth(width);
+        }
+
+    }
 }

@@ -15,6 +15,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jmCiudad">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Icons/ciuda28.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Adm. ciudades"/>
               </Properties>
               <Events>
@@ -28,6 +31,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmAlojamiento">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Icons/alojamiento28.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Adm. alojamientos"/>
               </Properties>
               <Events>
@@ -41,6 +47,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmPasaje">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Icons/pasaje28.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Adm. pasajes"/>
               </Properties>
               <Events>
@@ -53,6 +62,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmDesconectarse">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Icons/adminLogout28.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Desconectarse"/>
               </Properties>
               <Events>
@@ -72,6 +84,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Icons/armarPaquete28.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Armar presupuesto"/>
               </Properties>
               <Events>
@@ -80,19 +95,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jMenuItem2"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Icons/buscarPaquete28.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Consultar mi presupuesto"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jMenuItem3"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
-              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

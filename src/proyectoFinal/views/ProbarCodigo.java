@@ -5,6 +5,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -14,30 +15,25 @@ import proyectoFinal.AccessData.PaqueteData;
 import proyectoFinal.AccessData.PasajeData;
 import proyectoFinal.Entidades.Ciudad;
 import proyectoFinal.Entidades.Paquete;
-import static proyectoFinal.views.Principal.Desktop;  
 import static proyectoFinal.views.Presupuesto.paquete;
+import static proyectoFinal.views.Principal.Desktop;  
 
 
 public class ProbarCodigo extends javax.swing.JInternalFrame {
 
     CiudadData ciu = new CiudadData();
     PasajeData pd = new PasajeData();
-    AlojamientoData ad = new AlojamientoData();
-    Paquete ejemplo = new Paquete();    
+    AlojamientoData ad = new AlojamientoData();   
     PaqueteData pad = new PaqueteData();
         
     public ProbarCodigo() {
-        initComponents();
-        cargarDatos(ejemplo);        
-        
-        
+        initComponents(); 
         jrIda.setSelected(true);
         jlEmailValido.setVisible(false);
         jTextPane.setEditable(false);        
         jTextPane.setVisible(false);  
 
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -58,7 +54,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         jbAtras = new javax.swing.JButton();
         jbConfirmar = new javax.swing.JButton();
 
-        setClosable(true);
+        setTitle("Paso 3");
 
         jTextPane.setEditable(false);
         jTextPane.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -79,11 +75,6 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
             }
         });
 
-        jtPasajeros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtPasajerosActionPerformed(evt);
-            }
-        });
         jtPasajeros.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtPasajerosKeyTyped(evt);
@@ -193,7 +184,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
                 .addComponent(jlPresupuesto)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -201,22 +192,23 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(45, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRegistrarActionPerformed
-        if (jtPasajeros.getText().isEmpty() || jtEmail.getText().isEmpty()) {
+        if (jtPasajeros.getText().isEmpty() || jtEmail.getText().isEmpty() || Integer.parseInt(jtPasajeros.getText())<=0) {
             JOptionPane.showMessageDialog(this, "Rellene los campos correctamente");
         } else {
-            if (emailValido()) {
-                
+            if (emailValido()) {                
+                paquete.setEmail(jtEmail.getText());
+                paquete.setCantPasajeros(Integer.parseInt(jtPasajeros.getText()));
                 jTextPane.setText(armarPresupuesto(paquete));
-                jTextPane.setVisible(true);
-               
+                jTextPane.setVisible(true);               
                 jlEmailValido.setVisible(false);
+                                
             }else{
                 jlEmailValido.setVisible(true);
             }       
@@ -255,32 +247,35 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtEmailMouseClicked
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
-        Desktop.removeAll();
-        Desktop.repaint();
-        PresupuestoV2 ventana2= new PresupuestoV2();
-        ventana2.setVisible(true);
-        Desktop.add(ventana2);
-        Desktop.moveToFront(ventana2);
+        ImageIcon icono = new ImageIcon("src/Icons/cancelarPresupuesto32.png");
+        int op = JOptionPane.showConfirmDialog(null, "Si retrocede se perderan todos los cambios actuales.\n¿Seguro desa volver atas?",
+                "Atras", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icono);
+        if (op == 0) {
+            paquete.setCantPasajeros(0);
+            paquete.setEmail(null);
+            paquete.setMonto(0);
+            Desktop.removeAll();
+            Desktop.repaint();
+            PresupuestoV2 ventana2 = new PresupuestoV2();
+            ventana2.setVisible(true);
+            Desktop.add(ventana2);
+            Desktop.moveToFront(ventana2);
+        }
+
     }//GEN-LAST:event_jbAtrasActionPerformed
 
-    private void jtPasajerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPasajerosActionPerformed
-       if (jtPasajeros.getText() != ""){
-       paquete.setCantPasajeros(Integer.parseInt(jtPasajeros.getText()));
-       }
-    }//GEN-LAST:event_jtPasajerosActionPerformed
-
     private void jbConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarActionPerformed
-        if (jtPasajeros.getText() != null && jtEmail.getText() != null){
-        int option = JOptionPane.showConfirmDialog(null, "¿Estas seguro de querer aprobar el presupuesto?", "Confirmación", JOptionPane.YES_NO_OPTION);
-        if (option == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(null, "Felicitaciones! Has confirmado.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-            pad.armarPaquete(paquete);
-        } else {
-            JOptionPane.showMessageDialog(null, "Has cancelado.", "Cancelación", JOptionPane.WARNING_MESSAGE);
-        }
+        if (paquete.getCantPasajeros() != 0 && paquete.getEmail() != null) {
+            int option = JOptionPane.showConfirmDialog(null, "¿Estas seguro de querer aprobar el presupuesto?", "Confirmación", JOptionPane.YES_NO_OPTION);
+            if (option == 0) {
+                JOptionPane.showMessageDialog(null, "Felicitaciones! Has confirmado.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                pad.armarPaquete(paquete);
+            } else {
+                JOptionPane.showMessageDialog(null, "Has cancelado.", "Cancelación", JOptionPane.WARNING_MESSAGE);
+            }
     }//GEN-LAST:event_jbConfirmarActionPerformed
         else {
-          JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
+            JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
         }
     }
 
@@ -300,65 +295,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtEmail;
     private javax.swing.JTextField jtPasajeros;
     // End of variables declaration//GEN-END:variables
-
-    private void armarCabecera() {
-/*      modelo.setColumnCount(0);
-        modelo.addColumn("id");
-        modelo.addColumn("Transporte");
-        modelo.addColumn("Destino");
-        modelo.addColumn("Valor");
-      
-        
-        jTable.setModel(modelo);
-                   
-        modelo.addRow(new Object[]{"            ","                             ","                                                                                    ","                           "});
-        resizeColumnWidth(jTable);
-        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-*/    
-    }
-
-    private void cargarJTable(Ciudad origen){
- /*       modelo.setRowCount(0);
-        for (Pasaje p: pd.listarPasajes()){
-            if (p.isEstado() && p.getCiudadOrigen().getNombre().equals(origen.getNombre())){
-                modelo.addRow(new Object[]{p.getIdPasaje(),p.getTipoDeTransporte(),p.getCiudadDestino(),p.getImporte()});
-            }
-            
-        }
-*/
-    }
-    
-    private void resizeColumnWidth(JTable table) {
-/*    
-    TableColumnModel columnModel = table.getColumnModel();
-   
-    for (int column = 0; column < table.getColumnCount(); column++) {
-        
-        int width = 35; //Min Width
-        
-        for (int row = 0; row < table.getRowCount(); row++) {
-          
-            TableCellRenderer renderer = table.getCellRenderer(row, column);
-            Component comp = table.prepareRenderer(renderer, row, column);
-            width = Math.max(comp.getPreferredSize().width + 1, width);
-
-         }
-
-        
-        columnModel.getColumn(column).setPreferredWidth(width);
-    }
-*/        
-    }
-    
-    private void cargarDatos(Paquete p){
-        p.setAlojamiento(ad.alojamientoId(1));
-        p.setOrigen(ciu.ciudadId(6));
-        p.setDestino(ciu.ciudadId(7));
-        p.setPasaje(pd.pasajeId(11));
-        p.setFechaIn(LocalDate.of(2023, Month.MARCH, 5));
-        p.setFechaOut(LocalDate.of(2023, Month.MARCH, 15));       
-    }
-    
+           
     private boolean emailValido() {
         boolean valido = false;
         String email = jtEmail.getText().toLowerCase();
@@ -403,50 +340,46 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         return presupuesto;
     }
     
-    private Double MontoTotal(){
-        double monto=0;
+    private double MontoTotal() {
+        double monto = 0;
 
-        
-        long cantDias = Math.abs(ChronoUnit.DAYS.between(paquete.getFechaOut(), paquete.getFechaIn()));
-        
-        System.out.println(cantDias);
-        if (jrVuelta.isSelected()){
-            monto += paquete.getPasaje().getImporte()*2;   
-            double dias = paquete.getAlojamiento().getImporteDiario()*cantDias;
-            monto += dias;
-            if  (paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemAlta().getMonth()) >= 0  && paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemAlta().getMonth()) <= 4  ){
-            double m = monto * 0.25;
-            monto += m;
-            } else if (paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemMedia().getMonth()) >= 0  && paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemMedia().getMonth()) <= 4 ){
-            double m = monto * 0.10; 
-            monto = m;
-            } else if (paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemBaja().getMonth()) >= 0  && paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemBaja().getMonth()) <= 4 ){
-            monto = monto;
-            }
-          if (paquete.getCantPasajeros() > 0){
-            monto = monto * paquete.getCantPasajeros();
-          }
+        if (jrVuelta.isSelected()) { //Valor del pasaje
+            monto += (paquete.getPasaje().getImporte() * 2);
         } else {
-            monto = paquete.getPasaje().getImporte();
-            if  (paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemAlta().getMonth()) >= 0  && paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemAlta().getMonth()) <= 4  ){
-            double m = monto * 0.25;
-            monto += m;
-            } else if (paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemMedia().getMonth()) >= 0  && paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemMedia().getMonth()) <= 4 ){
-            double m = monto * 0.10; 
-            monto += m;
-            } else if (paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemBaja().getMonth()) >= 0  && paquete.getFechaIn().getMonth().compareTo(paquete.getDestino().getTemBaja().getMonth()) <= 4 ){
-          monto = monto;
-          }
-          if (paquete.getCantPasajeros() > 0){
-            monto = monto * paquete.getCantPasajeros();
-          } 
-        } 
-        //paquete.getAlojamiento().getImporteDiario() * cantdias;
-        //CalcularTEMPORADA;        
-        //multiplicar x pasajeros
-        
+            monto += paquete.getPasaje().getImporte();
+        }
+        System.out.println("Valor pasaje:  " + monto);
+
+        long cantDias = Math.abs(ChronoUnit.DAYS.between(paquete.getFechaOut(), paquete.getFechaIn()));
+        monto += paquete.getAlojamiento().getImporteDiario() * cantDias; //+valor alojamiento
+        //  System.out.println("valor Alojamiento: " + (paquete.getAlojamiento().getImporteDiario() * cantDias));
+        // System.out.println("Valor pasaje + alojamiento:" + monto);
+
+        Ciudad c = paquete.getDestino();
+        int mesIda = paquete.getFechaIn().getMonthValue();
+        if (c.getTemAlta().getMonthValue() == 1) {//tempVerano
+            if (mesIda < 5) {
+                //System.out.println("PORCENTAJE DE TEMPORADA alta"+ (monto*0.30));
+                monto += monto * 0.30;
+            } else if (mesIda >= 9) {
+                //System.out.println("PORCENTAJE DE TEMPORADA media"+ (monto*0.15));
+                monto += monto * 0.15;
+            }
+        } else {                                  //tempInvierno
+            if (mesIda < 5) {
+                //System.out.println("PORCENTAJE DE TEMPORADA media"+ (monto*0.15));
+                monto += monto * 0.15;
+            } else if (mesIda >= 5 && mesIda < 8) {
+                //System.out.println("PORCENTAJE DE TEMPORADA alta"+ (monto*0.30));
+                monto += monto * 0.30;
+            }
+        }
+        //System.out.println("monto total "+ monto);
+
         paquete.setMonto(monto);
         return monto;
     }
+    
+    
     
 }

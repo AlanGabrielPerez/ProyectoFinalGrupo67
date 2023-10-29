@@ -9,6 +9,7 @@ import java.awt.Component;
 import java.time.LocalDate;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -68,7 +69,7 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
         jlAlmuerzo = new javax.swing.JLabel();
         jlCena = new javax.swing.JLabel();
 
-        setClosable(true);
+        setTitle("Paso 2");
 
         jrPorCiudad.setText("Por Ciudad");
         jrPorCiudad.addActionListener(new java.awt.event.ActionListener() {
@@ -239,13 +240,23 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrPorProvinciaActionPerformed
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
-        Presupuesto ventana1 = new Presupuesto();
-        abrirVentana(ventana1);
+        ImageIcon icono = new ImageIcon("src/Icons/alojamiento32.png");
+        int op = JOptionPane.showConfirmDialog(null, "Si retrocede se perderan todos los cambios actuales.\n¿Seguro desa volver atas?",
+                "Atras", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icono);
+        if (op == 0) {
+            paquete.setAlojamiento(null);
+            Presupuesto ventana1 = new Presupuesto();
+            abrirVentana(ventana1);
+        }
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jbSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteActionPerformed
+       if (paquete.getAlojamiento()!= null){
         ProbarCodigo probar = new ProbarCodigo();
         abrirVentana(probar);
+       }else{
+           JOptionPane.showMessageDialog(this, "Seleccione un alojamiento primero;");
+       }
     }//GEN-LAST:event_jbSiguienteActionPerformed
 
     private void jrPorCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrPorCiudadActionPerformed
@@ -264,12 +275,14 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbTipoActionPerformed
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
-        int id = (int) jTable.getValueAt(jTable.getSelectedRow(), 0);
-        Alojamiento a = ad.alojamientoId(id);
         
+       if (jTable.getValueAt(jTable.getSelectedRow(), 0) != null){
+        int id = (int) jTable.getValueAt(jTable.getSelectedRow(), 0);
+        Alojamiento a = ad.alojamientoId(id);        
         jtAlojamientoSelec.setText(a.getNombre() + "(" + a.getTipoAlojamiento() + ") - " + a.getCiudadDestino());
         paquete.setAlojamiento(a);
         setServicios(a);
+       }
     }//GEN-LAST:event_jTableMouseClicked
 
 
