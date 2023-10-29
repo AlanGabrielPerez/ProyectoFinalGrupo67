@@ -1,6 +1,7 @@
 package proyectoFinal.Entidades;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Paquete {
 
@@ -17,6 +18,31 @@ public class Paquete {
 
     public Paquete() {
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode(); 
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Paquete other = (Paquete) obj;
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
  
 

@@ -9,8 +9,10 @@ import java.time.LocalDate;
 import java.time.Month;
 import proyectoFinal.AccessData.AlojamientoData;
 import proyectoFinal.AccessData.CiudadData;
+import proyectoFinal.AccessData.PaqueteData;
 import proyectoFinal.Entidades.Alojamiento;
 import proyectoFinal.Entidades.Ciudad;
+import proyectoFinal.Entidades.Paquete;
 
 /**
  *
@@ -22,6 +24,11 @@ public class PaquetesTuristicos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {    
+        PaqueteData pd = new PaqueteData();
+        for (Paquete p: pd.listaPaquete("h")){
+            System.out.println(p.toString());
+        }
+       
         
     }
 }

@@ -162,7 +162,7 @@ public class CiudadData {
     }
     
     public Ciudad ciudadId(int id){
-    String sql = "SELECT * FROM `ciudad` WHERE `idCiudad` = ?";
+    String sql = "SELECT * FROM `ciudad` WHERE `idCiudad` = %hotmail.com";
     Ciudad c = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
