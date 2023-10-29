@@ -275,7 +275,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
             }
     }//GEN-LAST:event_jbConfirmarActionPerformed
         else {
-            JOptionPane.showMessageDialog(this, "Rellene correctamente los campos");
+            JOptionPane.showMessageDialog(this, "Registre su Email y cantidad de pasajeros primero.");
         }
     }
 
