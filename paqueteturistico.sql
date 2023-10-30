@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-10-2023 a las 17:28:51
+-- Tiempo de generación: 30-10-2023 a las 14:49:41
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -199,7 +199,8 @@ INSERT INTO `ciudad` (`idCiudad`, `nombre`, `pais`, `estado`, `provincia`, `temA
 (27, 'Montevideo', 'Uruguay', 1, 'Montevideo', '2000-01-01', '2000-09-01', '2000-05-01'),
 (28, 'Colonia de Sacramento', 'Uruguay', 1, 'Colonia', '2000-01-01', '2000-09-01', '2000-05-01'),
 (29, 'Punta del Este', 'Uruguay', 1, 'Maldonado', '2000-01-01', '2000-09-01', '2000-05-01'),
-(30, 'Tucuman Capital', 'Argentina', 1, 'Tucuman', '2000-01-01', '2000-09-01', '2000-05-01');
+(30, 'Tucuman Capital', 'Argentina', 1, 'Tucuman', '2000-01-01', '2000-09-01', '2000-05-01'),
+(31, 'La Plata', 'La Plata', 1, 'Buenos Aires', '2000-05-01', '2000-01-01', '2000-09-01');
 
 -- --------------------------------------------------------
 
@@ -212,8 +213,23 @@ CREATE TABLE `paquete` (
   `idOrigen` int(11) NOT NULL,
   `idPasaje` int(11) NOT NULL,
   `idAlojamiento` int(11) NOT NULL,
-  `idDestino` int(11) NOT NULL
+  `idDestino` int(11) NOT NULL,
+  `fechaIn` date NOT NULL,
+  `fechaOut` date NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `monto` double(11,2) NOT NULL,
+  `cantPasajeros` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `paquete`
+--
+
+INSERT INTO `paquete` (`idPaquete`, `idOrigen`, `idPasaje`, `idAlojamiento`, `idDestino`, `fechaIn`, `fechaOut`, `email`, `monto`, `cantPasajeros`) VALUES
+(1, 6, 42, 74, 22, '2023-10-29', '2023-10-31', 'alan@ulp.com.ar', 48000.00, 1),
+(2, 6, 37, 47, 15, '2024-01-01', '2024-01-11', 'alan@ulp.com.ar', 884000.00, 2),
+(3, 1, 31, 35, 11, '2023-10-30', '2023-10-31', 'alan@ulp.com.ar', 117300.00, 3),
+(4, 6, 39, 78, 23, '2024-06-01', '2024-06-15', 'prueba@gmail.com', 336700.00, 1);
 
 -- --------------------------------------------------------
 
@@ -334,13 +350,13 @@ ALTER TABLE `alojamiento`
 -- AUTO_INCREMENT de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
-  MODIFY `idCiudad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `idCiudad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPaquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `pasaje`
