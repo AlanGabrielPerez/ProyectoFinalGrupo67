@@ -349,7 +349,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
         } else {
             monto += paquete.getPasaje().getImporte();
         }
-        System.out.println("Valor pasaje:  " + monto);
+       // System.out.println("Valor pasaje:  " + monto);
 
         long cantDias = Math.abs(ChronoUnit.DAYS.between(paquete.getFechaOut(), paquete.getFechaIn()));
         monto += paquete.getAlojamiento().getImporteDiario() * cantDias; //+valor alojamiento

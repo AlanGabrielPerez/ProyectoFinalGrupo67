@@ -19,6 +19,7 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
         initComponents();
         jlEmailValido.setVisible(false);
        
+       
     }
 
     /**
@@ -49,10 +50,9 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jbSalir = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
-        jcbPaquetes = new javax.swing.JComboBox<>();
+        jcbPaquete = new javax.swing.JComboBox<>();
         jbBuscar = new javax.swing.JButton();
         jlEmailValido = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         jtMonto = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
 
@@ -114,9 +114,14 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
             }
         });
 
-        jcbPaquetes.addItemListener(new java.awt.event.ItemListener() {
+        jcbPaquete.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcbPaquetesItemStateChanged(evt);
+                jcbPaqueteItemStateChanged(evt);
+            }
+        });
+        jcbPaquete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbPaqueteActionPerformed(evt);
             }
         });
 
@@ -176,18 +181,16 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jtOrigen, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                                 .addComponent(jtDestino))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(357, 357, 357)
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(35, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(106, 106, 106)
-                        .addComponent(jcbPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jcbPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(105, 105, 105)
                         .addComponent(jLabel4)
@@ -206,19 +209,14 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlEmailValido))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jbBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcbPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1))
+                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -256,9 +254,7 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(30, 30, 30)
                         .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31))
         );
 
@@ -274,7 +270,7 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
         int op = JOptionPane.showConfirmDialog(null, "Una vez eliminado no se podra recuparar el presupuesto.\n¿Seguro desa eliminar presupuesto?",
                 "Eliminar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icono);
         if (op == 0) {
-            Paquete p = (Paquete) jcbPaquetes.getSelectedItem();
+            Paquete p = (Paquete) jcbPaquete.getSelectedItem();
             pd.eliminarPaquete(p.getIdPaquete());
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
@@ -298,25 +294,33 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
          
     }//GEN-LAST:event_jbBuscarActionPerformed
 
-    private void jcbPaquetesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbPaquetesItemStateChanged
-        if (jcbPaquetes.getItemCount()>0){
-           Paquete p= (Paquete) jcbPaquetes.getSelectedItem();
-           
-           jtOrigen.setText(p.getOrigen().toString());
-           jtDestino.setText(p.getDestino().toString());
-           jtTransporte.setText(p.getPasaje().getTipoDeTransporte());
-           jtAlojamiento.setText(p.getAlojamiento().getTipoAlojamiento()+" - "+p.getAlojamiento().getNombre());
-           jtFIda.setText(p.getFechaIn().toString());
-           jtFVuelta.setText(p.getFechaOut().toString());
-           jtPasajeros.setText(p.getCantPasajeros()+"");
-           jtMonto.setText(p.getMonto()+"");
+    private void jcbPaqueteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbPaqueteItemStateChanged
+       
+        if (jcbPaquete.getItemCount() > 0) {
+            
+            Paquete p = (Paquete) jcbPaquete.getSelectedItem();
+
+            jtOrigen.setText(p.getOrigen().toString());
+            jtDestino.setText(p.getDestino().toString());
+            jtTransporte.setText(p.getPasaje().getTipoDeTransporte());
+            jtAlojamiento.setText(p.getAlojamiento().getTipoAlojamiento() + " - " + p.getAlojamiento().getNombre());
+            jtFIda.setText(p.getFechaIn().toString());
+            jtFVuelta.setText(p.getFechaOut().toString());
+            jtPasajeros.setText(p.getCantPasajeros() + "");
+            jtMonto.setText(p.getMonto() + "");
         }
-    }//GEN-LAST:event_jcbPaquetesItemStateChanged
+        
+    }//GEN-LAST:event_jcbPaqueteItemStateChanged
 
     private void jtEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtEmailMouseClicked
-        jcbPaquetes.removeAllItems();
+        jcbPaquete.removeAllItems();
         setTextFields();
     }//GEN-LAST:event_jtEmailMouseClicked
+
+    private void jcbPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPaqueteActionPerformed
+
+        
+    }//GEN-LAST:event_jcbPaqueteActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -330,11 +334,10 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<Paquete> jcbPaquetes;
+    private javax.swing.JComboBox<Paquete> jcbPaquete;
     private javax.swing.JLabel jlEmailValido;
     private javax.swing.JTextField jtAlojamiento;
     private javax.swing.JTextField jtDestino;
@@ -369,9 +372,8 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
     }
    
    private void cargarPaquetes(String email){
-       jcbPaquetes.removeAllItems();
-       for (Paquete p:pd.listaPaquete(email)){
-           jcbPaquetes.addItem(p);
+       for (Paquete p: pd.listaPaquete(email)){
+           jcbPaquete.addItem(p);
        }
     }
    
