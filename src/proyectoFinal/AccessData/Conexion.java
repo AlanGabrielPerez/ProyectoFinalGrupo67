@@ -30,7 +30,7 @@ public class Conexion {
             } catch (ClassNotFoundException ex) {
                JOptionPane.showMessageDialog(null, "error en el package del driver");
             } catch (SQLException ex) {
-               JOptionPane.showMessageDialog(null, "error en la conexion. \n" + ex.getMessage());
+                System.out.println("error en la conexion. " + ex.getMessage());
             }
             
         }

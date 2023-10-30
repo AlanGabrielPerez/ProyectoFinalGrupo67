@@ -3,17 +3,29 @@ package proyectoFinal.views;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.Connection;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import proyectoFinal.AccessData.Conexion;
 
 public class Principal extends javax.swing.JFrame {
     
-    public static boolean logeado=true;
+    public static boolean logeado=false;
+    private Connection con;
     
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+        con = Conexion.getConnection();
+        if (con == null) {            
+            ImageIcon icono = new ImageIcon("src/Icons/errorDatabase32.png");
+            JOptionPane.showMessageDialog(this, "No esta conectado a una base de datos", "Error conexion a base de datos", WIDTH, icono);
+            jMenuBar1.setVisible(false);
+            
+        }else{
+            jbReconectar.setVisible(false);
+            jbReconectar.setEnabled(false);
+        }
     }
 
     /**
@@ -33,6 +45,7 @@ public class Principal extends javax.swing.JFrame {
                 g.drawImage(image,0,0,getWidth(),getHeight(),this);
             }
         };
+        jbReconectar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmAdministrar = new javax.swing.JMenu();
         jmCiudad = new javax.swing.JMenuItem();
@@ -45,15 +58,31 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jbReconectar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Database32 .png"))); // NOI18N
+        jbReconectar.setToolTipText("Reconectar base de datos");
+        jbReconectar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbReconectarActionPerformed(evt);
+            }
+        });
+
+        Desktop.setLayer(jbReconectar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout DesktopLayout = new javax.swing.GroupLayout(Desktop);
         Desktop.setLayout(DesktopLayout);
         DesktopLayout.setHorizontalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DesktopLayout.createSequentialGroup()
+                .addContainerGap(493, Short.MAX_VALUE)
+                .addComponent(jbReconectar)
+                .addGap(45, 45, 45))
         );
         DesktopLayout.setVerticalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 627, Short.MAX_VALUE)
+            .addGroup(DesktopLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jbReconectar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(545, Short.MAX_VALUE))
         );
 
         jmAdministrar.setText("Administracion");
@@ -162,7 +191,6 @@ public class Principal extends javax.swing.JFrame {
             Login venlogin = new Login();
             venlogin.setVisible(true);
             Desktop.add(venlogin);
-         //   Desktop.moveToFront(venlogin);
             Dimension desktopSize = Desktop.getSize();
             Dimension FrameSize = venlogin.getSize();
             venlogin.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
@@ -244,6 +272,23 @@ public class Principal extends javax.swing.JFrame {
         Desktop.moveToFront(consulta);
     }//GEN-LAST:event_jmConsultarActionPerformed
 
+    private void jbReconectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbReconectarActionPerformed
+        con = Conexion.getConnection();
+        if (con == null) {            
+            ImageIcon icono = new ImageIcon("src/Icons/errorDatabase32.png");
+            JOptionPane.showMessageDialog(this, "No esta conectado a una base de datos",
+                    "Error conexion a base de datos", WIDTH, icono);
+        } else {
+            ImageIcon icono = new ImageIcon("src/Icons/okDatabase32.png");
+            JOptionPane.showMessageDialog(this, "Conectado a la base de datos.",
+                    "Conexion base de datos", WIDTH, icono);
+            jMenuBar1.setVisible(true);
+            jbReconectar.setVisible(false);
+            jbReconectar.setEnabled(false);
+            
+        }
+    }//GEN-LAST:event_jbReconectarActionPerformed
+
   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -280,6 +325,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane Desktop;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JButton jbReconectar;
     private javax.swing.JMenu jmAdministrar;
     private javax.swing.JMenuItem jmAlojamiento;
     private javax.swing.JMenuItem jmArmarPresupuesto;
