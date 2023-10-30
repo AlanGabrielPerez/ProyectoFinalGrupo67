@@ -203,7 +203,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Rellene los campos correctamente");
         } else {
             if (emailValido()) {                
-                paquete.setEmail(jtEmail.getText());
+                paquete.setEmail(jtEmail.getText().toLowerCase());
                 paquete.setCantPasajeros(Integer.parseInt(jtPasajeros.getText()));
                 jTextPane.setText(armarPresupuesto(paquete));
                 jTextPane.setVisible(true);               
@@ -375,7 +375,10 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
             }
         }
         //System.out.println("monto total "+ monto);
-
+        
+        monto*=paquete.getCantPasajeros();
+        
+        
         paquete.setMonto(monto);
         return monto;
     }

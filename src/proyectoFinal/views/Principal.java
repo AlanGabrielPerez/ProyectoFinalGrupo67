@@ -40,8 +40,8 @@ public class Principal extends javax.swing.JFrame {
         jmPasaje = new javax.swing.JMenuItem();
         jmDesconectarse = new javax.swing.JMenuItem();
         jmPresupuestos = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmArmarPresupuesto = new javax.swing.JMenuItem();
+        jmConsultar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,18 +114,23 @@ public class Principal extends javax.swing.JFrame {
 
         jmPresupuestos.setText("Presupuestos");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/armarPaquete28.png"))); // NOI18N
-        jMenuItem1.setText("Armar presupuesto");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jmArmarPresupuesto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/armarPaquete28.png"))); // NOI18N
+        jmArmarPresupuesto.setText("Armar presupuesto");
+        jmArmarPresupuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jmArmarPresupuestoActionPerformed(evt);
             }
         });
-        jmPresupuestos.add(jMenuItem1);
+        jmPresupuestos.add(jmArmarPresupuesto);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/buscarPaquete28.png"))); // NOI18N
-        jMenuItem2.setText("Consultar mi presupuesto");
-        jmPresupuestos.add(jMenuItem2);
+        jmConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/buscarPaquete28.png"))); // NOI18N
+        jmConsultar.setText("Consultar mi presupuesto");
+        jmConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmConsultarActionPerformed(evt);
+            }
+        });
+        jmPresupuestos.add(jmConsultar);
 
         jMenuBar1.add(jmPresupuestos);
 
@@ -205,7 +210,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmAlojamientoActionPerformed
 
     private void jmDesconectarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDesconectarseActionPerformed
-       ImageIcon icono = new ImageIcon("src/Icons/salida32.png");
+       ImageIcon icono = new ImageIcon("src/Icons/adminAdv32.png");
         int op = JOptionPane.showConfirmDialog(null, "Seguro desea salir",
             "Salir", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icono);
         if (op == 0) {
@@ -217,7 +222,7 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmDesconectarseActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jmArmarPresupuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmArmarPresupuestoActionPerformed
         Desktop.removeAll();
         Desktop.repaint();
 
@@ -226,7 +231,18 @@ public class Principal extends javax.swing.JFrame {
         presupuesto.setVisible(true);
         Desktop.add(presupuesto);
         Desktop.moveToFront(presupuesto);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jmArmarPresupuestoActionPerformed
+
+    private void jmConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultarActionPerformed
+       Desktop.removeAll();
+        Desktop.repaint();
+
+        ConsultarPresupuesto consulta = new ConsultarPresupuesto ();
+
+        consulta.setVisible(true);
+        Desktop.add(consulta);
+        Desktop.moveToFront(consulta);
+    }//GEN-LAST:event_jmConsultarActionPerformed
 
   
     public static void main(String args[]) {
@@ -264,11 +280,11 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane Desktop;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jmAdministrar;
     private javax.swing.JMenuItem jmAlojamiento;
+    private javax.swing.JMenuItem jmArmarPresupuesto;
     private javax.swing.JMenuItem jmCiudad;
+    private javax.swing.JMenuItem jmConsultar;
     private javax.swing.JMenuItem jmDesconectarse;
     private javax.swing.JMenuItem jmPasaje;
     private javax.swing.JMenu jmPresupuestos;

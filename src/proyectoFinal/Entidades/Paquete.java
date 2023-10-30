@@ -154,9 +154,8 @@ public class Paquete {
 
     @Override
     public String toString() {
-        return "Paquete{" + "idPaquete=" + idPaquete + ", origen=" + origen + ", pasaje=" + pasaje + ", alojamiento=" + alojamiento + ", Destino=" + Destino + ", fechaIn=" + fechaIn + ", fechaOut=" + fechaOut + ", email=" + email + ", monto=" + monto + ", cantPasajeros=" + cantPasajeros + '}';
+        return  pasaje.getTipoDeTransporte()+" - " + origen.getNombre()+", "+origen.getProvincia() + " destino " + Destino.getNombre() + ", " + Destino.getProvincia();
     }
-
     
 
 }

@@ -131,7 +131,7 @@ public class PaqueteData {
     
     public List <Paquete> listaPaquete(String email){
     String sql = "SELECT * FROM `paquete` WHERE `email` = ?";
-    Paquete paquete = new Paquete();
+    
     ArrayList <Paquete> ap = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -139,6 +139,7 @@ public class PaqueteData {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()){
+               Paquete paquete = new Paquete();
                paquete.setIdPaquete(rs.getInt("idPaquete"));
                paquete.setOrigen(ciudad.ciudadId(rs.getInt("idOrigen")));
                paquete.setDestino(ciudad.ciudadId(rs.getInt("idDestino")));
@@ -149,7 +150,7 @@ public class PaqueteData {
                paquete.setEmail(rs.getString("email"));
                paquete.setMonto(rs.getDouble("monto"));
                paquete.setCantPasajeros(rs.getInt("cantPasajeros"));
-            ap.add(paquete);
+                 ap.add(paquete);
             }
             ps.close();
         } catch (SQLException ex) {
