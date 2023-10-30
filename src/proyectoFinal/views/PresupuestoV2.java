@@ -241,7 +241,7 @@ public class PresupuestoV2 extends javax.swing.JInternalFrame {
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
         ImageIcon icono = new ImageIcon("src/Icons/alojamiento32.png");
-        int op = JOptionPane.showConfirmDialog(null, "Si retrocede se perderan todos los cambios actuales.\n¿Seguro desa volver atas?",
+        int op = JOptionPane.showConfirmDialog(null, "Si retrocede se perderan todos los cambios actuales.\n¿Seguro desa volver atras?",
                 "Atras", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icono);
         if (op == 0) {
             paquete.setAlojamiento(null);

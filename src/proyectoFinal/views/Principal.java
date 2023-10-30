@@ -237,7 +237,7 @@ public class Principal extends javax.swing.JFrame {
        Desktop.removeAll();
         Desktop.repaint();
 
-        ConsultarPresupuesto consulta = new ConsultarPresupuesto ();
+        PresupuestoV3 consulta = new PresupuestoV3 ();
 
         consulta.setVisible(true);
         Desktop.add(consulta);

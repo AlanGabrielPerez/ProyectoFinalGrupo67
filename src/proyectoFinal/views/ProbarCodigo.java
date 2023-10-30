@@ -248,7 +248,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
         ImageIcon icono = new ImageIcon("src/Icons/cancelarPresupuesto32.png");
-        int op = JOptionPane.showConfirmDialog(null, "Si retrocede se perderan todos los cambios actuales.\n¿Seguro desa volver atas?",
+        int op = JOptionPane.showConfirmDialog(null, "Si retrocede se perderan todos los cambios actuales.\n¿Seguro desa volver atras?",
                 "Atras", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icono);
         if (op == 0) {
             paquete.setCantPasajeros(0);
@@ -270,6 +270,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
             if (option == 0) {
                 JOptionPane.showMessageDialog(null, "Felicitaciones! Has confirmado.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
                 pad.armarPaquete(paquete);
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Has cancelado.", "Cancelación", JOptionPane.WARNING_MESSAGE);
             }
