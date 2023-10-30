@@ -112,34 +112,16 @@ public class PaqueteData {
         
     }
     
-    public HashSet <String> listaEmail(){
+    public HashSet <Paquete> listaEmail(){
     String sql = "SELECT  `email` FROM `paquete` WHERE `idPaquete` > 0";
-    HashSet <String> hs = new HashSet<>();
+    HashSet <Paquete> hs = new HashSet<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()){
-            hs.add(rs.getString("email"));
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error en el sql");
-        }
-     return hs;
-    }
-    
-    public List <Paquete> listaPaquete(String email){
-    String sql = "SELECT * FROM `paquete` WHERE `email` = ?";
-    
-    ArrayList <Paquete> ap = new ArrayList<>();
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()){
-               Paquete paquete = new Paquete();
+           
+            Paquete paquete = new Paquete();
                paquete.setIdPaquete(rs.getInt("idPaquete"));
                paquete.setOrigen(ciudad.ciudadId(rs.getInt("idOrigen")));
                paquete.setDestino(ciudad.ciudadId(rs.getInt("idDestino")));
@@ -150,13 +132,24 @@ public class PaqueteData {
                paquete.setEmail(rs.getString("email"));
                paquete.setMonto(rs.getDouble("monto"));
                paquete.setCantPasajeros(rs.getInt("cantPasajeros"));
-                 ap.add(paquete);
+               hs.add(paquete);
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error en el sql");
         }
-        return ap;
+     return hs;
     }
+    
+    public List <Paquete> listaPaquete(String email){
+    ArrayList<Paquete> ap = new ArrayList<>();   
+    for (Paquete p: listaEmail()){
+    if (p.getEmail().equals(email) || p.getEmail().startsWith(email)){
+    ap.add(p);
+    }
+    }    
+    return ap;
+    }
+    
 
 }
