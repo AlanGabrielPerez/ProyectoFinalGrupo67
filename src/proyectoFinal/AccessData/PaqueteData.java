@@ -130,7 +130,7 @@ public class PaqueteData {
     }
     
     public List <Paquete> listaPaquete(String email){
-    String sql = "SELECT * FROM `paquete` WHERE `email` LIKE '%?'";
+    String sql = "SELECT * FROM `paquete` WHERE `email` = ?";
     Paquete paquete = new Paquete();
     ArrayList <Paquete> ap = new ArrayList<>();
         try {
