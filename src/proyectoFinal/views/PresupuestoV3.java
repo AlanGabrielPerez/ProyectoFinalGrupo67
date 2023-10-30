@@ -379,12 +379,12 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
    
     private boolean comprobarEmail(String email){
         boolean retorno=false;
-        for(String e: pd.listaEmail()){
-            if (e.equals(email)){
+        for(Paquete e: pd.listaEmail()){
+            if (e.getEmail().equals(email)){
                 retorno = true;
                 break;
             }
-        
+  
         }
         return retorno;
     }
