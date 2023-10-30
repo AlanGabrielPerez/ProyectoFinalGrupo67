@@ -456,19 +456,19 @@ public class Presupuesto extends javax.swing.JInternalFrame {
         
         if (jIda.getDate() != null && jVuelta.getDate() != null) {
             java.util.Date fIda = jIda.getDate();
-            int mesIda = fIda.getMonth();
+            int mesIda = fIda.getMonth()+1;
             if (c.getTemAlta().getMonthValue() == 1) {//tempVerano
-                if (mesIda < 5) {
+                if (mesIda <= 4) {
                     jlFAlta.setForeground(Color.RED);
-                } else if (mesIda >= 5 && mesIda < 8) {
+                } else if (mesIda > 4 && mesIda < 8) {
                     jlFBaja.setForeground(Color.RED);
                 } else {
                     jlFMedia.setForeground(Color.RED);
                 }
             } else {                                  //tempInvierno
-                if (mesIda < 5) {
+                if (mesIda <=4) {
                     jlFMedia.setForeground(Color.RED);
-                } else if (mesIda >= 5 && mesIda < 8) {
+                } else if (mesIda > 4 && mesIda < 8) {
                     jlFAlta.setForeground(Color.RED);
                 } else {
                     jlFBaja.setForeground(Color.RED);
