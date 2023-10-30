@@ -25,7 +25,7 @@ public class PaquetesTuristicos {
      */
     public static void main(String[] args) {    
         PaqueteData pd = new PaqueteData();
-        for (Paquete p: pd.listaPaquete("h")){
+        for (Paquete p: pd.listaPaquete("u")){
             System.out.println(p.toString());
         }
        
