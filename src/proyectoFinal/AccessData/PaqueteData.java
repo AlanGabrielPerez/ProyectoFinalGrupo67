@@ -48,8 +48,8 @@ public class PaqueteData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 paquete.setIdPaquete(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Paquete guardado.");
-
+                //JOptionPane.showMessageDialog(null, "Paquete guardado.");
+                System.out.println("Paquete guardado.");
             }
 
         } catch (SQLException ex) {

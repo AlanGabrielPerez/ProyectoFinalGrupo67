@@ -310,7 +310,7 @@ public class ProbarCodigo extends javax.swing.JInternalFrame {
                     valido = true;
                     paquete.setEmail(email);
                 }
-            } else if (email.substring(pos, tam - 3).endsWith(".com")) {
+            } else if (email.substring(pos, tam - 2).endsWith(".com.")) {
                 if ((tam - pos) > 9) {
                     valido = true;
                     paquete.setEmail(email);

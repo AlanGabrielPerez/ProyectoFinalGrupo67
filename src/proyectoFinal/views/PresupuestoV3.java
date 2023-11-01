@@ -379,7 +379,7 @@ public class PresupuestoV3 extends javax.swing.JInternalFrame {
                 if ((tam - pos) > 6) {
                     valido = true;
                 }
-            } else if (email.substring(pos, tam - 3).endsWith(".com")) {
+            } else if (email.substring(pos, tam - 2).endsWith(".com.")) {
                 if ((tam - pos) > 9) {
                     valido = true;
                 }

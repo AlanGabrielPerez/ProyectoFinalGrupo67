@@ -69,11 +69,9 @@
                               <Component id="jtDestino" alignment="0" pref="305" max="32767" attributes="0"/>
                               <Component id="jtTransporte" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                               <Component id="jtFIda" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jtMonto" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jtFVuelta" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jtPasajeros" alignment="0" pref="140" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="jtMonto" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtFVuelta" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtPasajeros" alignment="0" pref="140" max="32767" attributes="0"/>
                               <Component id="jtOrigen" alignment="0" max="32767" attributes="0"/>
                               <Component id="jtAlojamiento" max="32767" attributes="0"/>
                           </Group>
